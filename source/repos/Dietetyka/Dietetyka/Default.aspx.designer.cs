@@ -40,6 +40,15 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.TextBox logHaslo;
         
         /// <summary>
+        /// zaloguj control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button zaloguj;
+        
+        /// <summary>
         /// textboxImie control.
         /// </summary>
         /// <remarks>
@@ -76,22 +85,31 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator NazwiskoWalidator;
         
         /// <summary>
-        /// textboxPesel control.
+        /// listaRodzaj control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textboxPesel;
+        protected global::System.Web.UI.WebControls.DropDownList listaRodzaj;
         
         /// <summary>
-        /// PeselWalidator control.
+        /// textboxLogin2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator PeselWalidator;
+        protected global::System.Web.UI.WebControls.TextBox textboxLogin2;
+        
+        /// <summary>
+        /// textboxHaslo2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textboxHaslo2;
         
         /// <summary>
         /// textboxTelefon control.
@@ -110,5 +128,14 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator TelefonValidator;
+        
+        /// <summary>
+        /// utworzKonto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button utworzKonto;
     }
 }

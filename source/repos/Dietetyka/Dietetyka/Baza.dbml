@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Baza" Class="BazaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Baza.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BazaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Konto" Member="Kontos">
+    <Type Name="Konto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="imie" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nazwisko" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rodzaj" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="login" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="haslo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="telefon" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Produkt_spozywczy" Member="Produkt_spozywczies">
+    <Type Name="Produkt_spozywczy">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="jednostka" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="kalorie" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="weglowodany" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bialka" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="blonnik" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tluszcze" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Produkt_spozywczy_Skladnik" Member="Skladniks" ThisKey="Id" OtherKey="Id_produktu" Type="Skladnik" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Danie" Member="Danies">
+    <Type Name="Danie">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nazwa" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="kategoria" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="przepis" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Danie_Skladnik" Member="Skladniks" ThisKey="Id" OtherKey="Id_dania" Type="Skladnik" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Skladnik" Member="Skladniks">
+    <Type Name="Skladnik">
+      <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id_produktu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Danie_Skladnik" Member="Danie" ThisKey="Id_dania" OtherKey="Id" Type="Danie" IsForeignKey="true" />
+      <Association Name="Produkt_spozywczy_Skladnik" Member="Produkt_spozywczy" ThisKey="Id_produktu" OtherKey="Id" Type="Produkt_spozywczy" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

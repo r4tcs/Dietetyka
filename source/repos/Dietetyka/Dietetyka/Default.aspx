@@ -18,8 +18,17 @@
 .right {
   float: right;
   text-align: left;
-  margin: 50px 150px;
+  margin: 50px 100px;
   display: inline;
+}
+
+.zaloguj {
+    margin: 0px 400px;
+}
+
+.utworzKonto
+{
+    margin: 0px 350px;
 }
 
 </style>
@@ -43,6 +52,9 @@
             <div class="form-group">
                 <label for="haslo">Hasło:</label><br />
                 <asp:TextBox ID="logHaslo" runat="server" Width="500px"></asp:TextBox><br />
+            </div>
+            <div class="zaloguj">
+                <asp:Button ID="zaloguj" runat="server" Width="100px" Text="Zaloguj"></asp:Button><br />
             </div>
         </div>
 
@@ -68,13 +80,20 @@
                     ForeColor="#CC3300" Display="Dynamic"></asp:RegularExpressionValidator>
             </div>
             <div class="form-group">
-                <label for="pesel">PESEL:</label><br />
-                <asp:TextBox ID="textboxPesel" runat="server" Width="500px"></asp:TextBox><br />
-                <asp:RegularExpressionValidator 
-                    ID="PeselWalidator" runat="server" ErrorMessage="Podaj poprawny PESEL" 
-                    ControlToValidate="textboxPesel" ValidationExpression="[0-9]{11}" 
-                    ForeColor="#CC3300" Display="Dynamic"></asp:RegularExpressionValidator>
+                <label for="rodzaj">Rodzaj:</label><br />
+                <asp:dropdownlist ID="listaRodzaj" runat="server">
+                    <asp:ListItem Value="Dietetyk"> Dietetyk </asp:ListItem>
+                    <asp:ListItem Value="Klient"> Klient </asp:ListItem>
+                </asp:dropdownlist>
             </div>
+            <div class="form-group">
+                <label for="login2">Nazwa użytkownika:</label><br />
+                <asp:TextBox ID="textboxLogin2" runat="server" Width="500px"></asp:TextBox><br />
+             </div>
+             <div class="form-group">
+                <label for="haslo2">Hasło:</label><br />
+                <asp:TextBox ID="textboxHaslo2" runat="server" Width="500px"></asp:TextBox><br />
+                 </div>
 
          <div class="form-group">
                 <label for="telefon">Numer telefonu:</label><br />
@@ -84,6 +103,10 @@
                     ControlToValidate="textboxTelefon" ValidationExpression="[0-9]{9}" 
                     ForeColor="#CC3300" Display="Dynamic"></asp:RegularExpressionValidator>
             </div>
+            <div class="utworzKonto">
+                <asp:Button ID="utworzKonto" runat="server" Width="150px" Text="Utwórz konto"></asp:Button><br />
+            </div>
+                 
         </div>
     </form>
         
