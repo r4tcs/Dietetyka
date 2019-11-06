@@ -31,13 +31,31 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.TextBox logNazwa;
         
         /// <summary>
+        /// RequiredLogLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredLogLogin;
+        
+        /// <summary>
         /// logHaslo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox logHaslo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword logHaslo;
+        
+        /// <summary>
+        /// RequiredLogPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredLogPassword;
         
         /// <summary>
         /// zaloguj control.
@@ -67,6 +85,15 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator ImieWalidator;
         
         /// <summary>
+        /// RequiredImie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredImie;
+        
+        /// <summary>
         /// textboxNazwisko control.
         /// </summary>
         /// <remarks>
@@ -85,31 +112,49 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator NazwiskoWalidator;
         
         /// <summary>
-        /// listaRodzaj control.
+        /// RequiredNazwisko control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList listaRodzaj;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredNazwisko;
         
         /// <summary>
-        /// textboxLogin2 control.
+        /// textboxLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textboxLogin2;
+        protected global::System.Web.UI.WebControls.TextBox textboxLogin;
         
         /// <summary>
-        /// textboxHaslo2 control.
+        /// RequiredLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textboxHaslo2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredLogin;
+        
+        /// <summary>
+        /// textboxHaslo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword textboxHaslo;
+        
+        /// <summary>
+        /// RequiredPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredPassword;
         
         /// <summary>
         /// textboxTelefon control.
@@ -128,6 +173,15 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator TelefonValidator;
+        
+        /// <summary>
+        /// RequiredTelefon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredTelefon;
         
         /// <summary>
         /// utworzKonto control.
