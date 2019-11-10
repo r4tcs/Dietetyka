@@ -13,5 +13,15 @@ namespace Dietetyka
         {
 
         }
+
+        protected void Options_button_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login_Regestration_Page.aspx");
+        }
+
+        protected void Messages_button_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login_Regestration_Page.aspx");
+        }
     }
 }
