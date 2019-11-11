@@ -48,15 +48,7 @@
     <a class="navbar-brand mr-1" href="Home_Page.aspx">Diet Manager</a>
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
-      <li class="nav-item dropdown no-arrow mx-1" runat="server">
-      <asp:Button ID="Registration_Log_In_button" runat="server" Text="Registration \ Log In"  > </asp:Button><br />
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1" runat="server">
-      <asp:Button ID="Options_button" runat="server" Text="Options"  />
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1" runat="server">
-      <asp:Button ID="Messages_button" runat="server" Text="Messages"  />
-      </li>
+
     </ul>
 
   </nav>

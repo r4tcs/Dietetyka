@@ -18,12 +18,6 @@
       <li class="nav-item dropdown no-arrow mx-1" runat="server">
       <asp:Button ID="Registration_Log_In_button" runat="server" Text="Registration \ Log In" OnClick="Registration_Log_In_button_Click" > </asp:Button><br />
       </li>
-      <li class="nav-item dropdown no-arrow mx-1" runat="server">
-      <asp:Button ID="Options_button" runat="server" Text="Options" OnClick="Options_button_Click" />
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1" runat="server">
-      <asp:Button ID="Messages_button" runat="server" Text="Messages" OnClick="Messages_button_Click" />
-      </li>
     </ul>
 
   </nav>
