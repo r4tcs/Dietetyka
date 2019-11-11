@@ -23,15 +23,15 @@
 	}
 
 	.zaloguj {
-		margin: 0px 400px;
+		margin: 0px 300px;
 	}
 
 	.utworzKonto {
-		margin: 0px 350px;
+		margin: 0px 250px;
 	}
 
 	.passwordStyle {
-		width: 500px;
+		width: 400px;
 	}
 </style>
 
@@ -85,7 +85,7 @@
 			</div>
 			<div class="form-group">
 				<label for="haslo">Hasło:</label><br />
-				<input id="logHaslo" runat="server" type="password" class="passwordStyle" />
+				<input id="logHaslo" runat="server" Width="400px" type="password" class="passwordStyle"/>
 				<asp:RequiredFieldValidator ID="RequiredLogPassword" ControlToValidate="logHaslo" Display="Dynamic"
 						runat="server" ForeColor="Red" ErrorMessage="Podaj hasło!" ValidationGroup="login"></asp:RequiredFieldValidator>
 			</div>
@@ -121,7 +121,7 @@
 			</div>
 			<div class="form-group">
 				<label for="login">Nazwa użytkownika:</label><br />
-				<asp:TextBox ID="textboxLogin" runat="server" Width="500px"></asp:TextBox><br />
+				<asp:TextBox ID="textboxLogin" runat="server" Width="400px"></asp:TextBox><br />
 				<asp:RequiredFieldValidator ID="RequiredLogin" ControlToValidate="textboxLogin" Display="Dynamic"
 						runat="server" ForeColor="Red" ErrorMessage="Podaj login!" ValidationGroup="register"></asp:RequiredFieldValidator>
 			</div>
@@ -134,7 +134,7 @@
 
 			<div class="form-group">
 				<label for="telefon">Numer telefonu:</label><br />
-				<asp:TextBox ID="textboxTelefon" runat="server" Width="500px"></asp:TextBox><br />
+				<asp:TextBox ID="textboxTelefon" runat="server" Width="400px"></asp:TextBox><br />
 				<asp:RegularExpressionValidator
 					ID="TelefonValidator" runat="server" ErrorMessage="Podaj poprawny numer"
 					ControlToValidate="textboxTelefon" ValidationExpression="[0-9]{9}"
