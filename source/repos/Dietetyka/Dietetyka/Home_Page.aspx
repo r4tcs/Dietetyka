@@ -12,7 +12,7 @@
     <form id="form1" runat="server">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Diet Manager</a>
+    <a class="navbar-brand mr-1" href="Home_Page.aspx">Diet Manager</a>
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
       <li class="nav-item dropdown no-arrow mx-1" runat="server">
