@@ -33,6 +33,9 @@
 	.passwordStyle {
 		width: 400px;
 	}
+	.auto-style1 {
+		width: 163px;
+	}
 </style>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -67,10 +70,10 @@
 
         <div class="left">
 			<div class="form-group">
-				<label for="logowanie">Logowanie</label><br />
+				<label for="logowanie"><b>Logowanie</b></label><br />
 			</div>
 			<div class="form-group">
-				<label for="imie">Nazwa użytkownika:</label><br />
+				<label for="imie" class="auto-style1">Nazwa użytkownika:</label><br />
 				<asp:TextBox ID="logNazwa" runat="server" Width="400px"></asp:TextBox><br />
 				<asp:RequiredFieldValidator ID="RequiredLogLogin" ControlToValidate="logNazwa" Display="Dynamic"
 						runat="server" ForeColor="Red" ErrorMessage="Podaj login!" ValidationGroup="login"></asp:RequiredFieldValidator>
@@ -89,7 +92,7 @@
 
 		<div class="right">
 			<div class="form-group">
-				<label for="rejestracja">Nie masz konta ? Zarejestruj się !</label><br />
+				<label for="rejestracja"><b>Nie masz konta? Zarejestruj się!</b></label><br />
 			</div>
 			<div class="form-group">
 				<label for="imie">Imię:</label><br />
@@ -122,6 +125,15 @@
 				<input id="textboxHaslo" runat="server" type="password" class="passwordStyle" /><br />
 				<asp:RequiredFieldValidator ID="RequiredPassword" ControlToValidate="textboxHaslo" Display="Dynamic"
 						runat="server" ForeColor="Red" ErrorMessage="Podaj hasło!" ValidationGroup="register"></asp:RequiredFieldValidator>
+			</div>
+			<div class="form-group">
+				<label for="haslo">Powtórz hasło:</label><br />
+				<input id="textboxHaslo2" runat="server" type="password" class="passwordStyle" /><br />
+				<asp:RequiredFieldValidator ID="RequiredPassword2" ControlToValidate="textboxHaslo2" Display="Dynamic"
+						runat="server" ForeColor="Red" ErrorMessage="Podaj hasło!" ValidationGroup="register"></asp:RequiredFieldValidator>
+				<asp:CompareValidator ID="CompareValidator1" runat="server" ForeColor="Red" ErrorMessage="Podane hasła muszą być takie same!" 
+					ValidationGroup="register" ControlToValidate="textboxHaslo" 
+					Operator="Equal" ControlToCompare="textboxHaslo2" Display="Dynamic"></asp:CompareValidator>
 			</div>
 
 			<div class="form-group">

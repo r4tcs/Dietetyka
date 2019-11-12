@@ -50,9 +50,9 @@ namespace Dietetyka
 				Response.Write("<script>alert('Pomyślnie utworzono konto');</script>");
                 Response.Redirect("User_Interface.aspx");
             }
-			catch(Exception ex)
+			catch(Exception)
 			{
-				Response.Write("<script>alert('Wystąpił błąd\n" + ex.Message + "');</script>");
+				Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
 			}
 		}
 
