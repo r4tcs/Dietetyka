@@ -16,7 +16,8 @@
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
       <li class="nav-item dropdown no-arrow mx-1" runat="server">
-      <asp:Button ID="Registration_Log_In_button" runat="server" Text="Registration \ Log In" OnClick="Registration_Log_In_button_Click" > </asp:Button><br />
+      <asp:Button ID="Registration_Log_In_button" runat="server" Text="Registration \ Log In" OnClick="Registration_Log_In_button_Click" > </asp:Button>
+      <asp:Button ID="Admin_button" runat="server" Text="Admin Interface" OnClick="Admin_button_Click" > </asp:Button><br />
       </li>
     </ul>
 

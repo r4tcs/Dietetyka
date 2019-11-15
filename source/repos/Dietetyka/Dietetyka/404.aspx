@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>404</title>
   <link href="css/css.css" rel="stylesheet">
    <link href="css/css.min.css" rel="stylesheet" type="text/css">
 </head>

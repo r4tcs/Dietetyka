@@ -119,7 +119,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\css.css" />
     <Content Include="css\css.min.css" />
-    <Content Include="Login_Regestration_Page.aspx" />
+    <Content Include="Login_Registration_Page.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -167,6 +167,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Successfull_Registration.aspx" />
     <Content Include="User_Interface.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -192,12 +193,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Baza.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Login_Regestration_Page.aspx.cs">
-      <DependentUpon>Login_Regestration_Page.aspx</DependentUpon>
+    <Compile Include="Login_Registration_Page.aspx.cs">
+      <DependentUpon>Login_Registration_Page.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login_Regestration_Page.aspx.designer.cs">
-      <DependentUpon>Login_Regestration_Page.aspx</DependentUpon>
+    <Compile Include="Login_Registration_Page.aspx.designer.cs">
+      <DependentUpon>Login_Registration_Page.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home_Page.aspx.cs">
       <DependentUpon>Home_Page.aspx</DependentUpon>
@@ -207,6 +208,13 @@
       <DependentUpon>Home_Page.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Successfull_Registration.aspx.cs">
+      <DependentUpon>Successfull_Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Successfull_Registration.aspx.designer.cs">
+      <DependentUpon>Successfull_Registration.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User_Interface.aspx.cs">
       <DependentUpon>User_Interface.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
