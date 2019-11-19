@@ -18,7 +18,9 @@ namespace Dietetyka
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (Session["username"] == null)
-				Response.Redirect("Login_Registration_Page.aspx");
+			{
+				Response.Redirect("Home_Page.aspx");
+			}
 
 			SqlConnection con = new SqlConnection(constr);
 			con.Open();
