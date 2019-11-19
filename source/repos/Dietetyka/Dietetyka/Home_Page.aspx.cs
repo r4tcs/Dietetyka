@@ -23,5 +23,10 @@ namespace Dietetyka
         {
             Response.Redirect("Admin_Interface.aspx");
         }
-    }
+
+		protected void DietecianButton_Click(object sender, EventArgs e)
+		{
+			Response.Redirect("Dietecian_Interface.aspx");
+		}
+	}
 }

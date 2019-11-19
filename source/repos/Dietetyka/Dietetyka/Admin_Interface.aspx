@@ -6,6 +6,11 @@
   <title>Home Page</title>
   <link href="css/css.css" rel="stylesheet">
    <link href="css/css.min.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		.auto-style1 {
+			width: 400px;
+		}
+	</style>
 </head>
 
 <body id="page-top">
@@ -71,13 +76,13 @@
 			</div>
 			<div class="form-group">
 				<label for="haslo">Hasło:</label><br />
-				<input id="textboxHaslo" runat="server" type="password" class="passwordStyle" /><br />
+				<input id="textboxHaslo" runat="server" type="password" class="auto-style1" /><br />
 				<asp:RequiredFieldValidator ID="RequiredPassword" ControlToValidate="textboxHaslo" Display="Dynamic"
 						runat="server" ForeColor="Red" ErrorMessage="Podaj hasło!" ValidationGroup="register"></asp:RequiredFieldValidator>
 			</div>
 			<div class="form-group">
 				<label for="haslo">Powtórz hasło:</label><br />
-				<input id="textboxHaslo2" runat="server" type="password" class="passwordStyle" /><br />
+				<input id="textboxHaslo2" runat="server" type="password" class="auto-style1" /><br />
 				<asp:RequiredFieldValidator ID="RequiredPassword2" ControlToValidate="textboxHaslo2" Display="Dynamic"
 						runat="server" ForeColor="Red" ErrorMessage="Podaj hasło!" ValidationGroup="register"></asp:RequiredFieldValidator>
 				<asp:CompareValidator ID="CompareValidator1" runat="server" ForeColor="Red" ErrorMessage="Podane hasła muszą być takie same!" 

@@ -38,5 +38,14 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Admin_button;
+        
+        /// <summary>
+        /// DietecianButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DietecianButton;
     }
 }

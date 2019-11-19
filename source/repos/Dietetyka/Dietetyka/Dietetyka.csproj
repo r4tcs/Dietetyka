@@ -119,6 +119,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\css.css" />
     <Content Include="css\css.min.css" />
+    <Content Include="Dietecian_Interface.aspx" />
     <Content Include="Login_Registration_Page.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -192,6 +193,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Baza.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Dietecian_Interface.aspx.cs">
+      <DependentUpon>Dietecian_Interface.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dietecian_Interface.aspx.designer.cs">
+      <DependentUpon>Dietecian_Interface.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login_Registration_Page.aspx.cs">
       <DependentUpon>Login_Registration_Page.aspx</DependentUpon>
