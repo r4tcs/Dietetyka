@@ -19,8 +19,16 @@ namespace Dietetyka
 
         protected void Page_Load(object sender, EventArgs e)
         {
+			if (Session["username"] == null)
+				Response.Redirect("Login_Registration_Page.aspx");
 
-        }
+			SqlConnection con = new SqlConnection(constr);
+			con.Open();
+			SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
+			sql.CommandType = CommandType.Text;
+			LabelName.Text = sql.ExecuteScalar() as string;
+			con.Close();
+		}
 
         protected void Options_button_Click(object sender, EventArgs e)
         {
@@ -66,5 +74,11 @@ namespace Dietetyka
                 Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
             }
         }
-    }
+
+		protected void ButtonLogout_Click(object sender, EventArgs e)
+		{
+			Session.Clear();
+			Response.Redirect("Home_Page.aspx");
+		}
+	}
 }

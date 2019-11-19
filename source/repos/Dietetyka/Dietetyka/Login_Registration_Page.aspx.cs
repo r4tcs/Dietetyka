@@ -11,14 +11,14 @@ using System.Web.UI.WebControls;
 
 namespace Dietetyka
 {
-    public partial class _Login_Regestration_Page : Page
-    {
+	public partial class _Login_Regestration_Page : Page
+	{
 		BazaDataContext baza = new BazaDataContext();
 		string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
 
 		protected void Page_Load(object sender, EventArgs e)
-        {
-        }
+		{
+		}
 
 		protected void utworzKonto_Click(object sender, EventArgs e)
 		{
@@ -46,47 +46,13 @@ namespace Dietetyka
 				baza.Kontos.InsertOnSubmit(k);
 				baza.SubmitChanges();
 				con.Close();
-            }
-			catch(Exception)
+			}
+			catch (Exception)
 			{
 				Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
 			}
-            Response.Write("<script>alert('Pomyślnie utworzono konto');</script>");
-            Response.Redirect("Successfull_Registration.aspx");
-        }
-
-		protected void zaloguj_Click(object sender, EventArgs e)
-		{
-			SqlConnection con = new SqlConnection(constr);
-			con.Open();
-			SqlCommand sql = new SqlCommand("SELECT haslo FROM Konto WHERE login='" + logNazwa.Text + "'", con);
-			sql.CommandType = CommandType.Text;
-			string savedPasswordHash = sql.ExecuteScalar() as string;
-			con.Close();
-			if (savedPasswordHash is null)
-			{
-				Response.Write("<script>alert('Niepoprawny login');</script>");
-				return;
-			}
-
-
-			byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
-			/* Get the salt */
-			byte[] salt = new byte[16];
-			Array.Copy(hashBytes, 0, salt, 0, 16);
-			/* Compute the hash on the password the user entered */
-			var pbkdf2 = new Rfc2898DeriveBytes(logHaslo.Value, salt, 10000);
-			byte[] hash = pbkdf2.GetBytes(20);
-			/* Compare the results */
-			for (int i = 0; i < 20; i++)
-				if (hashBytes[i + 16] != hash[i])
-				{
-					Response.Write("<script>alert('Niepoprawne hasło');</script>");
-					return;
-				}
-			Response.Write("<script>alert('Pomyślnie zalogowano');</script>");
-			Session["username"] = logNazwa.Text;
-			Response.Redirect("User_Interface.aspx");
-        }
+			Response.Write("<script>alert('Pomyślnie utworzono konto');</script>");
+			Response.Redirect("Successfull_Registration.aspx");
+		}
 	}
 }

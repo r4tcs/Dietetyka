@@ -7,6 +7,11 @@
 	<title>Home Page</title>
 	<link href="css/css.css" rel="stylesheet">
 	<link href="css/css.min.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		.auto-style1 {
+			width: 400px;
+		}
+	</style>
 </head>
 
 <body id="page-top">
@@ -17,9 +22,7 @@
 			<!-- Navbar -->
 			<ul class="navbar-nav ml-auto ml-md-0">
 				<li class="nav-item dropdown no-arrow mx-1" runat="server">
-					<asp:Button ID="Registration_Log_In_button" runat="server" Text="Registration \ Log In" OnClick="Registration_Log_In_button_Click"></asp:Button>
-					<asp:Button ID="Admin_button" runat="server" Text="Admin Interface" OnClick="Admin_button_Click"></asp:Button>
-					<asp:Button ID="DietecianButton" runat="server" Text="Dietecian Interface" OnClick="DietecianButton_Click"></asp:Button>
+					<asp:Button ID="Registration_Log_In_button" runat="server" Text="Zarejestruj się!" OnClick="Registration_Log_In_button_Click"></asp:Button>
 				</li>
 			</ul>
 
@@ -38,8 +41,25 @@
 				<div class="container-fluid">
 
 					<!-- Page Content -->
-					<h1>Just a Web Form so u can se tha layout of the Form</h1>
+					<h1>Logowanie</h1>
 					<hr>
+					<div class="left">
+						<div class="form-group">
+							<label for="imie" class="auto-style1">Nazwa użytkownika:</label><br />
+							<asp:TextBox ID="logNazwa" runat="server" Width="400px"></asp:TextBox><br />
+							<asp:RequiredFieldValidator ID="RequiredLogLogin" ControlToValidate="logNazwa" Display="Dynamic"
+								runat="server" ForeColor="Red" ErrorMessage="Podaj login!" ValidationGroup="login"></asp:RequiredFieldValidator>
+						</div>
+						<div class="form-group">
+							<label for="haslo">Hasło:</label><br />
+							<input id="logHaslo" runat="server" type="password" class="auto-style1" /><br />
+							<asp:RequiredFieldValidator ID="RequiredLogPassword" ControlToValidate="logHaslo" Display="Dynamic"
+								runat="server" ForeColor="Red" ErrorMessage="Podaj hasło!" ValidationGroup="login"></asp:RequiredFieldValidator>
+						</div>
+						<div class="zaloguj">
+							<asp:Button ID="zaloguj" runat="server" Width="100px" Text="Zaloguj" OnClick="zaloguj_Click" ValidationGroup="login"></asp:Button><br />
+						</div>
+					</div>
 				</div>
 
 			</div>

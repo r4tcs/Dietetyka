@@ -31,21 +31,48 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Button Registration_Log_In_button;
         
         /// <summary>
-        /// Admin_button control.
+        /// logNazwa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Admin_button;
+        protected global::System.Web.UI.WebControls.TextBox logNazwa;
         
         /// <summary>
-        /// DietecianButton control.
+        /// RequiredLogLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DietecianButton;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredLogLogin;
+        
+        /// <summary>
+        /// logHaslo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword logHaslo;
+        
+        /// <summary>
+        /// RequiredLogPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredLogPassword;
+        
+        /// <summary>
+        /// zaloguj control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button zaloguj;
     }
 }

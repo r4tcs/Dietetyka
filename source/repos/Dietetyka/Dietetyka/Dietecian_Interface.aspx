@@ -16,6 +16,9 @@
 			<a class="navbar-brand mr-1" href="Home_Page.aspx">Diet Manager</a>
 			<!-- Navbar -->
 			<ul class="navbar-nav ml-auto ml-md-0">
+				<li class="nav-item dropdown no-arrow mx-1" runat="server">
+					<asp:Button ID="ButtonLogout" runat="server" Text="Wyloguj" OnClick="ButtonLogout_Click" />
+				</li>
 			</ul>
 
 		</nav>
@@ -33,7 +36,8 @@
 				<div class="container-fluid">
 
 					<!-- Page Content -->
-					<h1>Dodawanie produktów</h1>
+					<h1>Witaj, <asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
+					<b>Dodawanie produktów</b>
 					
 		<div class="form-group">
 			<div class="form-group">Nazwa <br /><asp:TextBox ID="TextBoxNazwa" runat="server"></asp:TextBox><br />
