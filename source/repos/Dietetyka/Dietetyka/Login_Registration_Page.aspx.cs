@@ -85,7 +85,8 @@ namespace Dietetyka
 					return;
 				}
 			Response.Write("<script>alert('Pomyślnie zalogowano');</script>");
-            Response.Redirect("User_Interface.aspx");
+			Session["username"] = logNazwa.Text;
+			Response.Redirect("User_Interface.aspx");
         }
 	}
 }
