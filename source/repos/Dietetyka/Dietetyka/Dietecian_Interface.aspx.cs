@@ -36,7 +36,9 @@ namespace Dietetyka
 				con.Open();
 				Produkt_spozywczy p = new Produkt_spozywczy();
 				p.nazwa = TextBoxNazwa.Text;
-				//p.jednostka = DropDownListJednostka.SelectedValue;
+				//TU JEST COS DO POPRAWIENIA W BAZIE, NIE WIEM CZEMU PO ZMIANIE TYPÓW DANYCH ONE SIE NIE ZAKTUALIZOWAŁY
+				//PO NAPRAWIENIU MOZNA ODKOMENTOWAC I FUNKCJA BEDZIE DZIALAC
+				//p.jednostka = DropDownListJednostka.SelectedValue; 
 				//p.kalorie = float.Parse(TextBoxKalorie.Text);
 				//p.weglowodany = float.Parse(TextBoxWeglowodany.Text);
 				//p.bialka = float.Parse(TextBoxBialka.Text);
