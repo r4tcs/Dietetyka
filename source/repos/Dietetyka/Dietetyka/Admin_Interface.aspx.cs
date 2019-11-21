@@ -61,7 +61,7 @@ namespace Dietetyka
                 Konto k = new Konto();
                 k.imie = textboxImie.Text;
                 k.nazwisko = textboxNazwisko.Text;
-                k.rodzaj = "D";
+                k.rodzaj = Convert.ToChar("D");
                 k.login = textboxLogin.Text;
                 k.haslo = savedPasswordHash;
                 k.telefon = textboxTelefon.Text;

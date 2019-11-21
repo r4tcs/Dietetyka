@@ -30,15 +30,15 @@ namespace Dietetyka
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertDanie(Danie instance);
+    partial void UpdateDanie(Danie instance);
+    partial void DeleteDanie(Danie instance);
     partial void InsertKonto(Konto instance);
     partial void UpdateKonto(Konto instance);
     partial void DeleteKonto(Konto instance);
     partial void InsertProdukt_spozywczy(Produkt_spozywczy instance);
     partial void UpdateProdukt_spozywczy(Produkt_spozywczy instance);
     partial void DeleteProdukt_spozywczy(Produkt_spozywczy instance);
-    partial void InsertDanie(Danie instance);
-    partial void UpdateDanie(Danie instance);
-    partial void DeleteDanie(Danie instance);
     partial void InsertSkladnik(Skladnik instance);
     partial void UpdateSkladnik(Skladnik instance);
     partial void DeleteSkladnik(Skladnik instance);
@@ -74,6 +74,14 @@ namespace Dietetyka
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Danie> Danies
+		{
+			get
+			{
+				return this.GetTable<Danie>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Konto> Kontos
 		{
 			get
@@ -90,508 +98,12 @@ namespace Dietetyka
 			}
 		}
 		
-		public System.Data.Linq.Table<Danie> Danies
-		{
-			get
-			{
-				return this.GetTable<Danie>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Skladnik> Skladniks
 		{
 			get
 			{
 				return this.GetTable<Skladnik>();
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Konto")]
-	public partial class Konto : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _imie;
-		
-		private string _nazwisko;
-		
-		private string _rodzaj;
-		
-		private string _login;
-		
-		private string _haslo;
-		
-		private string _telefon;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnimieChanging(string value);
-    partial void OnimieChanged();
-    partial void OnnazwiskoChanging(string value);
-    partial void OnnazwiskoChanged();
-    partial void OnrodzajChanging(string value);
-    partial void OnrodzajChanged();
-    partial void OnloginChanging(string value);
-    partial void OnloginChanged();
-    partial void OnhasloChanging(string value);
-    partial void OnhasloChanged();
-    partial void OntelefonChanging(string value);
-    partial void OntelefonChanged();
-    #endregion
-		
-		public Konto()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_imie", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string imie
-		{
-			get
-			{
-				return this._imie;
-			}
-			set
-			{
-				if ((this._imie != value))
-				{
-					this.OnimieChanging(value);
-					this.SendPropertyChanging();
-					this._imie = value;
-					this.SendPropertyChanged("imie");
-					this.OnimieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwisko", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nazwisko
-		{
-			get
-			{
-				return this._nazwisko;
-			}
-			set
-			{
-				if ((this._nazwisko != value))
-				{
-					this.OnnazwiskoChanging(value);
-					this.SendPropertyChanging();
-					this._nazwisko = value;
-					this.SendPropertyChanged("nazwisko");
-					this.OnnazwiskoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rodzaj", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string rodzaj
-		{
-			get
-			{
-				return this._rodzaj;
-			}
-			set
-			{
-				if ((this._rodzaj != value))
-				{
-					this.OnrodzajChanging(value);
-					this.SendPropertyChanging();
-					this._rodzaj = value;
-					this.SendPropertyChanged("rodzaj");
-					this.OnrodzajChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_login", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string login
-		{
-			get
-			{
-				return this._login;
-			}
-			set
-			{
-				if ((this._login != value))
-				{
-					this.OnloginChanging(value);
-					this.SendPropertyChanging();
-					this._login = value;
-					this.SendPropertyChanged("login");
-					this.OnloginChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_haslo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string haslo
-		{
-			get
-			{
-				return this._haslo;
-			}
-			set
-			{
-				if ((this._haslo != value))
-				{
-					this.OnhasloChanging(value);
-					this.SendPropertyChanging();
-					this._haslo = value;
-					this.SendPropertyChanged("haslo");
-					this.OnhasloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telefon", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string telefon
-		{
-			get
-			{
-				return this._telefon;
-			}
-			set
-			{
-				if ((this._telefon != value))
-				{
-					this.OntelefonChanging(value);
-					this.SendPropertyChanging();
-					this._telefon = value;
-					this.SendPropertyChanged("telefon");
-					this.OntelefonChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Produkt_spozywczy")]
-	public partial class Produkt_spozywczy : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nazwa;
-		
-		private double _jednostka;
-		
-		private int _kalorie;
-		
-		private int _weglowodany;
-		
-		private int _bialka;
-		
-		private int _blonnik;
-		
-		private int _sol;
-		
-		private int _tluszcze;
-		
-		private EntitySet<Skladnik> _Skladniks;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void OnjednostkaChanging(double value);
-    partial void OnjednostkaChanged();
-    partial void OnkalorieChanging(int value);
-    partial void OnkalorieChanged();
-    partial void OnweglowodanyChanging(int value);
-    partial void OnweglowodanyChanged();
-    partial void OnbialkaChanging(int value);
-    partial void OnbialkaChanged();
-    partial void OnblonnikChanging(int value);
-    partial void OnblonnikChanged();
-    partial void OnsolChanging(int value);
-    partial void OnsolChanged();
-    partial void OntluszczeChanging(int value);
-    partial void OntluszczeChanged();
-    #endregion
-		
-		public Produkt_spozywczy()
-		{
-			this._Skladniks = new EntitySet<Skladnik>(new Action<Skladnik>(this.attach_Skladniks), new Action<Skladnik>(this.detach_Skladniks));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nazwa
-		{
-			get
-			{
-				return this._nazwa;
-			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_jednostka", DbType="Float NOT NULL")]
-		public double jednostka
-		{
-			get
-			{
-				return this._jednostka;
-			}
-			set
-			{
-				if ((this._jednostka != value))
-				{
-					this.OnjednostkaChanging(value);
-					this.SendPropertyChanging();
-					this._jednostka = value;
-					this.SendPropertyChanged("jednostka");
-					this.OnjednostkaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kalorie", DbType="Int NOT NULL")]
-		public int kalorie
-		{
-			get
-			{
-				return this._kalorie;
-			}
-			set
-			{
-				if ((this._kalorie != value))
-				{
-					this.OnkalorieChanging(value);
-					this.SendPropertyChanging();
-					this._kalorie = value;
-					this.SendPropertyChanged("kalorie");
-					this.OnkalorieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weglowodany", DbType="Int NOT NULL")]
-		public int weglowodany
-		{
-			get
-			{
-				return this._weglowodany;
-			}
-			set
-			{
-				if ((this._weglowodany != value))
-				{
-					this.OnweglowodanyChanging(value);
-					this.SendPropertyChanging();
-					this._weglowodany = value;
-					this.SendPropertyChanged("weglowodany");
-					this.OnweglowodanyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bialka", DbType="Int NOT NULL")]
-		public int bialka
-		{
-			get
-			{
-				return this._bialka;
-			}
-			set
-			{
-				if ((this._bialka != value))
-				{
-					this.OnbialkaChanging(value);
-					this.SendPropertyChanging();
-					this._bialka = value;
-					this.SendPropertyChanged("bialka");
-					this.OnbialkaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_blonnik", DbType="Int NOT NULL")]
-		public int blonnik
-		{
-			get
-			{
-				return this._blonnik;
-			}
-			set
-			{
-				if ((this._blonnik != value))
-				{
-					this.OnblonnikChanging(value);
-					this.SendPropertyChanging();
-					this._blonnik = value;
-					this.SendPropertyChanged("blonnik");
-					this.OnblonnikChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol", DbType="Int NOT NULL")]
-		public int sol
-		{
-			get
-			{
-				return this._sol;
-			}
-			set
-			{
-				if ((this._sol != value))
-				{
-					this.OnsolChanging(value);
-					this.SendPropertyChanging();
-					this._sol = value;
-					this.SendPropertyChanged("sol");
-					this.OnsolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tluszcze", DbType="Int NOT NULL")]
-		public int tluszcze
-		{
-			get
-			{
-				return this._tluszcze;
-			}
-			set
-			{
-				if ((this._tluszcze != value))
-				{
-					this.OntluszczeChanging(value);
-					this.SendPropertyChanging();
-					this._tluszcze = value;
-					this.SendPropertyChanged("tluszcze");
-					this.OntluszczeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Produkt_spozywczy_Skladnik", Storage="_Skladniks", ThisKey="Id", OtherKey="Id_produktu")]
-		public EntitySet<Skladnik> Skladniks
-		{
-			get
-			{
-				return this._Skladniks;
-			}
-			set
-			{
-				this._Skladniks.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Skladniks(Skladnik entity)
-		{
-			this.SendPropertyChanging();
-			entity.Produkt_spozywczy = this;
-		}
-		
-		private void detach_Skladniks(Skladnik entity)
-		{
-			this.SendPropertyChanging();
-			entity.Produkt_spozywczy = null;
 		}
 	}
 	
@@ -754,6 +266,494 @@ namespace Dietetyka
 		{
 			this.SendPropertyChanging();
 			entity.Danie = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Konto")]
+	public partial class Konto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _imie;
+		
+		private string _nazwisko;
+		
+		private char _rodzaj;
+		
+		private string _login;
+		
+		private string _haslo;
+		
+		private string _telefon;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnimieChanging(string value);
+    partial void OnimieChanged();
+    partial void OnnazwiskoChanging(string value);
+    partial void OnnazwiskoChanged();
+    partial void OnrodzajChanging(char value);
+    partial void OnrodzajChanged();
+    partial void OnloginChanging(string value);
+    partial void OnloginChanged();
+    partial void OnhasloChanging(string value);
+    partial void OnhasloChanged();
+    partial void OntelefonChanging(string value);
+    partial void OntelefonChanged();
+    #endregion
+		
+		public Konto()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_imie", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string imie
+		{
+			get
+			{
+				return this._imie;
+			}
+			set
+			{
+				if ((this._imie != value))
+				{
+					this.OnimieChanging(value);
+					this.SendPropertyChanging();
+					this._imie = value;
+					this.SendPropertyChanged("imie");
+					this.OnimieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwisko", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nazwisko
+		{
+			get
+			{
+				return this._nazwisko;
+			}
+			set
+			{
+				if ((this._nazwisko != value))
+				{
+					this.OnnazwiskoChanging(value);
+					this.SendPropertyChanging();
+					this._nazwisko = value;
+					this.SendPropertyChanged("nazwisko");
+					this.OnnazwiskoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rodzaj", DbType="Char(1) NOT NULL")]
+		public char rodzaj
+		{
+			get
+			{
+				return this._rodzaj;
+			}
+			set
+			{
+				if ((this._rodzaj != value))
+				{
+					this.OnrodzajChanging(value);
+					this.SendPropertyChanging();
+					this._rodzaj = value;
+					this.SendPropertyChanged("rodzaj");
+					this.OnrodzajChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_login", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string login
+		{
+			get
+			{
+				return this._login;
+			}
+			set
+			{
+				if ((this._login != value))
+				{
+					this.OnloginChanging(value);
+					this.SendPropertyChanging();
+					this._login = value;
+					this.SendPropertyChanged("login");
+					this.OnloginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_haslo", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string haslo
+		{
+			get
+			{
+				return this._haslo;
+			}
+			set
+			{
+				if ((this._haslo != value))
+				{
+					this.OnhasloChanging(value);
+					this.SendPropertyChanging();
+					this._haslo = value;
+					this.SendPropertyChanged("haslo");
+					this.OnhasloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telefon", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string telefon
+		{
+			get
+			{
+				return this._telefon;
+			}
+			set
+			{
+				if ((this._telefon != value))
+				{
+					this.OntelefonChanging(value);
+					this.SendPropertyChanging();
+					this._telefon = value;
+					this.SendPropertyChanged("telefon");
+					this.OntelefonChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Produkt_spozywczy")]
+	public partial class Produkt_spozywczy : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nazwa;
+		
+		private string _jednostka;
+		
+		private double _kalorie;
+		
+		private double _weglowodany;
+		
+		private double _bialka;
+		
+		private double _blonnik;
+		
+		private double _sol;
+		
+		private double _tluszcze;
+		
+		private EntitySet<Skladnik> _Skladniks;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnazwaChanging(string value);
+    partial void OnnazwaChanged();
+    partial void OnjednostkaChanging(string value);
+    partial void OnjednostkaChanged();
+    partial void OnkalorieChanging(double value);
+    partial void OnkalorieChanged();
+    partial void OnweglowodanyChanging(double value);
+    partial void OnweglowodanyChanged();
+    partial void OnbialkaChanging(double value);
+    partial void OnbialkaChanged();
+    partial void OnblonnikChanging(double value);
+    partial void OnblonnikChanged();
+    partial void OnsolChanging(double value);
+    partial void OnsolChanged();
+    partial void OntluszczeChanging(double value);
+    partial void OntluszczeChanged();
+    #endregion
+		
+		public Produkt_spozywczy()
+		{
+			this._Skladniks = new EntitySet<Skladnik>(new Action<Skladnik>(this.attach_Skladniks), new Action<Skladnik>(this.detach_Skladniks));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nazwa
+		{
+			get
+			{
+				return this._nazwa;
+			}
+			set
+			{
+				if ((this._nazwa != value))
+				{
+					this.OnnazwaChanging(value);
+					this.SendPropertyChanging();
+					this._nazwa = value;
+					this.SendPropertyChanged("nazwa");
+					this.OnnazwaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_jednostka", DbType="NVarChar(4) NOT NULL", CanBeNull=false)]
+		public string jednostka
+		{
+			get
+			{
+				return this._jednostka;
+			}
+			set
+			{
+				if ((this._jednostka != value))
+				{
+					this.OnjednostkaChanging(value);
+					this.SendPropertyChanging();
+					this._jednostka = value;
+					this.SendPropertyChanged("jednostka");
+					this.OnjednostkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kalorie", DbType="Float NOT NULL")]
+		public double kalorie
+		{
+			get
+			{
+				return this._kalorie;
+			}
+			set
+			{
+				if ((this._kalorie != value))
+				{
+					this.OnkalorieChanging(value);
+					this.SendPropertyChanging();
+					this._kalorie = value;
+					this.SendPropertyChanged("kalorie");
+					this.OnkalorieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weglowodany", DbType="Float NOT NULL")]
+		public double weglowodany
+		{
+			get
+			{
+				return this._weglowodany;
+			}
+			set
+			{
+				if ((this._weglowodany != value))
+				{
+					this.OnweglowodanyChanging(value);
+					this.SendPropertyChanging();
+					this._weglowodany = value;
+					this.SendPropertyChanged("weglowodany");
+					this.OnweglowodanyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bialka", DbType="Float NOT NULL")]
+		public double bialka
+		{
+			get
+			{
+				return this._bialka;
+			}
+			set
+			{
+				if ((this._bialka != value))
+				{
+					this.OnbialkaChanging(value);
+					this.SendPropertyChanging();
+					this._bialka = value;
+					this.SendPropertyChanged("bialka");
+					this.OnbialkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_blonnik", DbType="Float NOT NULL")]
+		public double blonnik
+		{
+			get
+			{
+				return this._blonnik;
+			}
+			set
+			{
+				if ((this._blonnik != value))
+				{
+					this.OnblonnikChanging(value);
+					this.SendPropertyChanging();
+					this._blonnik = value;
+					this.SendPropertyChanged("blonnik");
+					this.OnblonnikChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol", DbType="Float NOT NULL")]
+		public double sol
+		{
+			get
+			{
+				return this._sol;
+			}
+			set
+			{
+				if ((this._sol != value))
+				{
+					this.OnsolChanging(value);
+					this.SendPropertyChanging();
+					this._sol = value;
+					this.SendPropertyChanged("sol");
+					this.OnsolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tluszcze", DbType="Float NOT NULL")]
+		public double tluszcze
+		{
+			get
+			{
+				return this._tluszcze;
+			}
+			set
+			{
+				if ((this._tluszcze != value))
+				{
+					this.OntluszczeChanging(value);
+					this.SendPropertyChanging();
+					this._tluszcze = value;
+					this.SendPropertyChanged("tluszcze");
+					this.OntluszczeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Produkt_spozywczy_Skladnik", Storage="_Skladniks", ThisKey="Id", OtherKey="Id_produktu")]
+		public EntitySet<Skladnik> Skladniks
+		{
+			get
+			{
+				return this._Skladniks;
+			}
+			set
+			{
+				this._Skladniks.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Skladniks(Skladnik entity)
+		{
+			this.SendPropertyChanging();
+			entity.Produkt_spozywczy = this;
+		}
+		
+		private void detach_Skladniks(Skladnik entity)
+		{
+			this.SendPropertyChanging();
+			entity.Produkt_spozywczy = null;
 		}
 	}
 	
