@@ -17,11 +17,19 @@ namespace Dietetyka
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (Session["username"] == null)
+            if (Session["username"] == null)
 			{
 				Response.Redirect("Home_Page.aspx");
 			}
-
+            if(!IsPostBack)
+            {
+                SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                RepeaterProdoktow.DataSource = dt;
+                RepeaterProdoktow.DataBind();
+            }
 			SqlConnection con = new SqlConnection(constr);
 			con.Open();
 			SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
@@ -57,7 +65,29 @@ namespace Dietetyka
 			}
 		}
 
-		protected void ButtonLogout_Click(object sender, EventArgs e)
+        protected void addDanie_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(constr);
+                con.Open();
+                Danie d = new Danie();
+                d.nazwa = TextBoxNazwaDania.Text;
+                d.kategoria = KategoriaDropDownList.SelectedValue;
+                d.przepis = textboxPrzepis.Text;
+                baza.Danies.InsertOnSubmit(d);
+                baza.SubmitChanges();
+                con.Close();
+                Response.Write("<script>alert('Pomyślnie dodano danie');</script>");
+            }
+            catch (Exception)
+            {
+                Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
+            }
+        }
+
+
+        protected void ButtonLogout_Click(object sender, EventArgs e)
 		{
 			Session.Clear();
 			Response.Redirect("Home_Page.aspx");

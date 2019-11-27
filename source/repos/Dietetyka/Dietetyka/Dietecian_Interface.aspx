@@ -7,6 +7,31 @@
 	<title>Home Page</title>
 	<link href="css/css.css" rel="stylesheet">
 	<link href="css/css.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+
+    .left {
+		float: left;
+		width: 200px;
+		text-align: left;
+		margin: 50px 50px;
+		display: inline;
+	}
+	.center {
+		float: left;
+		text-align: left;
+        width: 170px;
+		margin: 50px 140px;
+		display: inline;
+	}
+    .right{
+        float: right;
+        text-align: left;
+        width: 650px;
+        margin: 50px 150px;
+        display: inline;
+    }
+</style>
+
 	</head>
 
 <body id="page-top">
@@ -33,13 +58,13 @@
 
 			<div id="content-wrapper">
 
-				<div class="container-fluid">
+				<div class="fluid-container">
 
 					<!-- Page Content -->
 					<h1>Witaj, <asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
-					<b>Dodawanie produktów</b>
 					
-		<div class="form-group">
+		<div class="left">
+            <h2>Dodawanie produktów</h2>
 			<div class="form-group">Nazwa <br /><asp:TextBox ID="TextBoxNazwa" runat="server"></asp:TextBox><br />
 			<asp:RegularExpressionValidator
 					ID="NazwaWalidator" runat="server" ErrorMessage="Podaj poprawną nazwę"
@@ -85,10 +110,63 @@
 		</div>
 				</div>
 
+                <div class="center"><h2>Stwórz danie</h2>
+                    <div class="form-group">Nazwa <br />
+                        <asp:TextBox ID="TextBoxNazwaDania" runat="server"></asp:TextBox><br/>
+                        <asp:RegularExpressionValidator
+					    ID="RegularExpressionValidator1" runat="server" ErrorMessage="Podaj poprawną nazwę"
+					    ControlToValidate="TextBoxNazwaDania" ValidationExpression="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ'.\s]{1,50}"
+					    ForeColor="Red" Display="Dynamic" ValidationGroup="addDanie"></asp:RegularExpressionValidator></div>
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="TextBoxNazwaDania" ErrorMessage="Podaj nazwę" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <div class=form-group>Kategoria <br />
+                        <asp:DropDownList ID="KategoriaDropDownList" runat="server">
+                        <asp:ListItem Selected="True" Value="Danie Gorące"> Danie gorące </asp:ListItem>
+                        <asp:ListItem Value="Danie Zimne"> Danie zimne </asp:ListItem>
+                        <asp:ListItem Value="Przekąska"> Przekąska </asp:ListItem>
+                        <asp:ListItem Value="Deser"> Deser </asp:ListItem>
+                        <asp:ListItem Value="Napój"> Napój </asp:ListItem>
+                        </asp:DropDownList> <br />
+                    </div>
+                    <div class="form-group">Przepis <br />
+                        <asp:TextBox ID="textboxPrzepis" textmode="MultiLine" Rows=15 width="300px" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="textboxPrzepis" ErrorMessage="Podaj przepis" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="form-goup">
+                        <asp:Button runat="server" ID="addDanie" OnClick="addDanie_Click" Text="Dodaj danie"/>
+                    </div>
+                </div>
+                
+                <div class="right"><br />
+                    <h2>Lista dodanych produktów</h2>
+                    <table border="1">
+                        <tr>
+                            <asp:Repeater ID="RepeaterProdoktow" runat="server">
+                                <HeaderTemplate>
+                                    <td><b>Nazwa</b></td>
+                                    <td><b>Kalorie</b></td>
+                                    <td><b>Węglowodany</b></td>
+                                    <td><b>Białka</b></td>
+                                    <td><b>Tłuszcze</b></td>
+                                    <td><b>Błonnik</b></td>
+                                    <td><b>Sól</b></td>
+                                </HeaderTemplate>
+                            <ItemTemplate>
+                            <tr>
+                                <td><%# Eval("nazwa") %></td>
+                                <td><%# Eval("kalorie") %> kcal</td>
+                                <td><%# Eval("weglowodany") %> g</td>
+                                <td><%# Eval("bialka") %> g</td>
+                                <td><%# Eval("tluszcze") %> g</td>
+                                <td><%# Eval("blonnik") %> g</td>
+                                <td><%# Eval("sol") %> g</td>
+                             </tr>
+                            </ItemTemplate>
+                            </asp:Repeater>
+                        </tr>
+                    </table>
+                </div>
 			</div>
-
 		</div>
-
 	</form>
 </body>
 
