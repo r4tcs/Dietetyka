@@ -22,6 +22,33 @@ namespace Dietetyka {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ButtonAddProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAddProduct;
+        
+        /// <summary>
+        /// ButtonProductList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonProductList;
+        
+        /// <summary>
+        /// ButtonCreateDish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonCreateDish;
+        
+        /// <summary>
         /// ButtonLogout control.
         /// </summary>
         /// <remarks>
@@ -38,6 +65,15 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelName;
+        
+        /// <summary>
+        /// addProductDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl addProductDiv;
         
         /// <summary>
         /// TextBoxNazwa control.
@@ -184,6 +220,15 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Button addProduct;
         
         /// <summary>
+        /// createDishDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl createDishDiv;
+        
+        /// <summary>
         /// TextBoxNazwaDania control.
         /// </summary>
         /// <remarks>
@@ -220,6 +265,33 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.TextBox textboxPrzepis;
         
         /// <summary>
+        /// DropDownListIngredient control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListIngredient;
+        
+        /// <summary>
+        /// SqlDataSource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        
+        /// <summary>
+        /// CheckBoxList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
+        
+        /// <summary>
         /// addDanie control.
         /// </summary>
         /// <remarks>
@@ -227,6 +299,15 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button addDanie;
+        
+        /// <summary>
+        /// ProductListDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProductListDiv;
         
         /// <summary>
         /// RepeaterProdoktow control.

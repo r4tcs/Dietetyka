@@ -45,7 +45,6 @@
 					<h1>Witaj, <asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
 					<hr>
 				</div>
-
 			</div>
 
 		</div>

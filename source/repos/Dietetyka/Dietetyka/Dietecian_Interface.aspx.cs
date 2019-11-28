@@ -30,6 +30,7 @@ namespace Dietetyka
                 RepeaterProdoktow.DataSource = dt;
                 RepeaterProdoktow.DataBind();
             }
+			
 			SqlConnection con = new SqlConnection(constr);
 			con.Open();
 			SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
@@ -91,6 +92,32 @@ namespace Dietetyka
 		{
 			Session.Clear();
 			Response.Redirect("Home_Page.aspx");
+		}
+
+		protected void ButtonAddProduct_Click(object sender, EventArgs e)
+		{
+			addProductDiv.Visible = true;
+			createDishDiv.Visible = false;
+			ProductListDiv.Visible = false;
+		}
+
+		protected void ButtonCreateDish_Click(object sender, EventArgs e)
+		{
+			createDishDiv.Visible = true;
+			addProductDiv.Visible = false;
+			ProductListDiv.Visible = false;
+		}
+
+		protected void ButtonProductList_Click(object sender, EventArgs e)
+		{
+			ProductListDiv.Visible = true;
+			addProductDiv.Visible = false;
+			createDishDiv.Visible = false;
+		}
+
+		protected void DropDownListIngredient_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
