@@ -17,13 +17,14 @@ namespace Dietetyka
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-            if (Session["username"] == null)
+			if (Session["username"] == null)
 			{
 				Response.Redirect("Home_Page.aspx");
 			}
             if(!IsPostBack)
             {
-                SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
+				SetInitialRow();
+				SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -37,6 +38,25 @@ namespace Dietetyka
 			sql.CommandType = CommandType.Text;
 			LabelName.Text = sql.ExecuteScalar() as string;
 			con.Close();
+		}
+
+		private void SetInitialRow()
+		{
+			DataTable dt = new DataTable();
+			DataRow dr = null;
+			dt.Columns.Add(new DataColumn("RowNumber", typeof(string)));
+			dt.Columns.Add(new DataColumn("Column1", typeof(string)));
+			dt.Columns.Add(new DataColumn("Column2", typeof(string)));
+			dt.Columns.Add(new DataColumn("Column3", typeof(string)));
+			dr = dt.NewRow();
+			dr["RowNumber"] = 1;
+			dr["Column1"] = string.Empty;
+			dr["Column2"] = string.Empty;
+			dr["Column3"] = string.Empty;
+			dt.Rows.Add(dr);
+			ViewState["CurrentTable"] = dt;
+			Gridview1.DataSource = dt;
+			Gridview1.DataBind();
 		}
 
 		protected void addProduct_Click(object sender, EventArgs e)
@@ -73,15 +93,32 @@ namespace Dietetyka
                 SqlConnection con = new SqlConnection(constr);
                 con.Open();
                 Danie d = new Danie();
+				
                 d.nazwa = TextBoxNazwaDania.Text;
                 d.kategoria = KategoriaDropDownList.SelectedValue;
                 d.przepis = textboxPrzepis.Text;
                 baza.Danies.InsertOnSubmit(d);
                 baza.SubmitChanges();
-                con.Close();
+				int danieID = d.Id;
+
+				int rowIndex = 0;
+				DataTable dt = (DataTable)ViewState["CurrentTable"];
+				for (int i = 0; i < dt.Rows.Count; i++)
+				{
+					Skladnik s = new Skladnik();
+					s.Id_dania = danieID;
+					DropDownList box1 = (DropDownList)Gridview1.Rows[rowIndex].Cells[0].FindControl("DropDownListIngredient");
+					s.Id_produktu = Convert.ToInt32(box1.SelectedItem.Value);
+					TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
+					//s.ilosc = Convert.ToInt32(box2.Text);
+					baza.Skladniks.InsertOnSubmit(s);
+					baza.SubmitChanges();
+					rowIndex++;
+				}
+				con.Close();
                 Response.Write("<script>alert('Pomyślnie dodano danie');</script>");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
             }
@@ -103,6 +140,7 @@ namespace Dietetyka
 
 		protected void ButtonCreateDish_Click(object sender, EventArgs e)
 		{
+			SetInitialRow();
 			createDishDiv.Visible = true;
 			addProductDiv.Visible = false;
 			ProductListDiv.Visible = false;
@@ -115,9 +153,57 @@ namespace Dietetyka
 			createDishDiv.Visible = false;
 		}
 
-		protected void DropDownListIngredient_SelectedIndexChanged(object sender, EventArgs e)
+		protected void ButtonAdd_Click(object sender, EventArgs e)
 		{
+			int rowIndex = 0;
+			if (ViewState["CurrentTable"] != null)
+			{
+				DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+				DataRow drCurrentRow = null;
+				if (dtCurrentTable.Rows.Count > 0)
+				{
+					for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+					{
+						DropDownList box1 = (DropDownList)Gridview1.Rows[rowIndex].Cells[0].FindControl("DropDownListIngredient");
+						TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
+						drCurrentRow = dtCurrentTable.NewRow();
+						drCurrentRow["RowNumber"] = i + 1;
+						dtCurrentTable.Rows[i - 1]["Column1"] = box1.SelectedItem.Text;
+						dtCurrentTable.Rows[i - 1]["Column2"] = box2.Text;
+						rowIndex++;
+					}
+					dtCurrentTable.Rows.Add(drCurrentRow);
+					ViewState["CurrentTable"] = dtCurrentTable;
+					Gridview1.DataSource = dtCurrentTable;
+					Gridview1.DataBind();
+				}
+			}
+			else
+			{
+				Response.Write("ViewState is null");
+			}
 
+			SetPreviousData();
+		}
+
+		private void SetPreviousData()
+		{
+			int rowIndex = 0;
+			if (ViewState["CurrentTable"] != null)
+			{
+				DataTable dt = (DataTable)ViewState["CurrentTable"];
+				if (dt.Rows.Count > 0)
+				{
+					for (int i = 0; i < dt.Rows.Count; i++)
+					{
+						DropDownList box1 = (DropDownList)Gridview1.Rows[rowIndex].Cells[0].FindControl("DropDownListIngredient");
+						TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
+						box1.SelectedItem.Text = dt.Rows[i]["Column1"].ToString();
+						box2.Text = dt.Rows[i]["Column2"].ToString();
+						rowIndex++;
+					}
+				}
+			}
 		}
 	}
 }

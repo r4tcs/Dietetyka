@@ -176,13 +176,29 @@
 						<asp:TextBox ID="textboxPrzepis" TextMode="MultiLine" Rows="15" Width="300px" runat="server"></asp:TextBox>
 						<asp:RequiredFieldValidator runat="server" ControlToValidate="textboxPrzepis" ErrorMessage="Podaj przepis" ForeColor="Red" Display="Dynamic" ValidationGroup="addDanie"></asp:RequiredFieldValidator>
 					</div>
-					<div class="form-group">
-						<asp:DropDownList ID="DropDownListIngredient" OnSelectedIndexChanged="DropDownListIngredient_SelectedIndexChanged" AppendDataBoundItems="true" runat="server" DataSourceID="SqlDataSource1" DataTextField="nazwa" DataValueField="Id">
-							<asp:ListItem Text="--WYBIERZ SKŁADNIK--" />
-						</asp:DropDownList>
-						<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BazaConnectionString %>" SelectCommand="SELECT [Id], [nazwa] FROM [Produkt_spozywczy] ORDER BY [nazwa]"></asp:SqlDataSource>
+					<div>
+						<asp:GridView ID="Gridview1" runat="server" ShowFooter="true" AutoGenerateColumns="false">
+							<Columns>
+								<asp:TemplateField HeaderText="Składnik">
+									<ItemTemplate>
+										<asp:DropDownList ID="DropDownListIngredient" AppendDataBoundItems="true" runat="server" DataSourceID="SqlDataSource1" DataTextField="nazwa" DataValueField="Id">
+											<asp:ListItem Text="--WYBIERZ SKŁADNIK--" />
+										</asp:DropDownList>
+										<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BazaConnectionString %>" SelectCommand="SELECT [Id], [nazwa] FROM [Produkt_spozywczy] ORDER BY [nazwa]"></asp:SqlDataSource>
+									</ItemTemplate>
+								</asp:TemplateField>
+								<asp:TemplateField HeaderText="Ilość">
+									<ItemTemplate>
+										<asp:TextBox ID="TextBoxWeight" runat="server" TextMode="Number"></asp:TextBox>g
+									</ItemTemplate>
+									<FooterStyle HorizontalAlign="Right" />
+									<FooterTemplate>
+										<asp:Button ID="ButtonAdd" runat="server" Text="Dodaj kolejny" OnClick="ButtonAdd_Click" />
+									</FooterTemplate>
+								</asp:TemplateField>
+							</Columns>
+						</asp:GridView>
 					</div>
-					<asp:CheckBoxList ID="CheckBoxList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="nazwa" DataValueField="Id"></asp:CheckBoxList>
 					<div class="form-group">
 						<asp:Button runat="server" ID="addDanie" OnClick="addDanie_Click" Text="Dodaj danie" ValidationGroup="addDanie" />
 					</div>
