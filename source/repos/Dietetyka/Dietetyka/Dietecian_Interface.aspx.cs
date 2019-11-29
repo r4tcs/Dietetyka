@@ -110,6 +110,7 @@ namespace Dietetyka
 					DropDownList box1 = (DropDownList)Gridview1.Rows[rowIndex].Cells[0].FindControl("DropDownListIngredient");
 					s.Id_produktu = Convert.ToInt32(box1.SelectedItem.Value);
 					TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
+					//PO ZAKTUALIZOWANIU BAZY TRZEBA ODKOMENTOWAC
 					//s.ilosc = Convert.ToInt32(box2.Text);
 					baza.Skladniks.InsertOnSubmit(s);
 					baza.SubmitChanges();
@@ -118,7 +119,7 @@ namespace Dietetyka
 				con.Close();
                 Response.Write("<script>alert('Pomyślnie dodano danie');</script>");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
             }
