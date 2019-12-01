@@ -31,11 +31,18 @@
 
 		<div id="wrapper">
 
-			<ul class="sidebar navbar-nav">
-				<li class="nav-item">
-					<span>Side Bar</span>
-				</li>
-			</ul>
+			<!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <asp:Button ID="ButtonKalendarz" runat="server" Text="Kalendarz" OnClick="ButtonKalendarz_Click" />
+      </li>
+      <li class="nav-item"> 
+          <asp:Button ID="ButtonKomentarz" runat="server" Text="Komentarz" OnClick="ButtonKomentarz_Click" />
+      </li>
+      <li class="nav-item">
+        <asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />
+      </li>
+    </ul>
 
 			<div id="content-wrapper">
 

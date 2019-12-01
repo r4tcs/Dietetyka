@@ -40,10 +40,25 @@ namespace Dietetyka
             Response.Redirect("Login_Regestration_Page.aspx");
         }
 
-		protected void ButtonLogout_Click(object sender, EventArgs e)
-		{
-			Session.Clear();
-			Response.Redirect("Home_Page.aspx");
-		}
-	}
+        protected void ButtonLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Home_Page.aspx");
+        }
+
+        protected void ButtonKomentarz_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Komentarz.aspx");
+        }
+
+        protected void ButtonKalendarz_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Kalendarz.aspx");
+        }
+
+        protected void ButtonStatystyka_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Statystyka.aspx");
+        }
+    }
 }
