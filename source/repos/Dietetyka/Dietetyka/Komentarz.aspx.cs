@@ -60,5 +60,31 @@ namespace Dietetyka
         {
             Response.Redirect("Statystyka.aspx");
         }
+
+        protected void Calendar_SelectionChanged(object sender, EventArgs e)
+        {
+            Label1.Text = "The selected date is " + Calendar.SelectedDate.ToShortDateString();
+        }
+
+        protected void ButtonDodajKomentarz_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(constr);
+                con.Open();
+                Menu m = new Menu();
+                m.data = Calendar.SelectedDate;
+                m.komentarz = TextBoxKomentarz.Text;
+                baza.Menu.InsertOnSubmit(m);
+                baza.SubmitChanges();
+                con.Close();
+                Response.Write("<script>alert('Komentarz zostal dodany');</script>");
+                Response.Redirect("User_Interface.aspx");
+            }
+            catch (Exception)
+            {
+                Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Dietetyka
     {
         BazaDataContext baza = new BazaDataContext();
         string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
-
+        string confirmedDate = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"] == null)
@@ -23,12 +23,6 @@ namespace Dietetyka
             }
             if(!IsPostBack)
             {
-                SqlCommand cmd = new SqlCommand("SELECT Id_dania,Id, data, nazwa FROM Menu, Danie WHERE Danie.Id = Menu.Id_dania AND data=ORDER BY data", new SqlConnection(constr));
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                RepeaterKalendarz.DataSource = dt;
-                RepeaterKalendarz.DataBind();
             }
 
             SqlConnection con = new SqlConnection(constr);
@@ -72,7 +66,14 @@ namespace Dietetyka
 
         protected void Calendar_SelectionChanged(object sender, EventArgs e)
         {
-            
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT id, data, nazwa FROM Menu WHERE data='" + Calendar.SelectedDate +"' ORDER BY data", con);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            RepeaterKalendarz.DataSource = dt;
+            RepeaterKalendarz.DataBind();
         }
     }
 }

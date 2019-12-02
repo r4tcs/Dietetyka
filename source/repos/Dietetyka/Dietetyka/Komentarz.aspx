@@ -50,6 +50,19 @@
 
 					<!-- Page Content -->
 					<h1>Witaj, <asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
+                    <asp:Calendar parse='left' ID="Calendar" runat="server" OnSelectionChanged="Calendar_SelectionChanged">
+
+
+                    </asp:Calendar>
+
+
+
+					<asp:Label parse='center' ID="Label1" runat="server" Text="Label"></asp:Label>
+                    <br />
+
+                    <asp:TextBox ID="TextBoxKomentarz" runat="server"></asp:TextBox>
+                    <asp:Button ID="ButtonDodajKomentarz" runat="server" Text="Button" OnClick="ButtonDodajKomentarz_Click" />
+
 					<hr>
 				</div>
 			</div>

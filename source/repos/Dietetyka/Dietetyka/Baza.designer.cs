@@ -134,8 +134,6 @@ namespace Dietetyka
 		
 		private EntitySet<Skladnik> _Skladniks;
 		
-		private EntitySet<Menu> _Menu;
-		
     #region Определения метода расширяемости
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -153,7 +151,6 @@ namespace Dietetyka
 		public Danie()
 		{
 			this._Skladniks = new EntitySet<Skladnik>(new Action<Skladnik>(this.attach_Skladniks), new Action<Skladnik>(this.detach_Skladniks));
-			this._Menu = new EntitySet<Menu>(new Action<Menu>(this.attach_Menu), new Action<Menu>(this.detach_Menu));
 			OnCreated();
 		}
 		
@@ -250,19 +247,6 @@ namespace Dietetyka
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Danie_Menu", Storage="_Menu", ThisKey="Id", OtherKey="Id_dania")]
-		public EntitySet<Menu> Menu
-		{
-			get
-			{
-				return this._Menu;
-			}
-			set
-			{
-				this._Menu.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -294,18 +278,6 @@ namespace Dietetyka
 			this.SendPropertyChanging();
 			entity.Danie = null;
 		}
-		
-		private void attach_Menu(Menu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Danie = this;
-		}
-		
-		private void detach_Menu(Menu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Danie = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Konto")]
@@ -327,8 +299,6 @@ namespace Dietetyka
 		private string _haslo;
 		
 		private string _telefon;
-		
-		private EntitySet<Menu> _Menu;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -352,7 +322,6 @@ namespace Dietetyka
 		
 		public Konto()
 		{
-			this._Menu = new EntitySet<Menu>(new Action<Menu>(this.attach_Menu), new Action<Menu>(this.detach_Menu));
 			OnCreated();
 		}
 		
@@ -496,19 +465,6 @@ namespace Dietetyka
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Konto_Menu", Storage="_Menu", ThisKey="Id", OtherKey="Id_konto")]
-		public EntitySet<Menu> Menu
-		{
-			get
-			{
-				return this._Menu;
-			}
-			set
-			{
-				this._Menu.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -527,18 +483,6 @@ namespace Dietetyka
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Menu(Menu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Konto = this;
-		}
-		
-		private void detach_Menu(Menu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Konto = null;
 		}
 	}
 	
@@ -998,83 +942,49 @@ namespace Dietetyka
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id_dania;
-		
-		private int _Id_konto;
+		private int _id;
 		
 		private System.DateTime _data;
 		
 		private string _komentarz;
 		
-		private EntityRef<Danie> _Danie;
-		
-		private EntityRef<Konto> _Konto;
+		private string _nazwa_dania;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnId_daniaChanging(int value);
-    partial void OnId_daniaChanged();
-    partial void OnId_kontoChanging(int value);
-    partial void OnId_kontoChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OndataChanging(System.DateTime value);
     partial void OndataChanged();
     partial void OnkomentarzChanging(string value);
     partial void OnkomentarzChanged();
+    partial void Onnazwa_daniaChanging(string value);
+    partial void Onnazwa_daniaChanged();
     #endregion
 		
 		public Menu()
 		{
-			this._Danie = default(EntityRef<Danie>);
-			this._Konto = default(EntityRef<Konto>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_dania", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id_dania
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
 		{
 			get
 			{
-				return this._Id_dania;
+				return this._id;
 			}
 			set
 			{
-				if ((this._Id_dania != value))
+				if ((this._id != value))
 				{
-					if (this._Danie.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_daniaChanging(value);
+					this.OnidChanging(value);
 					this.SendPropertyChanging();
-					this._Id_dania = value;
-					this.SendPropertyChanged("Id_dania");
-					this.OnId_daniaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_konto", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id_konto
-		{
-			get
-			{
-				return this._Id_konto;
-			}
-			set
-			{
-				if ((this._Id_konto != value))
-				{
-					if (this._Konto.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_kontoChanging(value);
-					this.SendPropertyChanging();
-					this._Id_konto = value;
-					this.SendPropertyChanged("Id_konto");
-					this.OnId_kontoChanged();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -1119,70 +1029,22 @@ namespace Dietetyka
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Danie_Menu", Storage="_Danie", ThisKey="Id_dania", OtherKey="Id", IsForeignKey=true)]
-		public Danie Danie
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa_dania", DbType="NVarChar(50)")]
+		public string nazwa_dania
 		{
 			get
 			{
-				return this._Danie.Entity;
+				return this._nazwa_dania;
 			}
 			set
 			{
-				Danie previousValue = this._Danie.Entity;
-				if (((previousValue != value) 
-							|| (this._Danie.HasLoadedOrAssignedValue == false)))
+				if ((this._nazwa_dania != value))
 				{
+					this.Onnazwa_daniaChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Danie.Entity = null;
-						previousValue.Menu.Remove(this);
-					}
-					this._Danie.Entity = value;
-					if ((value != null))
-					{
-						value.Menu.Add(this);
-						this._Id_dania = value.Id;
-					}
-					else
-					{
-						this._Id_dania = default(int);
-					}
-					this.SendPropertyChanged("Danie");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Konto_Menu", Storage="_Konto", ThisKey="Id_konto", OtherKey="Id", IsForeignKey=true)]
-		public Konto Konto
-		{
-			get
-			{
-				return this._Konto.Entity;
-			}
-			set
-			{
-				Konto previousValue = this._Konto.Entity;
-				if (((previousValue != value) 
-							|| (this._Konto.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Konto.Entity = null;
-						previousValue.Menu.Remove(this);
-					}
-					this._Konto.Entity = value;
-					if ((value != null))
-					{
-						value.Menu.Add(this);
-						this._Id_konto = value.Id;
-					}
-					else
-					{
-						this._Id_konto = default(int);
-					}
-					this.SendPropertyChanged("Konto");
+					this._nazwa_dania = value;
+					this.SendPropertyChanged("nazwa_dania");
+					this.Onnazwa_daniaChanged();
 				}
 			}
 		}
