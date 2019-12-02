@@ -282,3 +282,7 @@ D:\Projekt Zespolowy\Dietetyka\source\repos\Dietetyka\Dietetyka\obj\Debug\Dietet
 D:\Projekt Zespolowy\Dietetyka\source\repos\Dietetyka\Dietetyka\obj\Debug\Dietetyka.csproj.CopyComplete
 D:\Projekt Zespolowy\Dietetyka\source\repos\Dietetyka\Dietetyka\obj\Debug\Dietetyka.dll
 D:\Projekt Zespolowy\Dietetyka\source\repos\Dietetyka\Dietetyka\obj\Debug\Dietetyka.pdb
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.cs
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.designer.cs
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml.layout

@@ -139,9 +139,11 @@
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Baza.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Baza.dbml.layout">
       <DependentUpon>Baza.dbml</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Home_Page.aspx" />
@@ -197,11 +199,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Baza.cs">
       <DependentUpon>Baza.dbml</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Baza.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Baza.dbml</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Dietecian_Interface.aspx.cs">
       <DependentUpon>Dietecian_Interface.aspx</DependentUpon>

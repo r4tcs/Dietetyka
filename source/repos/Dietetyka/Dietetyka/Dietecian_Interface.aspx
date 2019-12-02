@@ -30,6 +30,18 @@
 			margin: 50px 150px;
 			display: inline;
 		}
+
+        .lista
+        {
+            display: inline;
+            margin-left: 300px;
+        }
+
+        .edytuj
+        {
+            float: none;
+            display: inline;
+        }
 	</style>
 
 </head>
@@ -205,11 +217,11 @@
 					</div>
 				</div>
 
-				<div class="left" id="ProductListDiv" runat="server" visible="false">
+				<div class="lista" id="ProductListDiv" runat="server" visible="false">
 					<h2>Lista dodanych produktów</h2>
 					<table border="1">
 						<tr>
-							<asp:Repeater ID="RepeaterProdoktow" runat="server">
+							<asp:Repeater ID="RepeaterProduktow" runat="server">
 								<HeaderTemplate>
 									<td><b>Nazwa</b></td>
 									<td><b>Kalorie</b></td>
@@ -228,11 +240,84 @@
 										<td><%# Eval("tluszcze") %> g</td>
 										<td><%# Eval("blonnik") %> g</td>
 										<td><%# Eval("sol") %> g</td>
+                                        <td><asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="EditProduct" Text="Edytuj" OnClick="EditProduct_Click"/></td>
+                                        <td><asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="DeleteProduct" Text="Usuń" OnClick="DeleteProduct_Click"/></td>
 									</tr>
 								</ItemTemplate>
 							</asp:Repeater>
 						</tr>
 					</table>
+                    <div class="edytuj">
+                    <div class="form-group">
+						Nazwa
+							<br />
+						<asp:TextBox ID="TextBoxNazwa2" runat="server"></asp:TextBox><br />
+						<asp:RegularExpressionValidator
+							ID="RegularExpressionValidator2" runat="server" ErrorMessage="Podaj poprawną nazwę"
+							ControlToValidate="textboxNazwa" ValidationExpression="[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ'.\s]{1,50}"
+							ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"></asp:RegularExpressionValidator>
+					</div>
+
+					<div class="form-group">
+						Jednostka
+							<br />
+						<asp:DropDownList ID="DropDownListJednostka2" runat="server" Width="175px">
+							<asp:ListItem>100g</asp:ListItem>
+							<asp:ListItem>szt</asp:ListItem>
+						</asp:DropDownList><br />
+					</div>
+
+					<div class="form-group">
+						Kalorie
+							<br />
+						<asp:TextBox ID="TextBoxKalorie2" runat="server"></asp:TextBox>kcal<br />
+						<asp:RangeValidator ID="RangeValidator1" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
+							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxKalorie" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+					</div>
+
+					<div class="form-group">
+						Węglowodany
+							<br />
+						<asp:TextBox ID="TextBoxWeglowodany2" runat="server"></asp:TextBox>g<br />
+						<asp:RangeValidator ID="RangeValidator2" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
+							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxWeglowodany" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+					</div>
+
+					<div class="form-group">
+						Białka
+							<br />
+						<asp:TextBox ID="TextBoxBialka2" runat="server"></asp:TextBox>g<br />
+						<asp:RangeValidator ID="RangeValidator3" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
+							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxBialka" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+					</div>
+
+					<div class="form-group">
+						Błonnik
+							<br />
+						<asp:TextBox ID="TextBoxBlonnik2" runat="server"></asp:TextBox>g<br />
+						<asp:RangeValidator ID="RangeValidator4" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
+							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxBlonnik" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+					</div>
+
+					<div class="form-group">
+						Sól
+							<br />
+						<asp:TextBox ID="TextBoxSol2" runat="server"></asp:TextBox>g<br />
+						<asp:RangeValidator ID="RangeValidator5" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
+							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxSol" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+					</div>
+
+					<div class="form-group">
+						Tłuszcze
+							<br />
+						<asp:TextBox ID="TextBoxTluszcze2" runat="server"></asp:TextBox>g<br />
+						<asp:RangeValidator ID="RangeValidator6" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
+							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxTluszcze" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+					</div>
+                        <div class="form-group"> 
+                            <asp:Button ID="editProduct" runat="server" OnClick="EditProduct2_Click" Text="Zatwierdź zmiany"/>
+                        </div>
+                   </div>
 				</div>
 			</div>
 		</div>
