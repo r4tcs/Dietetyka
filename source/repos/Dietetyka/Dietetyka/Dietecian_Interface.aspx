@@ -40,6 +40,10 @@
             float: none;
             display: inline;
         }
+        .wyloguj
+        {
+            float:right;
+        }
 	</style>
 
 </head>
@@ -59,6 +63,9 @@
 				</li>
 				<li class="nav-item dropdown no-arrow mx-1" runat="server">
 					<asp:Button ID="ButtonCreateDish" runat="server" Text="Stwórz danie" OnClick="ButtonCreateDish_Click" />
+				</li>
+                <li class="nav-item dropdown no-arrow mx-1" runat="server">
+					<asp:Button ID="ButtonCreateMenu" runat="server" Text="Utwórz menu" OnClick="ButtonCreateMenu_Click" />
 				</li>
 				<li class="nav-item dropdown no-arrow mx-1" runat="server">
 					<asp:Button ID="ButtonLogout" runat="server" Text="Wyloguj" OnClick="ButtonLogout_Click" />
@@ -317,6 +324,30 @@
                             <asp:Button ID="editProduct" runat="server" OnClick="EditProduct2_Click" Text="Zatwierdź zmiany"/>
                         </div>
                    </div>
+                <div class="left" runat="server" id="createMenu" visible="false">
+                    <h2>Wybierz klienta: </h2>
+                    <table border="1">
+						<tr>
+							<asp:Repeater ID="RepeaterKlientow" runat="server">
+								<HeaderTemplate>
+									<td><b>Imie</b></td>
+									<td><b>Nazwisko</b></td>
+									<td><b>Login</b></td>
+									<td><b>Telefon</b></td>
+								</HeaderTemplate>
+								<ItemTemplate>
+									<tr>
+										<td>    <%# Eval("imie") %> </td>
+										<td>    <%# Eval("nazwisko") %> </td>
+										<td>    <%# Eval("login") %>    </td>
+										<td>    <%# Eval("telefon") %>  </td>
+                                        <td><asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="chooseClient" Text="Wybierz" OnClick="chooseClient_Click"/></td>
+									</tr>
+								</ItemTemplate>
+							</asp:Repeater>
+						</tr>
+					</table>
+                </div>
 				</div>
 			</div>
 	</form>

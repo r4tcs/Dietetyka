@@ -49,6 +49,15 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Button ButtonCreateDish;
         
         /// <summary>
+        /// ButtonCreateMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonCreateMenu;
+        
+        /// <summary>
         /// ButtonLogout control.
         /// </summary>
         /// <remarks>
@@ -452,5 +461,23 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button editProduct;
+        
+        /// <summary>
+        /// createMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl createMenu;
+        
+        /// <summary>
+        /// RepeaterKlientow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterKlientow;
     }
 }

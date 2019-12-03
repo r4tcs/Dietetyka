@@ -30,6 +30,12 @@ namespace Dietetyka
                 sda.Fill(dt);
                 RepeaterProduktow.DataSource = dt;
                 RepeaterProduktow.DataBind();
+                cmd = new SqlCommand("Select Id, imie, nazwisko, login, telefon FROM Konto WHERE rodzaj='K'", new SqlConnection(constr));
+                sda = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                sda.Fill(dt);
+                RepeaterKlientow.DataSource = dt;
+                RepeaterKlientow.DataBind();
             }
 			
 			SqlConnection con = new SqlConnection(constr);
@@ -136,6 +142,7 @@ namespace Dietetyka
 			addProductDiv.Visible = true;
 			createDishDiv.Visible = false;
 			ProductListDiv.Visible = false;
+            createMenu.Visible = false;
 		}
 
 		protected void ButtonCreateDish_Click(object sender, EventArgs e)
@@ -144,16 +151,25 @@ namespace Dietetyka
 			createDishDiv.Visible = true;
 			addProductDiv.Visible = false;
 			ProductListDiv.Visible = false;
-		}
+            createMenu.Visible = false;
+        }
 
 		protected void ButtonProductList_Click(object sender, EventArgs e)
 		{
 			ProductListDiv.Visible = true;
 			addProductDiv.Visible = false;
 			createDishDiv.Visible = false;
-		}
+            createMenu.Visible = false;
+        }
+        protected void ButtonCreateMenu_Click(object sender, EventArgs e)
+        {
+            createMenu.Visible = true;
+            ProductListDiv.Visible = false;
+            addProductDiv.Visible = false;
+            createDishDiv.Visible = false;
+        }
 
-		protected void ButtonAdd_Click(object sender, EventArgs e)
+        protected void ButtonAdd_Click(object sender, EventArgs e)
 		{
 			int rowIndex = 0;
 			if (ViewState["CurrentTable"] != null)
@@ -273,6 +289,10 @@ namespace Dietetyka
             RepeaterProduktow.DataSource = dt;
             RepeaterProduktow.DataBind();
             edycjaProduktow.Visible = false;
+        }
+        protected void chooseClient_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
