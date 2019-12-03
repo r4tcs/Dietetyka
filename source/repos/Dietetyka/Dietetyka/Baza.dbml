@@ -34,20 +34,21 @@
       <Association Name="Produkt_spozywczy_Skladnik" Member="Skladniks" ThisKey="Id" OtherKey="Id_produktu" Type="Skladnik" />
     </Type>
   </Table>
-  <Table Name="dbo.Skladnik" Member="Skladniks">
-    <Type Name="Skladnik">
-      <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Id_produktu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Danie_Skladnik" Member="Danie" ThisKey="Id_dania" OtherKey="Id" Type="Danie" IsForeignKey="true" />
-      <Association Name="Produkt_spozywczy_Skladnik" Member="Produkt_spozywczy" ThisKey="Id_produktu" OtherKey="Id" Type="Produkt_spozywczy" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Menu" Member="Menu">
     <Type Name="Menu">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="komentarz" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="nazwa_dania" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Skladnik" Member="Skladniks">
+    <Type Name="Skladnik">
+      <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id_produktu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Danie_Skladnik" Member="Danie" ThisKey="Id_dania" OtherKey="Id" Type="Danie" IsForeignKey="true" />
+      <Association Name="Produkt_spozywczy_Skladnik" Member="Produkt_spozywczy" ThisKey="Id_produktu" OtherKey="Id" Type="Produkt_spozywczy" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
