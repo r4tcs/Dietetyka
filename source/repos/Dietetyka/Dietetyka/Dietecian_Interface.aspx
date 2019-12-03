@@ -30,20 +30,20 @@
 			margin: 50px 150px;
 			display: inline;
 		}
-         .lista
-        {
-            display: inline;
-            margin-left: 300px;
-        }
-        .edytuj
-        {
-            float: none;
-            display: inline;
-        }
-        .wyloguj
-        {
-            float:right;
-        }
+
+		.lista {
+			display: inline;
+			margin-left: 300px;
+		}
+
+		.edytuj {
+			float: none;
+			display: inline;
+		}
+
+		.wyloguj {
+			float: right;
+		}
 	</style>
 
 </head>
@@ -64,7 +64,10 @@
 				<li class="nav-item dropdown no-arrow mx-1" runat="server">
 					<asp:Button ID="ButtonCreateDish" runat="server" Text="Stwórz danie" OnClick="ButtonCreateDish_Click" />
 				</li>
-                <li class="nav-item dropdown no-arrow mx-1" runat="server">
+				<li class="nav-item dropdown no-arrow mx-1" runat="server">
+					<asp:Button ID="ButtonDishList" runat="server" Text="Lista dań" OnClick="ButtonDishList_Click" />
+				</li>
+				<li class="nav-item dropdown no-arrow mx-1" runat="server">
 					<asp:Button ID="ButtonCreateMenu" runat="server" Text="Utwórz menu" OnClick="ButtonCreateMenu_Click" />
 				</li>
 				<li class="nav-item dropdown no-arrow mx-1" runat="server">
@@ -210,7 +213,7 @@
 									</ItemTemplate>
 									<FooterStyle HorizontalAlign="Center" />
 									<FooterTemplate>
-										<asp:Button ID="ButtonAdd" runat="server" Text="Dodaj kolejny" OnClick="ButtonAdd_Click"/>
+										<asp:Button ID="ButtonAdd" runat="server" Text="Dodaj kolejny" OnClick="ButtonAdd_Click" />
 									</FooterTemplate>
 								</asp:TemplateField>
 							</Columns>
@@ -222,7 +225,7 @@
 					</div>
 				</div>
 
-				<div class="lista" id="ProductListDiv" runat="server" visible="false">
+				<div class="left" id="ProductListDiv" runat="server" visible="false">
 					<h2>Lista dodanych produktów</h2>
 					<table border="1">
 						<tr>
@@ -245,16 +248,18 @@
 										<td><%# Eval("tluszcze") %> g</td>
 										<td><%# Eval("blonnik") %> g</td>
 										<td><%# Eval("sol") %> g</td>
-                                        <td><asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="EditProduct" Text="Edytuj" OnClick="EditProduct_Click"/></td>
-                                        <td><asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="DeleteProduct" Text="Usuń" OnClick="DeleteProduct_Click"/></td>
+										<td>
+											<asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="EditProduct" Text="Edytuj" OnClick="EditProduct_Click" /></td>
+										<td>
+											<asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="DeleteProduct" Text="Usuń" OnClick="DeleteProduct_Click" /></td>
 									</tr>
 								</ItemTemplate>
 							</asp:Repeater>
 						</tr>
 					</table>
 				</div>
-                <div class="edytuj" id="edycjaProduktow" runat="server" visible="false">
-                    <div class="form-group">
+				<div class="left" id="edycjaProduktow" runat="server" visible="false">
+					<div class="form-group">
 						Nazwa
 							<br />
 						<asp:TextBox ID="TextBoxNazwa2" runat="server"></asp:TextBox><br />
@@ -320,13 +325,13 @@
 						<asp:RangeValidator ID="RangeValidator6" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editProduct"
 							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxTluszcze" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
 					</div>
-                        <div class="form-group"> 
-                            <asp:Button ID="editProduct" runat="server" OnClick="EditProduct2_Click" Text="Zatwierdź zmiany"/>
-                        </div>
-                   </div>
-                <div class="left" runat="server" id="createMenu" visible="false">
-                    <h2>Wybierz klienta: </h2>
-                    <table border="1">
+					<div class="form-group">
+						<asp:Button ID="editProduct" runat="server" OnClick="EditProduct2_Click" Text="Zatwierdź zmiany" />
+					</div>
+				</div>
+				<div class="left" runat="server" id="createMenu" visible="false">
+					<h2>Wybierz klienta: </h2>
+					<table border="1">
 						<tr>
 							<asp:Repeater ID="RepeaterKlientow" runat="server">
 								<HeaderTemplate>
@@ -337,19 +342,31 @@
 								</HeaderTemplate>
 								<ItemTemplate>
 									<tr>
-										<td>    <%# Eval("imie") %> </td>
-										<td>    <%# Eval("nazwisko") %> </td>
-										<td>    <%# Eval("login") %>    </td>
-										<td>    <%# Eval("telefon") %>  </td>
-                                        <td><asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="chooseClient" Text="Wybierz" OnClick="chooseClient_Click"/></td>
+										<td><%# Eval("imie") %> </td>
+										<td><%# Eval("nazwisko") %> </td>
+										<td><%# Eval("login") %>    </td>
+										<td><%# Eval("telefon") %>  </td>
+										<td>
+											<asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="chooseClient" Text="Wybierz" OnClick="chooseClient_Click" /></td>
 									</tr>
 								</ItemTemplate>
 							</asp:Repeater>
 						</tr>
 					</table>
-                </div>
+				</div>
+				<div class="left" runat="server" id="DishListDiv" visible="false">
+                    <h2>Dodane przepisy</h2>
+					Wybierz przepis<br />
+					<asp:DropDownList ID="DropDownListDish" AutoPostBack="true" AppendDataBoundItems="true" runat="server" DataSourceID="SqlDataSource2" DataTextField="nazwa" DataValueField="Id" OnSelectedIndexChanged="DropDownListDish_SelectedIndexChanged">
+						<asp:ListItem Selected="True" Text="--WYBIERZ DANIE--"> </asp:ListItem>
+					</asp:DropDownList>
+					<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:BazaConnectionString %>" SelectCommand="SELECT [Id], [nazwa] FROM [Danie] ORDER BY [nazwa]"></asp:SqlDataSource>
+					<br />Kategoria: <asp:Label ID="LabelCategory" runat="server" Text=""></asp:Label>
+					<br />Przepis: <asp:Label ID="LabelPrzepis" runat="server" Text=""></asp:Label>
+					<br />Produkty: <asp:Label ID="LabelProdukty" runat="server" Text=""></asp:Label>
 				</div>
 			</div>
+		</div>
 	</form>
 </body>
 

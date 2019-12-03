@@ -114,9 +114,12 @@ namespace Dietetyka
 					Skladnik s = new Skladnik();
 					s.Id_dania = danieID;
 					DropDownList box1 = (DropDownList)Gridview1.Rows[rowIndex].Cells[0].FindControl("DropDownListIngredient");
-					s.Id_produktu = Convert.ToInt32(box1.SelectedItem.Value);
+					SqlCommand sql = new SqlCommand("SELECT Id FROM Produkt_spozywczy WHERE nazwa='" + box1.SelectedItem.Text + "'", con);
+					sql.CommandType = CommandType.Text;
+					s.Id_produktu = Convert.ToInt32(sql.ExecuteScalar());
 					TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
 					s.ilosc = Convert.ToInt32(box2.Text);
+					
 					baza.Skladniks.InsertOnSubmit(s);
 					baza.SubmitChanges();
 					rowIndex++;
@@ -124,8 +127,9 @@ namespace Dietetyka
 				con.Close();
                 Response.Write("<script>alert('Pomyślnie dodano danie');</script>");
             }
-            catch (Exception)
+            catch (FormatException ex)
             {
+				Console.Write(ex.Message);
                 Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
             }
         }
@@ -139,35 +143,40 @@ namespace Dietetyka
 
 		protected void ButtonAddProduct_Click(object sender, EventArgs e)
 		{
-			addProductDiv.Visible = true;
-			createDishDiv.Visible = false;
-			ProductListDiv.Visible = false;
-            createMenu.Visible = false;
+			EnableOnlyOneDiv(addProductDiv);
 		}
 
 		protected void ButtonCreateDish_Click(object sender, EventArgs e)
 		{
 			SetInitialRow();
-			createDishDiv.Visible = true;
-			addProductDiv.Visible = false;
-			ProductListDiv.Visible = false;
-            createMenu.Visible = false;
-        }
+			EnableOnlyOneDiv(createDishDiv);
+		}
 
 		protected void ButtonProductList_Click(object sender, EventArgs e)
 		{
-			ProductListDiv.Visible = true;
+			EnableOnlyOneDiv(ProductListDiv);
+		}
+
+		protected void ButtonDishList_Click(object sender, EventArgs e)
+		{
+			EnableOnlyOneDiv(DishListDiv);
+		}
+
+		protected void ButtonCreateMenu_Click(object sender, EventArgs e)
+        {
+			EnableOnlyOneDiv(createMenu);
+        }
+
+		void EnableOnlyOneDiv(System.Web.UI.HtmlControls.HtmlContainerControl div)
+		{
 			addProductDiv.Visible = false;
 			createDishDiv.Visible = false;
-            createMenu.Visible = false;
-        }
-        protected void ButtonCreateMenu_Click(object sender, EventArgs e)
-        {
-            createMenu.Visible = true;
-            ProductListDiv.Visible = false;
-            addProductDiv.Visible = false;
-            createDishDiv.Visible = false;
-        }
+			ProductListDiv.Visible = false;
+			createMenu.Visible = false;
+			DishListDiv.Visible = false;
+
+			div.Visible = true;
+		}
 
         protected void ButtonAdd_Click(object sender, EventArgs e)
 		{
@@ -294,5 +303,34 @@ namespace Dietetyka
         {
 
         }
-    }
+
+		protected void DropDownListDish_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (DropDownListDish.SelectedIndex == 0)
+			{
+				LabelCategory.Text = "";
+				LabelPrzepis.Text = "";
+				LabelProdukty.Text = "";
+			}
+
+			try
+			{
+				SqlConnection con = new SqlConnection(constr);
+				con.Open();
+				SqlCommand sql = new SqlCommand("SELECT kategoria FROM Danie WHERE Id='" + DropDownListDish.SelectedItem.Value + "'", con);
+				sql.CommandType = CommandType.Text;
+				LabelCategory.Text = sql.ExecuteScalar() as string;
+				sql = new SqlCommand("SELECT przepis FROM Danie WHERE Id='" + DropDownListDish.SelectedItem.Value + "'", con);
+				LabelPrzepis.Text = sql.ExecuteScalar() as string;
+
+				//DODAĆ PRODUKTY
+				con.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.Write(ex.Message);
+			}
+				
+		}
+	}
 }
