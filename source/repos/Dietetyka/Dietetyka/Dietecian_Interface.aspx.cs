@@ -174,6 +174,7 @@ namespace Dietetyka
 			ProductListDiv.Visible = false;
 			createMenu.Visible = false;
 			DishListDiv.Visible = false;
+			DivCreateDiet.Visible = false;
 
 			div.Visible = true;
 		}
@@ -299,9 +300,26 @@ namespace Dietetyka
 			RepeaterProduktow.DataBind();
 			edycjaProduktow.Visible = false;
 		}
+
 		protected void chooseClient_Click(object sender, EventArgs e)
 		{
-
+			createMenu.Visible = false;
+			DivCreateDiet.Visible = true;
+			Button b = sender as Button;
+			Int32 ClientId = Convert.ToInt32(b.Attributes["ClientID"]);
+			try
+			{
+				SqlConnection con = new SqlConnection(constr);
+				con.Open();
+				SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE Id=" + ClientId.ToString(), con);
+				sql.CommandType = CommandType.Text;
+				LabelClient.Text = sql.ExecuteScalar() as string;
+				con.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.Write(ex.Message);
+			}
 		}
 
 		protected void DropDownListDish_SelectedIndexChanged(object sender, EventArgs e)
@@ -372,6 +390,16 @@ namespace Dietetyka
 			{
 				Console.Write(ex.Message);
 			}
+		}
+
+		protected void Calendar_Render(object sender, DayRenderEventArgs e)
+		{
+			if (e.Day.Date.CompareTo(DateTime.Today) <= 0)
+			{
+				e.Day.IsSelectable = false;
+				e.Cell.ForeColor = System.Drawing.Color.Red;
+			}
+			else e.Cell.ForeColor = System.Drawing.Color.Green;
 		}
 	}
 }

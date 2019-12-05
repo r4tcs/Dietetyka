@@ -94,6 +94,8 @@
 						<asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
 					<hr />
 				</div>
+
+				<%--DODAJ PRODUKT SPOŻYWCZY--%>
 				<div class="left" id="addProductDiv" runat="server" visible="false">
 					<h2>Dodawanie produktów</h2>
 					<div class="form-group">
@@ -165,7 +167,7 @@
 					<asp:Button ID="addProduct" runat="server" Width="150px" Text="Dodaj produkt" ValidationGroup="addProduct" OnClick="addProduct_Click" />
 				</div>
 
-
+				<%--STWÓRZ DANIE--%>
 				<div id="createDishDiv" class="left" visible="false" runat="server">
 					<h2>Stwórz danie</h2>
 					<div class="form-group">
@@ -225,6 +227,7 @@
 					</div>
 				</div>
 
+				<%--LISTA PRODUKTÓW SPOŻYWCZYCH--%>
 				<div class="left" id="ProductListDiv" runat="server" visible="false">
 					<h2>Lista dodanych produktów</h2>
 					<table border="1">
@@ -258,6 +261,8 @@
 						</tr>
 					</table>
 				</div>
+
+				<%--EDYTYJ/USUŃ PRODUKTY--%>
 				<div class="left" id="edycjaProduktow" runat="server" visible="false">
 					<div class="form-group">
 						Nazwa
@@ -329,6 +334,8 @@
 						<asp:Button ID="editProduct" runat="server" OnClick="EditProduct2_Click" Text="Zatwierdź zmiany" />
 					</div>
 				</div>
+
+				<%--WYBIERZ KLIENTA--%>
 				<div class="left" runat="server" id="createMenu" visible="false">
 					<h2>Wybierz klienta: </h2>
 					<table border="1">
@@ -347,24 +354,48 @@
 										<td><%# Eval("login") %>    </td>
 										<td><%# Eval("telefon") %>  </td>
 										<td>
-											<asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="chooseClient" Text="Wybierz" OnClick="chooseClient_Click" /></td>
+											<asp:Button ClientID='<%# Eval("Id")  %>' runat="server" ID="chooseClient" Text="Wybierz" OnClick="chooseClient_Click" /></td>
 									</tr>
 								</ItemTemplate>
 							</asp:Repeater>
 						</tr>
 					</table>
 				</div>
+
+				<div class="left" runat="server" id="DivCreateDiet" visible="false">
+					Klient:
+					<asp:Label ID="LabelClient" runat="server" Text=""></asp:Label><br />
+					<asp:Calendar ID="Calendar" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" Width="350px" OnDayRender="Calendar_Render" NextPrevFormat="FullMonth">
+						<DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+						<NextPrevStyle Font-Size="8pt" ForeColor="#333333" Font-Bold="True" VerticalAlign="Bottom" />
+						<OtherMonthDayStyle ForeColor="#999999" />
+						<SelectedDayStyle BackColor="#333399" ForeColor="White" />
+						<TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
+						<TodayDayStyle BackColor="#CCCCCC" />
+					</asp:Calendar>
+				</div>
+
+				<%--POKAŻ PRZEPISY--%>
 				<div class="left" runat="server" id="DishListDiv" visible="false">
-                    <h2>Dodane przepisy</h2>
-					<b>Kategoria: </b><br />
+					<h2>Dodane przepisy</h2>
+					<b>Kategoria: </b>
+					<br />
 					<asp:DropDownList ID="DropDownListCategory" AutoPostBack="true" AppendDataBoundItems="true" runat="server" DataSourceID="SqlDataSource3" DataTextField="kategoria" DataValueField="kategoria" OnSelectedIndexChanged="DropDownListCategory_SelectedIndexChanged">
 						<asp:ListItem Selected="True" Text="--WYBIERZ KATEGORIĘ--"> </asp:ListItem>
 					</asp:DropDownList>
 					<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:BazaConnectionString %>" SelectCommand="SELECT DISTINCT [kategoria] FROM [Danie]"></asp:SqlDataSource>
-					<br /><b>Danie: </b><br />
+					<br />
+					<b>Danie: </b>
+					<br />
 					<asp:DropDownList ID="DropDownListDish" AutoPostBack="true" AppendDataBoundItems="true" runat="server" OnSelectedIndexChanged="DropDownListDish_SelectedIndexChanged"></asp:DropDownList>
-					<br /><b>Przepis: </b><br /><asp:Label ID="LabelPrzepis" runat="server" Text=""></asp:Label>
-					<br /><b>Składniki: </b><br /><asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
+					<br />
+					<b>Przepis: </b>
+					<br />
+					<asp:Label ID="LabelPrzepis" runat="server" Text=""></asp:Label>
+					<br />
+					<b>Składniki: </b>
+					<br />
+					<asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
 			</div>
 		</div>
