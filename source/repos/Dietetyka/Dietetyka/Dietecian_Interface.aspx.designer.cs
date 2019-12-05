@@ -499,6 +499,24 @@ namespace Dietetyka {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DishListDiv;
         
         /// <summary>
+        /// DropDownListCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCategory;
+        
+        /// <summary>
+        /// SqlDataSource3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
+        
+        /// <summary>
         /// DropDownListDish control.
         /// </summary>
         /// <remarks>
@@ -506,24 +524,6 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListDish;
-        
-        /// <summary>
-        /// SqlDataSource2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
-        
-        /// <summary>
-        /// LabelCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCategory;
         
         /// <summary>
         /// LabelPrzepis control.
@@ -535,12 +535,12 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Label LabelPrzepis;
         
         /// <summary>
-        /// LabelProdukty control.
+        /// TableProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelProdukty;
+        protected global::System.Web.UI.WebControls.Table TableProducts;
     }
 }

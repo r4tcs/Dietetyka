@@ -14,30 +14,30 @@ namespace Dietetyka
 	{
 		BazaDataContext baza = new BazaDataContext();
 		string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
-        static int ProduktID = 0;
-        protected void Page_Load(object sender, EventArgs e)
+		static int ProduktID = 0;
+		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (Session["username"] == null)
 			{
 				Response.Redirect("Home_Page.aspx");
 			}
-            if(!IsPostBack)
-            {
+			if (!IsPostBack)
+			{
 				SetInitialRow();
 				SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                RepeaterProduktow.DataSource = dt;
-                RepeaterProduktow.DataBind();
-                cmd = new SqlCommand("Select Id, imie, nazwisko, login, telefon FROM Konto WHERE rodzaj='K'", new SqlConnection(constr));
-                sda = new SqlDataAdapter(cmd);
-                dt = new DataTable();
-                sda.Fill(dt);
-                RepeaterKlientow.DataSource = dt;
-                RepeaterKlientow.DataBind();
-            }
-			
+				SqlDataAdapter sda = new SqlDataAdapter(cmd);
+				DataTable dt = new DataTable();
+				sda.Fill(dt);
+				RepeaterProduktow.DataSource = dt;
+				RepeaterProduktow.DataBind();
+				cmd = new SqlCommand("Select Id, imie, nazwisko, login, telefon FROM Konto WHERE rodzaj='K'", new SqlConnection(constr));
+				sda = new SqlDataAdapter(cmd);
+				dt = new DataTable();
+				sda.Fill(dt);
+				RepeaterKlientow.DataSource = dt;
+				RepeaterKlientow.DataBind();
+			}
+
 			SqlConnection con = new SqlConnection(constr);
 			con.Open();
 			SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
@@ -73,7 +73,7 @@ namespace Dietetyka
 				con.Open();
 				Produkt_spozywczy p = new Produkt_spozywczy();
 				p.nazwa = TextBoxNazwa.Text;
-				p.jednostka = DropDownListJednostka.SelectedValue; 
+				p.jednostka = DropDownListJednostka.SelectedValue;
 				p.kalorie = float.Parse(TextBoxKalorie.Text);
 				p.weglowodany = float.Parse(TextBoxWeglowodany.Text);
 				p.bialka = float.Parse(TextBoxBialka.Text);
@@ -92,19 +92,19 @@ namespace Dietetyka
 			}
 		}
 
-        protected void addDanie_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SqlConnection con = new SqlConnection(constr);
-                con.Open();
-                Danie d = new Danie();
-				
-                d.nazwa = TextBoxNazwaDania.Text;
-                d.kategoria = KategoriaDropDownList.SelectedValue;
-                d.przepis = textboxPrzepis.Text;
-                baza.Danies.InsertOnSubmit(d);
-                baza.SubmitChanges();
+		protected void addDanie_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				SqlConnection con = new SqlConnection(constr);
+				con.Open();
+				Danie d = new Danie();
+
+				d.nazwa = TextBoxNazwaDania.Text;
+				d.kategoria = KategoriaDropDownList.SelectedValue;
+				d.przepis = textboxPrzepis.Text;
+				baza.Danies.InsertOnSubmit(d);
+				baza.SubmitChanges();
 				int danieID = d.Id;
 
 				int rowIndex = 0;
@@ -119,23 +119,23 @@ namespace Dietetyka
 					s.Id_produktu = Convert.ToInt32(sql.ExecuteScalar());
 					TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
 					s.ilosc = Convert.ToInt32(box2.Text);
-					
+
 					baza.Skladniks.InsertOnSubmit(s);
 					baza.SubmitChanges();
 					rowIndex++;
 				}
 				con.Close();
-                Response.Write("<script>alert('Pomyślnie dodano danie');</script>");
-            }
-            catch (FormatException ex)
-            {
+				Response.Write("<script>alert('Pomyślnie dodano danie');</script>");
+			}
+			catch (FormatException ex)
+			{
 				Console.Write(ex.Message);
-                Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
-            }
-        }
+				Response.Write("<script>alert('Wystąpił nieoczekiwany błąd. Spróbuj ponownie później');</script>");
+			}
+		}
 
 
-        protected void ButtonLogout_Click(object sender, EventArgs e)
+		protected void ButtonLogout_Click(object sender, EventArgs e)
 		{
 			Session.Clear();
 			Response.Redirect("Home_Page.aspx");
@@ -163,9 +163,9 @@ namespace Dietetyka
 		}
 
 		protected void ButtonCreateMenu_Click(object sender, EventArgs e)
-        {
+		{
 			EnableOnlyOneDiv(createMenu);
-        }
+		}
 
 		void EnableOnlyOneDiv(System.Web.UI.HtmlControls.HtmlContainerControl div)
 		{
@@ -178,7 +178,7 @@ namespace Dietetyka
 			div.Visible = true;
 		}
 
-        protected void ButtonAdd_Click(object sender, EventArgs e)
+		protected void ButtonAdd_Click(object sender, EventArgs e)
 		{
 			int rowIndex = 0;
 			if (ViewState["CurrentTable"] != null)
@@ -230,107 +230,148 @@ namespace Dietetyka
 				}
 			}
 		}
-        protected void DeleteProduct_Click(object sender, EventArgs e)
-        {
-            BazaDataContext baza = new BazaDataContext();
-            Button b = sender as Button;
-            Int32 id = Convert.ToInt32(b.Attributes["ProduktID"]);
-            foreach (Produkt_spozywczy p in baza.Produkt_spozywczies)
-            {
-                if (p.Id == id)
-                {
-                    baza.Produkt_spozywczies.DeleteOnSubmit(p);
-                    break;
-                }
-            }
-            baza.SubmitChanges();
-            SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            RepeaterProduktow.DataSource = dt;
-            RepeaterProduktow.DataBind();
-        }
-        protected void EditProduct_Click(object sender, EventArgs e)
-        {
-            edycjaProduktow.Visible = true;
-            BazaDataContext baza = new BazaDataContext();
-            Button b = sender as Button;
-            Int32 id = Convert.ToInt32(b.Attributes["ProduktID"]);
-            foreach (Produkt_spozywczy pr in baza.Produkt_spozywczies)
-            {
-                if (pr.Id == id)
-                {
-                    ProduktID = id;
-                    TextBoxNazwa2.Text = pr.nazwa;
-                    DropDownListJednostka2.SelectedValue = pr.jednostka;
-                    TextBoxKalorie2.Text = Convert.ToString(pr.kalorie);
-                    TextBoxWeglowodany2.Text = Convert.ToString(pr.weglowodany);
-                    TextBoxBialka2.Text = Convert.ToString(pr.bialka);
-                    TextBoxBlonnik2.Text = Convert.ToString(pr.blonnik);
-                    TextBoxSol2.Text = Convert.ToString(pr.sol);
-                    TextBoxTluszcze2.Text = Convert.ToString(pr.tluszcze);
-                }
-            }
-        }
-        protected void EditProduct2_Click(object sender, EventArgs e)
-        {
-            foreach (Produkt_spozywczy p in baza.Produkt_spozywczies)
-            {
-                if (p.Id == ProduktID)
-                {
-                    p.nazwa = TextBoxNazwa2.Text;
-                    p.jednostka = DropDownListJednostka2.SelectedValue;
-                    p.kalorie = float.Parse(TextBoxKalorie2.Text);
-                    p.weglowodany = float.Parse(TextBoxWeglowodany2.Text);
-                    p.bialka = float.Parse(TextBoxBialka2.Text);
-                    p.blonnik = float.Parse(TextBoxBlonnik2.Text);
-                    p.sol = float.Parse(TextBoxSol2.Text);
-                    p.tluszcze = float.Parse(TextBoxTluszcze2.Text);
-                    break;
-                }
-            }
-            baza.SubmitChanges();
-            SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            RepeaterProduktow.DataSource = dt;
-            RepeaterProduktow.DataBind();
-            edycjaProduktow.Visible = false;
-        }
-        protected void chooseClient_Click(object sender, EventArgs e)
-        {
+		protected void DeleteProduct_Click(object sender, EventArgs e)
+		{
+			BazaDataContext baza = new BazaDataContext();
+			Button b = sender as Button;
+			Int32 id = Convert.ToInt32(b.Attributes["ProduktID"]);
+			foreach (Produkt_spozywczy p in baza.Produkt_spozywczies)
+			{
+				if (p.Id == id)
+				{
+					baza.Produkt_spozywczies.DeleteOnSubmit(p);
+					break;
+				}
+			}
+			baza.SubmitChanges();
+			SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
+			SqlDataAdapter sda = new SqlDataAdapter(cmd);
+			DataTable dt = new DataTable();
+			sda.Fill(dt);
+			RepeaterProduktow.DataSource = dt;
+			RepeaterProduktow.DataBind();
+		}
+		protected void EditProduct_Click(object sender, EventArgs e)
+		{
+			edycjaProduktow.Visible = true;
+			BazaDataContext baza = new BazaDataContext();
+			Button b = sender as Button;
+			Int32 id = Convert.ToInt32(b.Attributes["ProduktID"]);
+			foreach (Produkt_spozywczy pr in baza.Produkt_spozywczies)
+			{
+				if (pr.Id == id)
+				{
+					ProduktID = id;
+					TextBoxNazwa2.Text = pr.nazwa;
+					DropDownListJednostka2.SelectedValue = pr.jednostka;
+					TextBoxKalorie2.Text = Convert.ToString(pr.kalorie);
+					TextBoxWeglowodany2.Text = Convert.ToString(pr.weglowodany);
+					TextBoxBialka2.Text = Convert.ToString(pr.bialka);
+					TextBoxBlonnik2.Text = Convert.ToString(pr.blonnik);
+					TextBoxSol2.Text = Convert.ToString(pr.sol);
+					TextBoxTluszcze2.Text = Convert.ToString(pr.tluszcze);
+				}
+			}
+		}
+		protected void EditProduct2_Click(object sender, EventArgs e)
+		{
+			foreach (Produkt_spozywczy p in baza.Produkt_spozywczies)
+			{
+				if (p.Id == ProduktID)
+				{
+					p.nazwa = TextBoxNazwa2.Text;
+					p.jednostka = DropDownListJednostka2.SelectedValue;
+					p.kalorie = float.Parse(TextBoxKalorie2.Text);
+					p.weglowodany = float.Parse(TextBoxWeglowodany2.Text);
+					p.bialka = float.Parse(TextBoxBialka2.Text);
+					p.blonnik = float.Parse(TextBoxBlonnik2.Text);
+					p.sol = float.Parse(TextBoxSol2.Text);
+					p.tluszcze = float.Parse(TextBoxTluszcze2.Text);
+					break;
+				}
+			}
+			baza.SubmitChanges();
+			SqlCommand cmd = new SqlCommand("SELECT Id, nazwa, kalorie, weglowodany, bialka, tluszcze, blonnik, sol FROM Produkt_spozywczy", new SqlConnection(constr));
+			SqlDataAdapter sda = new SqlDataAdapter(cmd);
+			DataTable dt = new DataTable();
+			sda.Fill(dt);
+			RepeaterProduktow.DataSource = dt;
+			RepeaterProduktow.DataBind();
+			edycjaProduktow.Visible = false;
+		}
+		protected void chooseClient_Click(object sender, EventArgs e)
+		{
 
-        }
+		}
 
 		protected void DropDownListDish_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (DropDownListDish.SelectedIndex == 0)
 			{
-				LabelCategory.Text = "";
 				LabelPrzepis.Text = "";
-				LabelProdukty.Text = "";
 			}
 
 			try
 			{
 				SqlConnection con = new SqlConnection(constr);
 				con.Open();
-				SqlCommand sql = new SqlCommand("SELECT kategoria FROM Danie WHERE Id='" + DropDownListDish.SelectedItem.Value + "'", con);
+				SqlCommand sql = new SqlCommand("SELECT przepis FROM Danie WHERE Id='" + DropDownListDish.SelectedItem.Value + "'", con);
 				sql.CommandType = CommandType.Text;
-				LabelCategory.Text = sql.ExecuteScalar() as string;
-				sql = new SqlCommand("SELECT przepis FROM Danie WHERE Id='" + DropDownListDish.SelectedItem.Value + "'", con);
 				LabelPrzepis.Text = sql.ExecuteScalar() as string;
+				sql = new SqlCommand("SELECT p.nazwa, s.ilosc FROM Skladnik s JOIN Produkt_spozywczy p ON (s.Id_produktu=p.Id) WHERE s.Id_dania=" + DropDownListDish.SelectedItem.Value, con);
+				sql.CommandType = CommandType.Text;
 
-				//DODAĆ PRODUKTY
+				TableRow r = new TableRow();
+				TableCell c = new TableCell();
+				c.Text = "Produkt";
+				r.Cells.Add(c);
+				c = new TableCell();
+				c.Text = "Waga (w gramach)";
+				r.Cells.Add(c);
+				TableProducts.Rows.Add(r);
+
+				SqlDataReader reader = sql.ExecuteReader();
+				while (reader.Read())
+				{
+					TableRow r1 = new TableRow();
+					TableCell c1 = new TableCell();
+					c1.Text = reader.GetString(0);
+					r1.Cells.Add(c1);
+					c1 = new TableCell();
+					c1.Text = reader.GetInt32(1).ToString();
+					r1.Cells.Add(c1);
+					TableProducts.Rows.Add(r1);
+				}
 				con.Close();
 			}
 			catch (Exception ex)
 			{
 				Console.Write(ex.Message);
 			}
-				
+
+		}
+
+		protected void DropDownListCategory_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			DropDownListDish.Items.Clear();
+			LabelPrzepis.Text = "";
+			try
+			{
+				SqlConnection con = new SqlConnection(constr);
+				con.Open();
+				SqlCommand sql = new SqlCommand("SELECT Id, nazwa FROM Danie WHERE kategoria='" + DropDownListCategory.SelectedItem.Text + "' ORDER BY nazwa", con);
+				sql.CommandType = CommandType.Text;
+				DropDownListDish.DataSource = sql.ExecuteReader();
+				DropDownListDish.DataTextField = "nazwa";
+				DropDownListDish.DataValueField = "Id";
+				DropDownListDish.DataBind();
+				DropDownListDish.Items.Insert(0, new ListItem("--WYBIERZ DANIE--", "0"));
+				con.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.Write(ex.Message);
+			}
 		}
 	}
 }

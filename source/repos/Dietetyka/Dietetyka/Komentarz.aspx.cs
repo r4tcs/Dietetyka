@@ -73,9 +73,9 @@ namespace Dietetyka
                 SqlConnection con = new SqlConnection(constr);
                 con.Open();
                 Menu m = new Menu();
-                m.data = Calendar.SelectedDate;
-                m.komentarz = TextBoxKomentarz.Text;
-                baza.Menu.InsertOnSubmit(m);
+                //m.data = Calendar.SelectedDate;
+                //m.komentarz = TextBoxKomentarz.Text;
+                //baza.Menu.InsertOnSubmit(m);
                 baza.SubmitChanges();
                 con.Close();
                 Response.Write("<script>alert('Komentarz zostal dodany');</script>");

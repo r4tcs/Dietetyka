@@ -356,14 +356,15 @@
 				</div>
 				<div class="left" runat="server" id="DishListDiv" visible="false">
                     <h2>Dodane przepisy</h2>
-					Wybierz przepis<br />
-					<asp:DropDownList ID="DropDownListDish" AutoPostBack="true" AppendDataBoundItems="true" runat="server" DataSourceID="SqlDataSource2" DataTextField="nazwa" DataValueField="Id" OnSelectedIndexChanged="DropDownListDish_SelectedIndexChanged">
-						<asp:ListItem Selected="True" Text="--WYBIERZ DANIE--"> </asp:ListItem>
+					<b>Kategoria: </b><br />
+					<asp:DropDownList ID="DropDownListCategory" AutoPostBack="true" AppendDataBoundItems="true" runat="server" DataSourceID="SqlDataSource3" DataTextField="kategoria" DataValueField="kategoria" OnSelectedIndexChanged="DropDownListCategory_SelectedIndexChanged">
+						<asp:ListItem Selected="True" Text="--WYBIERZ KATEGORIĘ--"> </asp:ListItem>
 					</asp:DropDownList>
-					<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:BazaConnectionString %>" SelectCommand="SELECT [Id], [nazwa] FROM [Danie] ORDER BY [nazwa]"></asp:SqlDataSource>
-					<br />Kategoria: <asp:Label ID="LabelCategory" runat="server" Text=""></asp:Label>
-					<br />Przepis: <asp:Label ID="LabelPrzepis" runat="server" Text=""></asp:Label>
-					<br />Produkty: <asp:Label ID="LabelProdukty" runat="server" Text=""></asp:Label>
+					<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:BazaConnectionString %>" SelectCommand="SELECT DISTINCT [kategoria] FROM [Danie]"></asp:SqlDataSource>
+					<br /><b>Danie: </b><br />
+					<asp:DropDownList ID="DropDownListDish" AutoPostBack="true" AppendDataBoundItems="true" runat="server" OnSelectedIndexChanged="DropDownListDish_SelectedIndexChanged"></asp:DropDownList>
+					<br /><b>Przepis: </b><br /><asp:Label ID="LabelPrzepis" runat="server" Text=""></asp:Label>
+					<br /><b>Składniki: </b><br /><asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
 			</div>
 		</div>
