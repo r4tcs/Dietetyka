@@ -39,12 +39,15 @@ namespace Dietetyka
     partial void InsertProdukt_spozywczy(Produkt_spozywczy instance);
     partial void UpdateProdukt_spozywczy(Produkt_spozywczy instance);
     partial void DeleteProdukt_spozywczy(Produkt_spozywczy instance);
-    partial void InsertMenu(Menu instance);
-    partial void UpdateMenu(Menu instance);
-    partial void DeleteMenu(Menu instance);
     partial void InsertSkladnik(Skladnik instance);
     partial void UpdateSkladnik(Skladnik instance);
     partial void DeleteSkladnik(Skladnik instance);
+    partial void InsertMenu(Menu instance);
+    partial void UpdateMenu(Menu instance);
+    partial void DeleteMenu(Menu instance);
+    partial void InsertDania_Menu(Dania_Menu instance);
+    partial void UpdateDania_Menu(Dania_Menu instance);
+    partial void DeleteDania_Menu(Dania_Menu instance);
     #endregion
 		
 		public BazaDataContext() : 
@@ -101,7 +104,15 @@ namespace Dietetyka
 			}
 		}
 		
-		public System.Data.Linq.Table<Menu> Menu
+		public System.Data.Linq.Table<Skladnik> Skladniks
+		{
+			get
+			{
+				return this.GetTable<Skladnik>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Menu> Menus
 		{
 			get
 			{
@@ -109,11 +120,11 @@ namespace Dietetyka
 			}
 		}
 		
-		public System.Data.Linq.Table<Skladnik> Skladniks
+		public System.Data.Linq.Table<Dania_Menu> Dania_Menus
 		{
 			get
 			{
-				return this.GetTable<Skladnik>();
+				return this.GetTable<Dania_Menu>();
 			}
 		}
 	}
@@ -134,6 +145,8 @@ namespace Dietetyka
 		
 		private EntitySet<Skladnik> _Skladniks;
 		
+		private EntitySet<Dania_Menu> _Dania_Menus;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -151,6 +164,7 @@ namespace Dietetyka
 		public Danie()
 		{
 			this._Skladniks = new EntitySet<Skladnik>(new Action<Skladnik>(this.attach_Skladniks), new Action<Skladnik>(this.detach_Skladniks));
+			this._Dania_Menus = new EntitySet<Dania_Menu>(new Action<Dania_Menu>(this.attach_Dania_Menus), new Action<Dania_Menu>(this.detach_Dania_Menus));
 			OnCreated();
 		}
 		
@@ -247,6 +261,19 @@ namespace Dietetyka
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Danie_Dania_Menu", Storage="_Dania_Menus", ThisKey="Id", OtherKey="Id_dania")]
+		public EntitySet<Dania_Menu> Dania_Menus
+		{
+			get
+			{
+				return this._Dania_Menus;
+			}
+			set
+			{
+				this._Dania_Menus.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -278,6 +305,18 @@ namespace Dietetyka
 			this.SendPropertyChanging();
 			entity.Danie = null;
 		}
+		
+		private void attach_Dania_Menus(Dania_Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Danie = this;
+		}
+		
+		private void detach_Dania_Menus(Dania_Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Danie = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Konto")]
@@ -299,6 +338,10 @@ namespace Dietetyka
 		private string _haslo;
 		
 		private string _telefon;
+		
+		private EntitySet<Menu> _Menus;
+		
+		private EntitySet<Menu> _Menus1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -322,6 +365,8 @@ namespace Dietetyka
 		
 		public Konto()
 		{
+			this._Menus = new EntitySet<Menu>(new Action<Menu>(this.attach_Menus), new Action<Menu>(this.detach_Menus));
+			this._Menus1 = new EntitySet<Menu>(new Action<Menu>(this.attach_Menus1), new Action<Menu>(this.detach_Menus1));
 			OnCreated();
 		}
 		
@@ -465,6 +510,32 @@ namespace Dietetyka
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Konto_Menu", Storage="_Menus", ThisKey="Id", OtherKey="id_dietetyka")]
+		public EntitySet<Menu> Menus
+		{
+			get
+			{
+				return this._Menus;
+			}
+			set
+			{
+				this._Menus.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Konto_Menu1", Storage="_Menus1", ThisKey="Id", OtherKey="id_klienta")]
+		public EntitySet<Menu> Menus1
+		{
+			get
+			{
+				return this._Menus1;
+			}
+			set
+			{
+				this._Menus1.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -483,6 +554,30 @@ namespace Dietetyka
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Menus(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Konto = this;
+		}
+		
+		private void detach_Menus(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Konto = null;
+		}
+		
+		private void attach_Menus1(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Konto1 = this;
+		}
+		
+		private void detach_Menus1(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Konto1 = null;
 		}
 	}
 	
@@ -768,140 +863,6 @@ namespace Dietetyka
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Menu")]
-	public partial class Menu : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private System.DateTime _data;
-		
-		private string _komentarz;
-		
-		private string _nazwa_dania;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OndataChanging(System.DateTime value);
-    partial void OndataChanged();
-    partial void OnkomentarzChanging(string value);
-    partial void OnkomentarzChanged();
-    partial void Onnazwa_daniaChanging(string value);
-    partial void Onnazwa_daniaChanged();
-    #endregion
-		
-		public Menu()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Date NOT NULL")]
-		public System.DateTime data
-		{
-			get
-			{
-				return this._data;
-			}
-			set
-			{
-				if ((this._data != value))
-				{
-					this.OndataChanging(value);
-					this.SendPropertyChanging();
-					this._data = value;
-					this.SendPropertyChanged("data");
-					this.OndataChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_komentarz", DbType="NVarChar(MAX)")]
-		public string komentarz
-		{
-			get
-			{
-				return this._komentarz;
-			}
-			set
-			{
-				if ((this._komentarz != value))
-				{
-					this.OnkomentarzChanging(value);
-					this.SendPropertyChanging();
-					this._komentarz = value;
-					this.SendPropertyChanged("komentarz");
-					this.OnkomentarzChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa_dania", DbType="NVarChar(50)")]
-		public string nazwa_dania
-		{
-			get
-			{
-				return this._nazwa_dania;
-			}
-			set
-			{
-				if ((this._nazwa_dania != value))
-				{
-					this.Onnazwa_daniaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa_dania = value;
-					this.SendPropertyChanged("nazwa_dania");
-					this.Onnazwa_daniaChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Skladnik")]
 	public partial class Skladnik : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1069,6 +1030,418 @@ namespace Dietetyka
 						this._Id_produktu = default(int);
 					}
 					this.SendPropertyChanged("Produkt_spozywczy");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Menu")]
+	public partial class Menu : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.DateTime _data;
+		
+		private int _id_klienta;
+		
+		private int _id_dietetyka;
+		
+		private EntitySet<Dania_Menu> _Dania_Menus;
+		
+		private EntityRef<Konto> _Konto;
+		
+		private EntityRef<Konto> _Konto1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OndataChanging(System.DateTime value);
+    partial void OndataChanged();
+    partial void Onid_klientaChanging(int value);
+    partial void Onid_klientaChanged();
+    partial void Onid_dietetykaChanging(int value);
+    partial void Onid_dietetykaChanged();
+    #endregion
+		
+		public Menu()
+		{
+			this._Dania_Menus = new EntitySet<Dania_Menu>(new Action<Dania_Menu>(this.attach_Dania_Menus), new Action<Dania_Menu>(this.detach_Dania_Menus));
+			this._Konto = default(EntityRef<Konto>);
+			this._Konto1 = default(EntityRef<Konto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_data", DbType="Date NOT NULL")]
+		public System.DateTime data
+		{
+			get
+			{
+				return this._data;
+			}
+			set
+			{
+				if ((this._data != value))
+				{
+					this.OndataChanging(value);
+					this.SendPropertyChanging();
+					this._data = value;
+					this.SendPropertyChanged("data");
+					this.OndataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_klienta", DbType="Int NOT NULL")]
+		public int id_klienta
+		{
+			get
+			{
+				return this._id_klienta;
+			}
+			set
+			{
+				if ((this._id_klienta != value))
+				{
+					if (this._Konto1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_klientaChanging(value);
+					this.SendPropertyChanging();
+					this._id_klienta = value;
+					this.SendPropertyChanged("id_klienta");
+					this.Onid_klientaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_dietetyka", DbType="Int NOT NULL")]
+		public int id_dietetyka
+		{
+			get
+			{
+				return this._id_dietetyka;
+			}
+			set
+			{
+				if ((this._id_dietetyka != value))
+				{
+					if (this._Konto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_dietetykaChanging(value);
+					this.SendPropertyChanging();
+					this._id_dietetyka = value;
+					this.SendPropertyChanged("id_dietetyka");
+					this.Onid_dietetykaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menu_Dania_Menu", Storage="_Dania_Menus", ThisKey="id", OtherKey="Id_menu")]
+		public EntitySet<Dania_Menu> Dania_Menus
+		{
+			get
+			{
+				return this._Dania_Menus;
+			}
+			set
+			{
+				this._Dania_Menus.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Konto_Menu", Storage="_Konto", ThisKey="id_dietetyka", OtherKey="Id", IsForeignKey=true)]
+		public Konto Konto
+		{
+			get
+			{
+				return this._Konto.Entity;
+			}
+			set
+			{
+				Konto previousValue = this._Konto.Entity;
+				if (((previousValue != value) 
+							|| (this._Konto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Konto.Entity = null;
+						previousValue.Menus.Remove(this);
+					}
+					this._Konto.Entity = value;
+					if ((value != null))
+					{
+						value.Menus.Add(this);
+						this._id_dietetyka = value.Id;
+					}
+					else
+					{
+						this._id_dietetyka = default(int);
+					}
+					this.SendPropertyChanged("Konto");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Konto_Menu1", Storage="_Konto1", ThisKey="id_klienta", OtherKey="Id", IsForeignKey=true)]
+		public Konto Konto1
+		{
+			get
+			{
+				return this._Konto1.Entity;
+			}
+			set
+			{
+				Konto previousValue = this._Konto1.Entity;
+				if (((previousValue != value) 
+							|| (this._Konto1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Konto1.Entity = null;
+						previousValue.Menus1.Remove(this);
+					}
+					this._Konto1.Entity = value;
+					if ((value != null))
+					{
+						value.Menus1.Add(this);
+						this._id_klienta = value.Id;
+					}
+					else
+					{
+						this._id_klienta = default(int);
+					}
+					this.SendPropertyChanged("Konto1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dania_Menus(Dania_Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Menu = this;
+		}
+		
+		private void detach_Dania_Menus(Dania_Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Menu = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Dania_Menu")]
+	public partial class Dania_Menu : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id_menu;
+		
+		private int _Id_dania;
+		
+		private EntityRef<Danie> _Danie;
+		
+		private EntityRef<Menu> _Menu;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnId_menuChanging(int value);
+    partial void OnId_menuChanged();
+    partial void OnId_daniaChanging(int value);
+    partial void OnId_daniaChanged();
+    #endregion
+		
+		public Dania_Menu()
+		{
+			this._Danie = default(EntityRef<Danie>);
+			this._Menu = default(EntityRef<Menu>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_menu", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id_menu
+		{
+			get
+			{
+				return this._Id_menu;
+			}
+			set
+			{
+				if ((this._Id_menu != value))
+				{
+					if (this._Menu.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_menuChanging(value);
+					this.SendPropertyChanging();
+					this._Id_menu = value;
+					this.SendPropertyChanged("Id_menu");
+					this.OnId_menuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_dania", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id_dania
+		{
+			get
+			{
+				return this._Id_dania;
+			}
+			set
+			{
+				if ((this._Id_dania != value))
+				{
+					if (this._Danie.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_daniaChanging(value);
+					this.SendPropertyChanging();
+					this._Id_dania = value;
+					this.SendPropertyChanged("Id_dania");
+					this.OnId_daniaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Danie_Dania_Menu", Storage="_Danie", ThisKey="Id_dania", OtherKey="Id", IsForeignKey=true)]
+		public Danie Danie
+		{
+			get
+			{
+				return this._Danie.Entity;
+			}
+			set
+			{
+				Danie previousValue = this._Danie.Entity;
+				if (((previousValue != value) 
+							|| (this._Danie.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Danie.Entity = null;
+						previousValue.Dania_Menus.Remove(this);
+					}
+					this._Danie.Entity = value;
+					if ((value != null))
+					{
+						value.Dania_Menus.Add(this);
+						this._Id_dania = value.Id;
+					}
+					else
+					{
+						this._Id_dania = default(int);
+					}
+					this.SendPropertyChanged("Danie");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Menu_Dania_Menu", Storage="_Menu", ThisKey="Id_menu", OtherKey="id", IsForeignKey=true)]
+		public Menu Menu
+		{
+			get
+			{
+				return this._Menu.Entity;
+			}
+			set
+			{
+				Menu previousValue = this._Menu.Entity;
+				if (((previousValue != value) 
+							|| (this._Menu.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Menu.Entity = null;
+						previousValue.Dania_Menus.Remove(this);
+					}
+					this._Menu.Entity = value;
+					if ((value != null))
+					{
+						value.Dania_Menus.Add(this);
+						this._Id_menu = value.id;
+					}
+					else
+					{
+						this._Id_menu = default(int);
+					}
+					this.SendPropertyChanged("Menu");
 				}
 			}
 		}

@@ -7,6 +7,7 @@
       <Column Name="kategoria" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="przepis" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Danie_Skladnik" Member="Skladniks" ThisKey="Id" OtherKey="Id_dania" Type="Skladnik" />
+      <Association Name="Danie_Dania_Menu" Member="Dania_Menus" ThisKey="Id" OtherKey="Id_dania" Type="Dania_Menu" />
     </Type>
   </Table>
   <Table Name="dbo.Konto" Member="Kontos">
@@ -18,6 +19,8 @@
       <Column Name="login" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="haslo" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="telefon" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Konto_Menu" Member="Menus" ThisKey="Id" OtherKey="id_dietetyka" Type="Menu" />
+      <Association Name="Konto_Menu1" Member="Menus1" ThisKey="Id" OtherKey="id_klienta" Type="Menu" />
     </Type>
   </Table>
   <Table Name="dbo.Produkt_spozywczy" Member="Produkt_spozywczies">
@@ -34,14 +37,6 @@
       <Association Name="Produkt_spozywczy_Skladnik" Member="Skladniks" ThisKey="Id" OtherKey="Id_produktu" Type="Skladnik" />
     </Type>
   </Table>
-  <Table Name="dbo.Menu" Member="Menu">
-    <Type Name="Menu">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="komentarz" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="nazwa_dania" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Skladnik" Member="Skladniks">
     <Type Name="Skladnik">
       <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -49,6 +44,25 @@
       <Column Name="ilosc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Danie_Skladnik" Member="Danie" ThisKey="Id_dania" OtherKey="Id" Type="Danie" IsForeignKey="true" />
       <Association Name="Produkt_spozywczy_Skladnik" Member="Produkt_spozywczy" ThisKey="Id_produktu" OtherKey="Id" Type="Produkt_spozywczy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Menu" Member="Menus">
+    <Type Name="Menu">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="id_klienta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_dietetyka" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Menu_Dania_Menu" Member="Dania_Menus" ThisKey="id" OtherKey="Id_menu" Type="Dania_Menu" />
+      <Association Name="Konto_Menu" Member="Konto" ThisKey="id_dietetyka" OtherKey="Id" Type="Konto" IsForeignKey="true" />
+      <Association Name="Konto_Menu1" Member="Konto1" ThisKey="id_klienta" OtherKey="Id" Type="Konto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dania_Menu" Member="Dania_Menus">
+    <Type Name="Dania_Menu">
+      <Column Name="Id_menu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Danie_Dania_Menu" Member="Danie" ThisKey="Id_dania" OtherKey="Id" Type="Danie" IsForeignKey="true" />
+      <Association Name="Menu_Dania_Menu" Member="Menu" ThisKey="Id_menu" OtherKey="id" Type="Menu" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
