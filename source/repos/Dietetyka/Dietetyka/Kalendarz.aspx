@@ -54,19 +54,19 @@
 					<hr>
                     <asp:Calendar ID="Calendar" runat="server" OnSelectionChanged="Calendar_SelectionChanged"></asp:Calendar>
                     
-                    <div id="DishesListDiv" runat="server" visible="true">
+                    <div id="KalendarzListDiv" runat="server" visible="true">
 					
 					<table border="1">
 						<tr>
 							<asp:Repeater ID="RepeaterKalendarz" runat="server">
 								<HeaderTemplate>
-									<td><b>Data</b></td>
 									<td><b>Nazwa</b></td>
+									<td><b>Kategoria</b></td>
 								</HeaderTemplate>
 								<ItemTemplate>
 									<tr>
-										<td><%# Eval("data") %></td>
 										<td><%# Eval("nazwa") %></td>
+										<td><%# Eval("kategoria") %></td>
 									</tr>
 								</ItemTemplate>
 							</asp:Repeater>

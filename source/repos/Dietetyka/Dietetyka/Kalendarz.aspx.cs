@@ -14,15 +14,24 @@ namespace Dietetyka
     {
         BazaDataContext baza = new BazaDataContext();
         string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
-        string confirmedDate = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"] == null)
             {
                 Response.Redirect("Home_Page.aspx");
             }
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
+                //SetInitialRow();
+                //SqlCommand cmd = new SqlCommand("SELECT d.nazwa, d.kategoria FROM Danie d, Dania_Menu dm, Menu m, Konto k WHERE d.Id=dm.Id_menu AND dm.Id_dania=m.id AND k.Id = m.id_klienta AND k.login='" + Session["username"].ToString() + "'AND m.data='" + Calendar.SelectedDate + "' ORDER BY 2", new SqlConnection(constr));
+
+                SqlCommand cmd = new SqlCommand("SELECT d.nazwa, d.kategoria FROM Danie d, Dania_Menu dm, Menu m, Konto k WHERE d.Id=dm.Id_dania AND dm.Id_menu=m.id AND k.Id = m.id_klienta AND k.login='" + Session["username"].ToString() + "'AND m.data='" + Calendar.SelectedDate + "' ORDER BY 2", new SqlConnection(constr));
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                RepeaterKalendarz.DataSource = dt;
+                RepeaterKalendarz.DataBind();
+
             }
 
             SqlConnection con = new SqlConnection(constr);
@@ -66,9 +75,7 @@ namespace Dietetyka
 
         protected void Calendar_SelectionChanged(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(constr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT id, data, nazwa FROM Menu WHERE data='" + Calendar.SelectedDate +"' ORDER BY data", con);
+            SqlCommand cmd = new SqlCommand("SELECT d.nazwa, d.kategoria FROM Danie d, Dania_Menu dm, Menu m, Konto k WHERE d.Id=dm.Id_dania AND dm.Id_menu=m.id AND k.Id = m.id_klienta AND k.login='" + Session["username"].ToString() + "'AND m.data='" + Calendar.SelectedDate + "' ORDER BY 2", new SqlConnection(constr));
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
