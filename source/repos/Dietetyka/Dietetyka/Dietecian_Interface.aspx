@@ -365,7 +365,7 @@
 				<div class="left" runat="server" id="DivCreateDiet" visible="false">
 					Klient:
 					<asp:Label ID="LabelClient" runat="server" Text=""></asp:Label><br />
-					<asp:Calendar ID="Calendar" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" Width="350px" OnDayRender="Calendar_Render" NextPrevFormat="FullMonth">
+					<asp:Calendar ID="Calendar" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" Width="350px" OnDayRender="Calendar_Render" NextPrevFormat="FullMonth" OnSelectionChanged="Calendar_SelectionChanged">
 						<DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
 						<NextPrevStyle Font-Size="8pt" ForeColor="#333333" Font-Bold="True" VerticalAlign="Bottom" />
 						<OtherMonthDayStyle ForeColor="#999999" />
@@ -373,6 +373,7 @@
 						<TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
 						<TodayDayStyle BackColor="#CCCCCC" />
 					</asp:Calendar>
+                    <asp:TextBox runat="server" ID="dateChoosedTextbox"></asp:TextBox>
 				</div>
 
 				<%--POKAŻ PRZEPISY--%>
@@ -397,6 +398,28 @@
 					<br />
 					<asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
+                <%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
+                <div class="left" runat="server" id="DishListDayClient" visible="false">
+                    <h2>Dania na dany dzień:</h2>
+                    <asp:Repeater runat="server" id="DishListDayClientRepeater">
+								<HeaderTemplate>
+									<td><b>Nazwa</b></td>
+									<td><b>Kategoria</b></td>
+									<td><b>Przepis</b></td>
+								</HeaderTemplate>
+								<ItemTemplate>
+									<tr>
+										<td><%# Eval("nazwa") %></td>
+										<td><%# Eval("kategoria") %> kcal</td>
+										<td><%# Eval("przepis") %> g</td>		
+										<td><asp:Button runat="server" Text="Usuń"/></td>
+									</tr>
+                                    <tr>
+                                         <asp:Button runat="server" Text="Dodaj"/>
+                                    </tr>
+								</ItemTemplate>
+                    </asp:Repeater>
+                </div>
 			</div>
 		</div>
 	</form>

@@ -15,6 +15,7 @@ namespace Dietetyka
 		BazaDataContext baza = new BazaDataContext();
 		string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
 		static int ProduktID = 0;
+        static int KlientID = 0;
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (Session["username"] == null)
@@ -175,6 +176,7 @@ namespace Dietetyka
 			createMenu.Visible = false;
 			DishListDiv.Visible = false;
 			DivCreateDiet.Visible = false;
+            DishListDayClient.Visible = false;
 
 			div.Visible = true;
 		}
@@ -307,6 +309,7 @@ namespace Dietetyka
 			DivCreateDiet.Visible = true;
 			Button b = sender as Button;
 			Int32 ClientId = Convert.ToInt32(b.Attributes["ClientID"]);
+            KlientID = ClientId;
 			try
 			{
 				SqlConnection con = new SqlConnection(constr);
@@ -401,5 +404,17 @@ namespace Dietetyka
 			}
 			else e.Cell.ForeColor = System.Drawing.Color.Green;
 		}
-	}
+
+        protected void Calendar_SelectionChanged(object sender, EventArgs e)
+        {
+            dateChoosedTextbox.Text = Calendar.SelectedDate.ToString("dd/MMMM/yyyy");
+            DishListDayClient.Visible = true;
+            SqlCommand cmd = new SqlCommand("SELECT d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE m.data=CONVERT(date, '" + Calendar.SelectedDate +  "') AND m.id_klienta=" + KlientID, new SqlConnection(constr));
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            DishListDayClientRepeater.DataSource = dt;
+            DishListDayClientRepeater.DataBind();
+        }
+    }
 }
