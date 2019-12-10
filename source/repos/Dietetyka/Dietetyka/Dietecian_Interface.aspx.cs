@@ -407,9 +407,9 @@ namespace Dietetyka
 
         protected void Calendar_SelectionChanged(object sender, EventArgs e)
         {
-            dateChoosedTextbox.Text = Calendar.SelectedDate.ToString("dd/MMMM/yyyy");
+            LabelDay.Text = Calendar.SelectedDate.ToString("dd MMMM yyyy");
             DishListDayClient.Visible = true;
-            SqlCommand cmd = new SqlCommand("SELECT d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE m.data=CONVERT(date, '" + Calendar.SelectedDate +  "') AND m.id_klienta=" + KlientID, new SqlConnection(constr));
+            SqlCommand cmd = new SqlCommand("SELECT d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate +  "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);

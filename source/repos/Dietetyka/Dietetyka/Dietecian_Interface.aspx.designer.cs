@@ -517,15 +517,6 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Calendar Calendar;
         
         /// <summary>
-        /// dateChoosedTextbox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dateChoosedTextbox;
-        
-        /// <summary>
         /// DishListDiv control.
         /// </summary>
         /// <remarks>
@@ -587,6 +578,15 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DishListDayClient;
+        
+        /// <summary>
+        /// LabelDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDay;
         
         /// <summary>
         /// DishListDayClientRepeater control.

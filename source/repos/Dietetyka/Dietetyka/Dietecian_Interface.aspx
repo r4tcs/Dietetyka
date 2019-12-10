@@ -373,7 +373,6 @@
 						<TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
 						<TodayDayStyle BackColor="#CCCCCC" />
 					</asp:Calendar>
-                    <asp:TextBox runat="server" ID="dateChoosedTextbox"></asp:TextBox>
 				</div>
 
 				<%--POKAŻ PRZEPISY--%>
@@ -400,7 +399,7 @@
 				</div>
                 <%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
                 <div class="left" runat="server" id="DishListDayClient" visible="false">
-                    <h2>Dania na dany dzień:</h2>
+                    <h2>Dieta na dzień <asp:Label ID="LabelDay" runat="server" Text=""></asp:Label></h2>
                     <asp:Repeater runat="server" id="DishListDayClientRepeater">
 								<HeaderTemplate>
 									<td><b>Nazwa</b></td>
