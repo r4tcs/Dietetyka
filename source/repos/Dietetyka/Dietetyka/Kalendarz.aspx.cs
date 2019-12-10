@@ -75,7 +75,7 @@ namespace Dietetyka
 
         protected void Calendar_SelectionChanged(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("SELECT d.nazwa, d.kategoria FROM Danie d, Dania_Menu dm, Menu m, Konto k WHERE d.Id=dm.Id_dania AND dm.Id_menu=m.id AND k.Id = m.id_klienta AND k.login='" + Session["username"].ToString() + "'AND m.data='" + Calendar.SelectedDate + "' ORDER BY 2", new SqlConnection(constr));
+            SqlCommand cmd = new SqlCommand("SELECT d.nazwa, d.kategoria FROM Danie d, Dania_Menu dm, Menu m, Konto k WHERE d.Id=dm.Id_dania AND dm.Id_menu=m.id AND k.Id = m.id_klienta AND k.login='" + Session["username"].ToString() + "' AND CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) ORDER BY 2", new SqlConnection(constr));
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
