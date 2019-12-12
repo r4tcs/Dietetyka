@@ -94,6 +94,15 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Calendar Calendar;
         
         /// <summary>
+        /// Label_Data control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_Data;
+        
+        /// <summary>
         /// KalendarzListDiv control.
         /// </summary>
         /// <remarks>
@@ -110,5 +119,23 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RepeaterKalendarz;
+        
+        /// <summary>
+        /// SkladnikiListDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SkladnikiListDiv;
+        
+        /// <summary>
+        /// RepeaterSkladniki control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterSkladniki;
     }
 }
