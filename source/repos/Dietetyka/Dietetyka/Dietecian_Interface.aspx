@@ -413,11 +413,17 @@
 										<td><%# Eval("przepis") %> g</td>		
 										<td><asp:Button runat="server" Text="Usuń"/></td>
 									</tr>
-                                    <tr>
-                                         <asp:Button runat="server" Text="Dodaj"/>
-                                    </tr>
 								</ItemTemplate>
                     </asp:Repeater>
+                </div>
+                <div class="form-group" runat="server" id="AddDishDayClient" visible="false">
+                    <asp:DropDownList runat="server" ID="kategoriaDanDropDownList" OnSelectedIndexChanged="kategoriaDanDropDownList_SelectedIndexChanged" AppendDataBoundItems="True" AutoPostBack="True"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="kategoriaDanDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="kategoriaDanDropDownList" 
+					ErrorMessage="Wybierz kategorie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <asp:DropDownList runat="server" ID="daniaDropDownList"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="daniaDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="daniaDropDownList" 
+					ErrorMessage="Wybierz danie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <asp:Button runat="server" Text="Dodaj danie" OnClick="dodajDanie_Click" ValidationGroup="dodawanie"/>
                 </div>
 			</div>
 		</div>
