@@ -16,6 +16,7 @@ namespace Dietetyka
         string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
         static int ProduktID = 0;
         static int KlientID = 0;
+        static int dietetykID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"] == null)
@@ -34,6 +35,13 @@ namespace Dietetyka
             SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
             sql.CommandType = CommandType.Text;
             LabelName.Text = sql.ExecuteScalar() as string;
+            foreach(Konto k in baza.Kontos)
+            {
+                if(Session["username"].ToString() == k.login)
+                {
+                    dietetykID = k.Id;
+                }
+            }
             con.Close();
         }
         protected void ustawRepeaterKlientow()
@@ -415,7 +423,7 @@ namespace Dietetyka
             LabelDay.Text = Calendar.SelectedDate.ToString("dd MMMM yyyy");
             DishListDayClient.Visible = true;
             AddDishDayClient.Visible = true;
-            SqlCommand cmd = new SqlCommand("SELECT d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
+            SqlCommand cmd = new SqlCommand("SELECT dm.id AS dania_menuID, d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -453,7 +461,85 @@ namespace Dietetyka
 
         protected void dodajDanie_Click(object sender, EventArgs e)
         {
+            bool flaga = false;
+            foreach(Menu m in baza.Menus)
+            {
+                if(m.data == Calendar.SelectedDate && m.id_klienta == KlientID)
+                {
+                    flaga = true;
+                }
+            }
+            if (flaga)
+            {
+                Dania_Menu dm = new Dania_Menu();
+                foreach (Menu me in baza.Menus)
+                {
+                    if (me.data == Calendar.SelectedDate && me.id_klienta == KlientID && me.id_dietetyka == dietetykID)
+                    {
+                        dm.Id_menu = me.id;
+                    }
+                }
+                foreach (Danie d in baza.Danies)
+                {
+                    if (d.nazwa == daniaDropDownList.SelectedItem.Text)
+                    {
+                        dm.Id_dania = d.Id;
+                    }
+                }
+                baza.Dania_Menus.InsertOnSubmit(dm);
+                baza.SubmitChanges();
+            }
+            else
+            {
+                Menu m = new Menu();
+                m.data = Calendar.SelectedDate;
+                m.id_klienta = KlientID;
+                m.id_dietetyka = dietetykID;
+                baza.Menus.InsertOnSubmit(m);
+                baza.SubmitChanges();
+                Dania_Menu dm = new Dania_Menu();
+                foreach (Menu me in baza.Menus)
+                {
+                    if (me.data == Calendar.SelectedDate && me.id_klienta == KlientID && me.id_dietetyka == dietetykID)
+                    {
+                        dm.Id_menu = me.id;
+                    }
+                }
+                foreach (Danie d in baza.Danies)
+                {
+                    if(d.nazwa == daniaDropDownList.SelectedItem.Text)
+                    {
+                        dm.Id_dania = d.Id;
+                    }
+                }
+                baza.Dania_Menus.InsertOnSubmit(dm);
+                baza.SubmitChanges();
+            }
+            odswiezMenu();
+        }
+        protected void usunDanie_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            Int32 danie_menuID = Convert.ToInt32(b.Attributes["danie_menuID"]);
+            foreach(Dania_Menu dm in baza.Dania_Menus)
+            {
+                if(dm.id == danie_menuID)
+                {
+                    baza.Dania_Menus.DeleteOnSubmit(dm);
+                }
+            }
+            baza.SubmitChanges();
+            odswiezMenu();
+        }
 
+        protected void odswiezMenu()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT dm.id AS dania_menuID, d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            DishListDayClientRepeater.DataSource = dt;
+            DishListDayClientRepeater.DataBind();
         }
     }
 }

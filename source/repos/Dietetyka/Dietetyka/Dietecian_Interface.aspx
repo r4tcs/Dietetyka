@@ -400,6 +400,7 @@
                 <%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
                 <div class="left" runat="server" id="DishListDayClient" visible="false">
                     <h2>Dieta na dzień <asp:Label ID="LabelDay" runat="server" Text=""></asp:Label></h2>
+                    <table border="1">
                     <asp:Repeater runat="server" id="DishListDayClientRepeater">
 								<HeaderTemplate>
 									<td><b>Nazwa</b></td>
@@ -409,12 +410,13 @@
 								<ItemTemplate>
 									<tr>
 										<td><%# Eval("nazwa") %></td>
-										<td><%# Eval("kategoria") %> kcal</td>
-										<td><%# Eval("przepis") %> g</td>		
-										<td><asp:Button runat="server" Text="Usuń"/></td>
+										<td><%# Eval("kategoria") %> </td>
+										<td><%# Eval("przepis") %> </td>		
+										<td><asp:Button danie_menuID='<%# Eval("dania_menuID")  %>' runat="server" Text="Usuń" OnClick="usunDanie_Click"/></td>
 									</tr>
 								</ItemTemplate>
                     </asp:Repeater>
+                    </table>
                 </div>
                 <div class="form-group" runat="server" id="AddDishDayClient" visible="false">
                     <asp:DropDownList runat="server" ID="kategoriaDanDropDownList" OnSelectedIndexChanged="kategoriaDanDropDownList_SelectedIndexChanged" AppendDataBoundItems="True" AutoPostBack="True"></asp:DropDownList>

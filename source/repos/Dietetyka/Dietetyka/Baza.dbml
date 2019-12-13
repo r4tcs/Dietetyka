@@ -59,8 +59,9 @@
   </Table>
   <Table Name="dbo.Dania_Menu" Member="Dania_Menus">
     <Type Name="Dania_Menu">
-      <Column Name="Id_menu" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_menu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_dania" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Danie_Dania_Menu" Member="Danie" ThisKey="Id_dania" OtherKey="Id" Type="Danie" IsForeignKey="true" />
       <Association Name="Menu_Dania_Menu" Member="Menu" ThisKey="Id_menu" OtherKey="id" Type="Menu" IsForeignKey="true" />
     </Type>
