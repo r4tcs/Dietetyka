@@ -58,15 +58,6 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Button ButtonKalendarz;
         
         /// <summary>
-        /// ButtonKomentarz control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonKomentarz;
-        
-        /// <summary>
         /// ButtonStatystyka control.
         /// </summary>
         /// <remarks>

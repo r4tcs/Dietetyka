@@ -12,23 +12,23 @@ namespace Dietetyka
 {
     public partial class User_Interface : System.Web.UI.Page
     {
-		BazaDataContext baza = new BazaDataContext();
-		string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
+        BazaDataContext baza = new BazaDataContext();
+        string constr = ConfigurationManager.ConnectionStrings["BazaConnectionString"].ConnectionString;
 
-		protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-			if (Session["username"] == null)
-			{
-				Response.Redirect("Home_Page.aspx");
-			}
+            if (Session["username"] == null)
+            {
+                Response.Redirect("Home_Page.aspx");
+            }
 
-			SqlConnection con = new SqlConnection(constr);
-			con.Open();
-			SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
-			sql.CommandType = CommandType.Text;
-			LabelName.Text = sql.ExecuteScalar() as string;
-			con.Close();
-		}
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
+            sql.CommandType = CommandType.Text;
+            LabelName.Text = sql.ExecuteScalar() as string;
+            con.Close();
+        }
 
         protected void Options_button_Click(object sender, EventArgs e)
         {
@@ -44,11 +44,6 @@ namespace Dietetyka
         {
             Session.Clear();
             Response.Redirect("Home_Page.aspx");
-        }
-
-        protected void ButtonKomentarz_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Komentarz.aspx");
         }
 
         protected void ButtonKalendarz_Click(object sender, EventArgs e)

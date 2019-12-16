@@ -37,9 +37,6 @@
                     <asp:Button ID="ButtonKalendarz" runat="server" Text="Kalendarz" OnClick="ButtonKalendarz_Click" />
                 </li>
                 <li class="nav-item">
-                    <asp:Button ID="ButtonKomentarz" runat="server" Text="Komentarz" OnClick="ButtonKomentarz_Click" />
-                </li>
-                <li class="nav-item">
                     <asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />
                 </li>
             </ul>
@@ -89,7 +86,7 @@
                                         <tr>
                                             <asp:Repeater ID="RepeaterSkladniki" runat="server">
                                                 <HeaderTemplate>
-                                                    <td><b>Nazwa kladnika</b></td>
+                                                    <td><b>Nazwa skladnika</b></td>
                                                     <td><b>Ilosc</b></td>
                                                 </HeaderTemplate>
                                                 <ItemTemplate>

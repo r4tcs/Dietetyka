@@ -36,9 +36,6 @@
       <li class="nav-item">
         <asp:Button ID="ButtonKalendarz" runat="server" Text="Kalendarz" OnClick="ButtonKalendarz_Click" />
       </li>
-      <li class="nav-item"> 
-          <asp:Button ID="ButtonKomentarz" runat="server" Text="Komentarz" OnClick="ButtonKomentarz_Click" />
-      </li>
       <li class="nav-item">
         <asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />
       </li>
@@ -51,6 +48,12 @@
 					<!-- Page Content -->
 					<h1>Witaj, <asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
 					<hr>
+
+                    <h2>Dear user, Welcome to your own Diet Manager Page. Please Check your Calendar to start following your diet. Also try to check our new feature of statistics, where you can 
+                        see your progress!
+                    </h2>
+                    <hr />
+
 				</div>
 			</div>
 
