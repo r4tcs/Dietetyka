@@ -396,6 +396,9 @@
 					<b>Składniki: </b>
 					<br />
 					<asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
+					<br />
+					Wartości odżywcze na dany dzień:
+					<asp:Table ID="TableZliczoneWartosci" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
                 <%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
                 <div class="left" runat="server" id="DishListDayClient" visible="false">

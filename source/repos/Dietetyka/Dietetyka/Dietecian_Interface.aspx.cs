@@ -418,21 +418,48 @@ namespace Dietetyka
             else e.Cell.ForeColor = System.Drawing.Color.Green;
         }
 
-        protected void Calendar_SelectionChanged(object sender, EventArgs e)
-        {
-            LabelDay.Text = Calendar.SelectedDate.ToString("dd MMMM yyyy");
-            DishListDayClient.Visible = true;
-            AddDishDayClient.Visible = true;
-            SqlCommand cmd = new SqlCommand("SELECT dm.id AS dania_menuID, d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            DishListDayClientRepeater.DataSource = dt;
-            DishListDayClientRepeater.DataBind();
-            
-        }
+		protected void Calendar_SelectionChanged(object sender, EventArgs e)
+		{
+			SqlConnection con = new SqlConnection(constr);
+			con.Open();
+			LabelDay.Text = Calendar.SelectedDate.ToString("dd MMMM yyyy");
+			DishListDayClient.Visible = true;
+			AddDishDayClient.Visible = true;
+			SqlCommand cmd = new SqlCommand("SELECT dm.id AS dania_menuID, d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
+			SqlDataAdapter sda = new SqlDataAdapter(cmd);
+			DataTable dt = new DataTable();
+			sda.Fill(dt);
+			DishListDayClientRepeater.DataSource = dt;
+			DishListDayClientRepeater.DataBind();
 
-        protected void ustawKategoriaDanDropdownList()
+			//ZLICZANIE
+			cmd = new SqlCommand(
+			"SELECT SUM(ps.kalorie*s.ilosc/100) Kalorie, SUM(ps.weglowodany*s.ilosc/100) Weglowodany, SUM(ps.bialka*s.ilosc/100) Bialka, SUM(ps.blonnik*s.ilosc/100) Blonnik, SUM(ps.sol*s.ilosc/100) Sol, SUM(ps.tluszcze*s.ilosc/100) Tluszcze " +
+			"FROM Produkt_spozywczy ps JOIN Skladnik s ON ps.Id = s.Id_produktu JOIN Danie d ON d.Id = s.Id_dania JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id " +
+			"WHERE CONVERT(date, m.data, 103) = CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, con);
+			cmd.CommandType = CommandType.Text;
+
+			SqlDataReader reader = cmd.ExecuteReader();
+			while (reader.Read())
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					if (reader.IsDBNull(i))
+						return;
+					TableRow r1 = new TableRow();
+					TableCell c1 = new TableCell();
+					c1.Text = reader.GetName(i);
+					r1.Cells.Add(c1);
+					c1 = new TableCell();
+					c1.Text = reader.GetDouble(i).ToString();
+					r1.Cells.Add(c1);
+					TableZliczoneWartosci.Rows.Add(r1);
+				}
+			}
+			con.Close();
+		}
+
+		protected void ustawKategoriaDanDropdownList()
         {
             SqlConnection con = new SqlConnection(constr);
             con.Open();
