@@ -517,6 +517,15 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Calendar Calendar;
         
         /// <summary>
+        /// TableZliczoneWartosci control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableZliczoneWartosci;
+        
+        /// <summary>
         /// DishListDiv control.
         /// </summary>
         /// <remarks>
@@ -569,15 +578,6 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TableProducts;
-        
-        /// <summary>
-        /// TableZliczoneWartosci control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TableZliczoneWartosci;
         
         /// <summary>
         /// DishListDayClient control.

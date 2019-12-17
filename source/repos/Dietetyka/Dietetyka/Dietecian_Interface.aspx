@@ -373,6 +373,9 @@
 						<TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
 						<TodayDayStyle BackColor="#CCCCCC" />
 					</asp:Calendar>
+                    <br />
+					Wartości odżywcze na dany dzień:
+					<asp:Table ID="TableZliczoneWartosci" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
 
 				<%--POKAŻ PRZEPISY--%>
@@ -396,9 +399,6 @@
 					<b>Składniki: </b>
 					<br />
 					<asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
-					<br />
-					Wartości odżywcze na dany dzień:
-					<asp:Table ID="TableZliczoneWartosci" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
                 <%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
                 <div class="left" runat="server" id="DishListDayClient" visible="false">
@@ -420,15 +420,17 @@
 								</ItemTemplate>
                     </asp:Repeater>
                     </table>
+                    
+                <div runat="server" id="AddDishDayClient" visible="false">
+                        <asp:DropDownList runat="server" ID="kategoriaDanDropDownList" OnSelectedIndexChanged="kategoriaDanDropDownList_SelectedIndexChanged" AppendDataBoundItems="True" AutoPostBack="True"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="kategoriaDanDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="kategoriaDanDropDownList" 
+					    ErrorMessage="Wybierz kategorie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:DropDownList runat="server" ID="daniaDropDownList"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="daniaDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="daniaDropDownList" 
+					    ErrorMessage="Wybierz danie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:Button runat="server" Text="Dodaj danie" OnClick="dodajDanie_Click" ValidationGroup="dodawanie"/>
                 </div>
-                <div class="form-group" runat="server" id="AddDishDayClient" visible="false">
-                    <asp:DropDownList runat="server" ID="kategoriaDanDropDownList" OnSelectedIndexChanged="kategoriaDanDropDownList_SelectedIndexChanged" AppendDataBoundItems="True" AutoPostBack="True"></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="kategoriaDanDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="kategoriaDanDropDownList" 
-					ErrorMessage="Wybierz kategorie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:DropDownList runat="server" ID="daniaDropDownList"></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="daniaDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="daniaDropDownList" 
-					ErrorMessage="Wybierz danie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:Button runat="server" Text="Dodaj danie" OnClick="dodajDanie_Click" ValidationGroup="dodawanie"/>
+                    
                 </div>
 			</div>
 		</div>
