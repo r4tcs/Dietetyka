@@ -353,3 +353,7 @@ C:\Users\Kuba\source\repos\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Antlr3
 C:\Users\Kuba\source\repos\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Users\Kuba\source\repos\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Kuba\source\repos\Dietetyka\source\repos\Dietetyka\Dietetyka\obj\Debug\Dietetyka.csproj.CopyComplete
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.cs
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.designer.cs
+C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml.layout
