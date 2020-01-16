@@ -10,19 +10,6 @@
       <Association Name="Danie_Dania_Menu" Member="Dania_Menus" ThisKey="Id" OtherKey="Id_dania" Type="Dania_Menu" />
     </Type>
   </Table>
-  <Table Name="dbo.Konto" Member="Kontos">
-    <Type Name="Konto">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="imie" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="nazwisko" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="rodzaj" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
-      <Column Name="login" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="haslo" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="telefon" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
-      <Association Name="Konto_Menu" Member="Menus" ThisKey="Id" OtherKey="id_dietetyka" Type="Menu" />
-      <Association Name="Konto_Menu1" Member="Menus1" ThisKey="Id" OtherKey="id_klienta" Type="Menu" />
-    </Type>
-  </Table>
   <Table Name="dbo.Produkt_spozywczy" Member="Produkt_spozywczies">
     <Type Name="Produkt_spozywczy">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -64,6 +51,34 @@
       <Association Name="Menu_Dania_Menu" Member="Dania_Menus" ThisKey="id" OtherKey="Id_menu" Type="Dania_Menu" />
       <Association Name="Konto_Menu" Member="Konto" ThisKey="id_dietetyka" OtherKey="Id" Type="Konto" IsForeignKey="true" />
       <Association Name="Konto_Menu1" Member="Konto1" ThisKey="id_klienta" OtherKey="Id" Type="Konto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Konto" Member="Kontos">
+    <Type Name="Konto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="imie" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nazwisko" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rodzaj" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="login" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="haslo" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="telefon" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="plan_kalorii" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Konto_Menu" Member="Menus" ThisKey="Id" OtherKey="id_dietetyka" Type="Menu" />
+      <Association Name="Konto_Menu1" Member="Menus1" ThisKey="Id" OtherKey="id_klienta" Type="Menu" />
+      <Association Name="Konto_Plan_zywienia" Member="Plan_zywienias" ThisKey="Id" OtherKey="Id_konta" Type="Plan_zywienia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Plan_zywienia" Member="Plan_zywienias">
+    <Type Name="Plan_zywienia">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="kalorie" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="weglowodany" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="bialka" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="blonnik" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="sol" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="tluszcze" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Id_konta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Konto_Plan_zywienia" Member="Konto" ThisKey="Id_konta" OtherKey="Id" Type="Konto" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

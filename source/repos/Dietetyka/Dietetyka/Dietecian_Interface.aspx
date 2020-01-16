@@ -109,12 +109,8 @@
 					</div>
 
 					<div class="form-group">
-						Jednostka
+						Jednostka: 100g
 							<br />
-						<asp:DropDownList ID="DropDownListJednostka" runat="server" Width="175px">
-							<asp:ListItem>100g</asp:ListItem>
-							<asp:ListItem>szt</asp:ListItem>
-						</asp:DropDownList><br />
 					</div>
 
 					<div class="form-group">
@@ -253,8 +249,6 @@
 										<td><%# Eval("sol") %> g</td>
 										<td>
 											<asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="EditProduct" Text="Edytuj" OnClick="EditProduct_Click" /></td>
-										<td>
-											<asp:Button ProduktID='<%# Eval("Id")  %>' runat="server" ID="DeleteProduct" Text="Usuń" OnClick="DeleteProduct_Click" /></td>
 									</tr>
 								</ItemTemplate>
 							</asp:Repeater>
@@ -374,8 +368,52 @@
 						<TodayDayStyle BackColor="#CCCCCC" />
 					</asp:Calendar>
                     <br />
-					Wartości odżywcze na dany dzień:
+                    <div id="editCaloryPlan" runat="server" visible="false">
+                        <b>Plan żywienia</b><br />
+                        Kalorie
+                        <asp:TextBox runat="server" ID="caloryTextbox"></asp:TextBox><br />
+                        Węglowodany
+                        <asp:TextBox runat="server" ID="weglowodanyTextbox"></asp:TextBox><br />
+                        Białka
+                        <asp:TextBox runat="server" ID="bialkaTextBox"></asp:TextBox><br />
+                        Błonnik
+                        <asp:TextBox runat="server" ID="blonnikTextBox"></asp:TextBox><br />
+                        Sól
+                        <asp:TextBox runat="server" ID="solTextBox"></asp:TextBox><br />
+                        Tłuszcze
+                        <asp:TextBox runat="server" ID="tluszczeTextBox"></asp:TextBox><br />
+                        <asp:Button runat="server" ID="editCaloryPlanButton" Text="Edytuj" OnClick="editCaloryPlanButton_Click" ValidationGroup="editCaloryPlanValidation" />
+                        <br />
+                        <asp:RangeValidator ID="RangeValidator7" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="caloryTextbox" 
+                            ErrorMessage="Podaj wartości kalorii z przedziału <0.01,15000>"></asp:RangeValidator>
+                        <asp:RangeValidator ID="RangeValidator8" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="weglowodanyTextbox" 
+                            ErrorMessage="Podaj wartości węglowodanów z przedziału <0.01,15000>"></asp:RangeValidator>
+                        <asp:RangeValidator ID="RangeValidator9" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="bialkaTextbox" 
+                            ErrorMessage="Podaj wartości białka z przedziału <0.01,15000>"></asp:RangeValidator>
+                        <asp:RangeValidator ID="RangeValidator10" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="blonnikTextbox" 
+                            ErrorMessage="Podaj wartości błonnika z przedziału <0.01,15000>"></asp:RangeValidator>
+                        <asp:RangeValidator ID="RangeValidator11" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="solTextbox" 
+                            ErrorMessage="Podaj wartości soli z przedziału <0.01,15000>"></asp:RangeValidator>
+                        <asp:RangeValidator ID="RangeValidator12" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="tluszczeTextbox" 
+                            ErrorMessage="Podaj wartości tłuszczów z przedziału <0.01,15000>"></asp:RangeValidator>
+                    </div>
+                    <br />
+                    <b>Wartości odżywcze na dany dzień:</b>
 					<asp:Table ID="TableZliczoneWartosci" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
+                    <b>Pozostało :</b> <br/>
+                    <asp:Literal runat="server" ID="pozostaleKalorie"></asp:Literal> kalorii <br/>
+                    <asp:Literal runat="server" id="pozostaleWeglowodany"></asp:Literal> gram węglowodanów <br/>
+                    <asp:Literal runat="server" id="pozostaleBialka"></asp:Literal> gram białka <br/>
+                    <asp:Literal runat="server" id="pozostalyBlonnik"> </asp:Literal> gram błonnika <br/>
+                    <asp:Literal runat="server" id="pozostalaSol"></asp:Literal> gram soli<br/>
+                    <asp:Literal runat="server" id="pozostaleTluszcze"></asp:Literal> gram tłuszczów<br/>
+                    <br />
 				</div>
 
 				<%--POKAŻ PRZEPISY--%>
