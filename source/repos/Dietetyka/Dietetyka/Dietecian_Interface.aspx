@@ -357,63 +357,49 @@
 				</div>
 
 				<div class="left" runat="server" id="DivCreateDiet" visible="false">
-					Klient:
-					<asp:Label ID="LabelClient" runat="server" Text=""></asp:Label><br />
-					<asp:Calendar ID="Calendar" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" Width="350px" OnDayRender="Calendar_Render" NextPrevFormat="FullMonth" OnSelectionChanged="Calendar_SelectionChanged">
-						<DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
-						<NextPrevStyle Font-Size="8pt" ForeColor="#333333" Font-Bold="True" VerticalAlign="Bottom" />
-						<OtherMonthDayStyle ForeColor="#999999" />
-						<SelectedDayStyle BackColor="#333399" ForeColor="White" />
-						<TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
-						<TodayDayStyle BackColor="#CCCCCC" />
-					</asp:Calendar>
-                    <br />
-                    <div id="editCaloryPlan" runat="server" visible="false">
-                        <b>Plan żywienia</b><br />
-                        Kalorie
-                        <asp:TextBox runat="server" ID="caloryTextbox"></asp:TextBox><br />
-                        Węglowodany
-                        <asp:TextBox runat="server" ID="weglowodanyTextbox"></asp:TextBox><br />
-                        Białka
-                        <asp:TextBox runat="server" ID="bialkaTextBox"></asp:TextBox><br />
-                        Błonnik
-                        <asp:TextBox runat="server" ID="blonnikTextBox"></asp:TextBox><br />
-                        Sól
-                        <asp:TextBox runat="server" ID="solTextBox"></asp:TextBox><br />
-                        Tłuszcze
-                        <asp:TextBox runat="server" ID="tluszczeTextBox"></asp:TextBox><br />
-                        <asp:Button runat="server" ID="editCaloryPlanButton" Text="Edytuj" OnClick="editCaloryPlanButton_Click" ValidationGroup="editCaloryPlanValidation" />
-                        <br />
-                        <asp:RangeValidator ID="RangeValidator7" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
-                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="caloryTextbox" 
-                            ErrorMessage="Podaj wartości kalorii z przedziału <0.01,15000>"></asp:RangeValidator>
-                        <asp:RangeValidator ID="RangeValidator8" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
-                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="weglowodanyTextbox" 
-                            ErrorMessage="Podaj wartości węglowodanów z przedziału <0.01,15000>"></asp:RangeValidator>
-                        <asp:RangeValidator ID="RangeValidator9" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
-                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="bialkaTextbox" 
-                            ErrorMessage="Podaj wartości białka z przedziału <0.01,15000>"></asp:RangeValidator>
-                        <asp:RangeValidator ID="RangeValidator10" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
-                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="blonnikTextbox" 
-                            ErrorMessage="Podaj wartości błonnika z przedziału <0.01,15000>"></asp:RangeValidator>
-                        <asp:RangeValidator ID="RangeValidator11" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
-                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="solTextbox" 
-                            ErrorMessage="Podaj wartości soli z przedziału <0.01,15000>"></asp:RangeValidator>
-                        <asp:RangeValidator ID="RangeValidator12" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
-                            MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="tluszczeTextbox" 
-                            ErrorMessage="Podaj wartości tłuszczów z przedziału <0.01,15000>"></asp:RangeValidator>
-                    </div>
-                    <br />
-                    <b>Wartości odżywcze na dany dzień:</b>
-					<asp:Table ID="TableZliczoneWartosci" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
-                    <b>Pozostało :</b> <br/>
-                    <asp:Literal runat="server" ID="pozostaleKalorie"></asp:Literal> kalorii <br/>
-                    <asp:Literal runat="server" id="pozostaleWeglowodany"></asp:Literal> gram węglowodanów <br/>
-                    <asp:Literal runat="server" id="pozostaleBialka"></asp:Literal> gram białka <br/>
-                    <asp:Literal runat="server" id="pozostalyBlonnik"> </asp:Literal> gram błonnika <br/>
-                    <asp:Literal runat="server" id="pozostalaSol"></asp:Literal> gram soli<br/>
-                    <asp:Literal runat="server" id="pozostaleTluszcze"></asp:Literal> gram tłuszczów<br/>
-                    <br />
+					<b>
+						<p style="font-size: large">
+							Klient:
+					<asp:Label ID="LabelClient" runat="server" Text=""></asp:Label>
+						</p>
+					</b>
+					<br />
+					<div id="editCaloryPlan" runat="server" visible="false">
+						<b>Plan żywienia</b><br />
+						Kalorie
+                        <asp:TextBox runat="server" ID="caloryTextbox" Enabled="false"></asp:TextBox><br />
+						Węglowodany
+                        <asp:TextBox runat="server" ID="weglowodanyTextbox" Enabled="false"></asp:TextBox><br />
+						Białka
+                        <asp:TextBox runat="server" ID="bialkaTextBox" Enabled="false"></asp:TextBox><br />
+						Błonnik
+                        <asp:TextBox runat="server" ID="blonnikTextBox" Enabled="false"></asp:TextBox><br />
+						Sól
+                        <asp:TextBox runat="server" ID="solTextBox" Enabled="false"></asp:TextBox><br />
+						Tłuszcze
+                        <asp:TextBox runat="server" ID="tluszczeTextBox" Enabled="false"></asp:TextBox><br />
+						<asp:Button runat="server" ID="editCaloryPlanButton" Text="Edytuj" OnClick="editCaloryPlanButton_Click" ValidationGroup="editCaloryPlanValidation" />
+						<br />
+						<asp:RangeValidator ID="RangeValidator7" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+							MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="caloryTextbox"
+							ErrorMessage="Podaj wartości kalorii z przedziału <0.01,15000>"></asp:RangeValidator>
+						<asp:RangeValidator ID="RangeValidator8" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+							MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="weglowodanyTextbox"
+							ErrorMessage="Podaj wartości węglowodanów z przedziału <0.01,15000>"></asp:RangeValidator>
+						<asp:RangeValidator ID="RangeValidator9" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+							MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="bialkaTextbox"
+							ErrorMessage="Podaj wartości białka z przedziału <0.01,15000>"></asp:RangeValidator>
+						<asp:RangeValidator ID="RangeValidator10" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+							MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="blonnikTextbox"
+							ErrorMessage="Podaj wartości błonnika z przedziału <0.01,15000>"></asp:RangeValidator>
+						<asp:RangeValidator ID="RangeValidator11" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+							MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="solTextbox"
+							ErrorMessage="Podaj wartości soli z przedziału <0.01,15000>"></asp:RangeValidator>
+						<asp:RangeValidator ID="RangeValidator12" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="editCaloryPlanValidation"
+							MinimumValue="0.01" MaximumValue="15000" CultureInvariantValues="true" Type="Currency" ControlToValidate="tluszczeTextbox"
+							ErrorMessage="Podaj wartości tłuszczów z przedziału <0.01,15000>"></asp:RangeValidator>
+					</div>
+					<br />
 				</div>
 
 				<%--POKAŻ PRZEPISY--%>
@@ -438,11 +424,22 @@
 					<br />
 					<asp:Table ID="TableProducts" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
 				</div>
-                <%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
-                <div class="left" runat="server" id="DishListDayClient" visible="false">
-                    <h2>Dieta na dzień <asp:Label ID="LabelDay" runat="server" Text=""></asp:Label></h2>
-                    <table border="1">
-                    <asp:Repeater runat="server" id="DishListDayClientRepeater">
+				<%--POKAŻ DANIA DANEGO KLIENTA NA DANY DZIEŃ --%>
+				<div class="left" runat="server" id="DishListDayClient" visible="false">
+					<asp:Calendar ID="Calendar" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" Width="350px" OnDayRender="Calendar_Render" NextPrevFormat="FullMonth" OnSelectionChanged="Calendar_SelectionChanged">
+						<DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+						<NextPrevStyle Font-Size="8pt" ForeColor="#333333" Font-Bold="True" VerticalAlign="Bottom" />
+						<OtherMonthDayStyle ForeColor="#999999" />
+						<SelectedDayStyle BackColor="#333399" ForeColor="White" />
+						<TitleStyle BackColor="White" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" BorderColor="Black" BorderWidth="4px" />
+						<TodayDayStyle BackColor="#CCCCCC" />
+					</asp:Calendar>
+					<br />
+					<div runat="server" id="dayDiet" visible="false">
+						<h2>Dieta na dzień
+						<asp:Label ID="LabelDay" runat="server" Text=""></asp:Label></h2>
+						<table border="1">
+							<asp:Repeater runat="server" ID="DishListDayClientRepeater">
 								<HeaderTemplate>
 									<td><b>Nazwa</b></td>
 									<td><b>Kategoria</b></td>
@@ -452,24 +449,29 @@
 									<tr>
 										<td><%# Eval("nazwa") %></td>
 										<td><%# Eval("kategoria") %> </td>
-										<td><%# Eval("przepis") %> </td>		
-										<td><asp:Button danie_menuID='<%# Eval("dania_menuID")  %>' runat="server" Text="Usuń" OnClick="usunDanie_Click"/></td>
+										<td><%# Eval("przepis") %> </td>
+										<td>
+											<asp:Button danie_menuID='<%# Eval("dania_menuID")  %>' runat="server" Text="Usuń" OnClick="usunDanie_Click" /></td>
 									</tr>
 								</ItemTemplate>
-                    </asp:Repeater>
-                    </table>
-                    
-                <div runat="server" id="AddDishDayClient" visible="false">
-                        <asp:DropDownList runat="server" ID="kategoriaDanDropDownList" OnSelectedIndexChanged="kategoriaDanDropDownList_SelectedIndexChanged" AppendDataBoundItems="True" AutoPostBack="True"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="kategoriaDanDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="kategoriaDanDropDownList" 
-					    ErrorMessage="Wybierz kategorie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
-                        <asp:DropDownList runat="server" ID="daniaDropDownList"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="daniaDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="daniaDropDownList" 
-					    ErrorMessage="Wybierz danie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
-                        <asp:Button runat="server" Text="Dodaj danie" OnClick="dodajDanie_Click" ValidationGroup="dodawanie"/>
-                </div>
-                    
-                </div>
+							</asp:Repeater>
+						</table>
+
+						<div runat="server" id="AddDishDayClient" visible="false">
+							<asp:DropDownList runat="server" ID="kategoriaDanDropDownList" OnSelectedIndexChanged="kategoriaDanDropDownList_SelectedIndexChanged" AppendDataBoundItems="True" AutoPostBack="True"></asp:DropDownList>
+							<asp:RequiredFieldValidator ID="kategoriaDanDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="kategoriaDanDropDownList"
+								ErrorMessage="Wybierz kategorie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
+							<asp:DropDownList runat="server" ID="daniaDropDownList"></asp:DropDownList>
+							<asp:RequiredFieldValidator ID="daniaDropDownListValidator" runat="server" ForeColor="Red" InitialValue="0" ControlToValidate="daniaDropDownList"
+								ErrorMessage="Wybierz danie!" ValidationGroup="dodawanie" Display="Dynamic"></asp:RequiredFieldValidator>
+							<asp:Button runat="server" Text="Dodaj danie" OnClick="dodajDanie_Click" ValidationGroup="dodawanie" />
+						</div>
+						<b>Wartości odżywcze na dany dzień:</b>
+						<asp:Table ID="TableZliczoneWartosci" runat="server" BorderStyle="Solid" GridLines="Both"></asp:Table>
+						<br />
+						
+					</div>
+				</div>
 			</div>
 		</div>
 	</form>

@@ -357,3 +357,7 @@ C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\
 C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.cs
 C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.designer.cs
 C:\Users\Kuba\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml.layout
+C:\Users\kspyc\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml
+C:\Users\kspyc\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.cs
+C:\Users\kspyc\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.designer.cs
+C:\Users\kspyc\Source\Repos\r4tcs\Dietetyka\source\repos\Dietetyka\Dietetyka\bin\Baza.dbml.layout

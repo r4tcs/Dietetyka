@@ -303,7 +303,8 @@ namespace Dietetyka
             createMenu.Visible = false;
             DivCreateDiet.Visible = true;
             editCaloryPlan.Visible = true;
-            Button b = sender as Button;
+			DishListDayClient.Visible = true;
+			Button b = sender as Button;
             Int32 ClientId = Convert.ToInt32(b.Attributes["ClientID"]);
             KlientID = ClientId;
             foreach(Konto k in baza.Kontos)
@@ -413,55 +414,76 @@ namespace Dietetyka
 
         protected void editCaloryPlanButton_Click(object sender, EventArgs e)
         {
-            bool czyPlanIstnieje = false;
-            foreach(Konto k in baza.Kontos)
-            {
-                if(k.Id == KlientID)
-                {
-                    foreach(Plan_zywienia plz in baza.Plan_zywienias)
-                    {
-                        if(KlientID == plz.Id_konta)
-                        {
-                            plz.kalorie = Convert.ToInt32(caloryTextbox.Text);
-                            plz.weglowodany = Convert.ToInt32(weglowodanyTextbox.Text);
-                            plz.bialka = Convert.ToInt32(bialkaTextBox.Text);
-                            plz.blonnik = Convert.ToInt32(blonnikTextBox.Text);
-                            plz.sol = Convert.ToInt32(solTextBox.Text);
-                            plz.tluszcze = Convert.ToInt32(tluszczeTextBox.Text);
-                            plz.Id_konta = k.Id;
-                            czyPlanIstnieje = true;
-                            break;
-                        }
-                    }
-                    if(czyPlanIstnieje == false)
-                    {
-                        Plan_zywienia pz = new Plan_zywienia();
-                        pz.kalorie = Convert.ToInt32(caloryTextbox.Text);
-                        pz.weglowodany = Convert.ToInt32(weglowodanyTextbox.Text);
-                        pz.bialka = Convert.ToInt32(bialkaTextBox.Text);
-                        pz.blonnik = Convert.ToInt32(blonnikTextBox.Text);
-                        pz.sol = Convert.ToInt32(solTextBox.Text);
-                        pz.tluszcze = Convert.ToInt32(tluszczeTextBox.Text);
-                        pz.Id_konta = k.Id;
-                        baza.Plan_zywienias.InsertOnSubmit(pz);
-                        break;
-                    }
-                }
-            }
-            baza.SubmitChanges();
-            odswiezZliczanie();
+			if (caloryTextbox.Enabled == true)
+			{
+				bool czyPlanIstnieje = false;
+				foreach (Konto k in baza.Kontos)
+				{
+					if (k.Id == KlientID)
+					{
+						foreach (Plan_zywienia plz in baza.Plan_zywienias)
+						{
+							if (KlientID == plz.Id_konta)
+							{
+								plz.kalorie = Convert.ToInt32(caloryTextbox.Text);
+								plz.weglowodany = Convert.ToInt32(weglowodanyTextbox.Text);
+								plz.bialka = Convert.ToInt32(bialkaTextBox.Text);
+								plz.blonnik = Convert.ToInt32(blonnikTextBox.Text);
+								plz.sol = Convert.ToInt32(solTextBox.Text);
+								plz.tluszcze = Convert.ToInt32(tluszczeTextBox.Text);
+								plz.Id_konta = k.Id;
+								czyPlanIstnieje = true;
+								break;
+							}
+						}
+						if (czyPlanIstnieje == false)
+						{
+							Plan_zywienia pz = new Plan_zywienia();
+							pz.kalorie = Convert.ToInt32(caloryTextbox.Text);
+							pz.weglowodany = Convert.ToInt32(weglowodanyTextbox.Text);
+							pz.bialka = Convert.ToInt32(bialkaTextBox.Text);
+							pz.blonnik = Convert.ToInt32(blonnikTextBox.Text);
+							pz.sol = Convert.ToInt32(solTextBox.Text);
+							pz.tluszcze = Convert.ToInt32(tluszczeTextBox.Text);
+							pz.Id_konta = k.Id;
+							baza.Plan_zywienias.InsertOnSubmit(pz);
+							break;
+						}
+					}
+				}
+				baza.SubmitChanges();
+				odswiezZliczanie();
+				caloryTextbox.Enabled = false;
+				weglowodanyTextbox.Enabled = false;
+				bialkaTextBox.Enabled = false;
+				blonnikTextBox.Enabled = false;
+				solTextBox.Enabled = false;
+				tluszczeTextBox.Enabled = false;
+				editCaloryPlanButton.Text = "Edytuj";
+			}
+			else
+			{
+				editCaloryPlanButton.Text = "Zapisz";
+				caloryTextbox.Enabled = true;
+				weglowodanyTextbox.Enabled = true;
+				bialkaTextBox.Enabled = true;
+				blonnikTextBox.Enabled = true;
+				solTextBox.Enabled = true;
+				tluszczeTextBox.Enabled = true;
+			}
         }
 
 
         protected void Calendar_Render(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.Date.CompareTo(DateTime.Today) <= 0)
+            if (e.Day.Date.CompareTo(DateTime.Today) < 0)
             {
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Red;
             }
             else e.Cell.ForeColor = System.Drawing.Color.Green;
-        }
+
+		}
 
 		protected void Calendar_SelectionChanged(object sender, EventArgs e)
 		{
@@ -470,6 +492,7 @@ namespace Dietetyka
 			LabelDay.Text = Calendar.SelectedDate.ToString("dd MMMM yyyy");
 			DishListDayClient.Visible = true;
 			AddDishDayClient.Visible = true;
+			dayDiet.Visible = true;
             SqlCommand cmd = new SqlCommand("SELECT dm.id AS dania_menuID, d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
             //SqlCommand cmd = new SqlCommand("SELECT dm.id AS dania_menuID, d.Id, d.nazwa, d.kategoria, d.przepis FROM Danie d JOIN Dania_Menu dm ON d.Id = dm.Id_dania JOIN Menu m ON dm.Id_menu = m.id WHERE CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar.SelectedDate.ToShortDateString() + "', 23) AND m.id_klienta=" + KlientID, new SqlConnection(constr));
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -609,66 +632,99 @@ namespace Dietetyka
             "WHERE CONVERT(date, m.data, 103) = CONVERT(date, '" + Calendar.SelectedDate + "', 103) AND m.id_klienta=" + KlientID, con);
             cmd.CommandType = CommandType.Text;
             SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+			TableRow r = new TableRow();
+			TableCell c = new TableCell();
+			c.Text = "";
+			r.Cells.Add(c);
+			c = new TableCell();
+			c.Text = "Aktualne";
+			r.Cells.Add(c);
+			c = new TableCell();
+			c.Text = "Zapotrzebowanie";
+			r.Cells.Add(c);
+			c = new TableCell();
+			c.Text = "Jednostka";
+			r.Cells.Add(c);
+			TableZliczoneWartosci.Rows.Add(r);
+			while (reader.Read())
             {
                 for (int i = 0; i < 6; i++)
                 {
                     if (reader.IsDBNull(i))
                     {
-                        pozostaleKalorie.Text = "";
-                        pozostaleWeglowodany.Text = "";
-                        pozostaleBialka.Text = "";
-                        pozostalyBlonnik.Text = "";
-                        pozostalaSol.Text = "";
-                        pozostaleTluszcze.Text = "";
+                        //pozostaleKalorie.Text = "";
+                        //pozostaleWeglowodany.Text = "";
+                        //pozostaleBialka.Text = "";
+                       // pozostalyBlonnik.Text = "";
+                        //pozostalaSol.Text = "";
+                       // pozostaleTluszcze.Text = "";
                         return;
                     }
                         
                     TableRow r1 = new TableRow();
                     TableCell c1 = new TableCell();
-                    c1.Text = reader.GetName(i);
+					c1.Text = reader.GetName(i);
                     r1.Cells.Add(c1);
                     c1 = new TableCell();
-                    c1.Text = reader.GetDouble(i).ToString();
-                    if(i == 0)
+					c1.Text = reader.GetDouble(i).ToString();
+					r1.Cells.Add(c1);
+					c1 = new TableCell();
+					if (i == 0)
                     {
-                        double sumaKalorii = Convert.ToDouble(c1.Text);
+                        //double sumaKalorii = Convert.ToDouble(c1.Text);
                         double kalorie = Convert.ToDouble(caloryTextbox.Text);
-                        pozostaleKalorie.Text = Convert.ToString(kalorie - sumaKalorii);
-                    }
+                        //pozostaleKalorie.Text = Convert.ToString(kalorie - sumaKalorii);
+						c1.Text = kalorie.ToString();
+					}
                     if(i == 1)
                     {
-                        double sumaWeglowodanow = Convert.ToDouble(c1.Text);
+                        //double sumaWeglowodanow = Convert.ToDouble(c1.Text);
                         double weglowodany = Convert.ToDouble(weglowodanyTextbox.Text);
-                        pozostaleWeglowodany.Text = Convert.ToString(weglowodany - sumaWeglowodanow);
-                    }
+						//pozostaleWeglowodany.Text = Convert.ToString(weglowodany - sumaWeglowodanow);
+						c1.Text = weglowodany.ToString();
+					}
                     if(i == 2)
                     {
-                        double sumaBialek = Convert.ToDouble(c1.Text);
+                       // double sumaBialek = Convert.ToDouble(c1.Text);
                         double bialka = Convert.ToDouble(bialkaTextBox.Text);
-                        pozostaleBialka.Text = Convert.ToString(bialka - sumaBialek);
-                    }
+						//pozostaleBialka.Text = Convert.ToString(bialka - sumaBialek);
+						c1.Text = bialka.ToString();
+					}
                     if(i == 3)
                     {
-                        double sumaBlonnika = Convert.ToDouble(c1.Text);
+                        //double sumaBlonnika = Convert.ToDouble(c1.Text);
                         double blonnik = Convert.ToDouble(blonnikTextBox.Text);
-                        pozostalyBlonnik.Text = Convert.ToString(blonnik - sumaBlonnika);
-                    }
+						//pozostalyBlonnik.Text = Convert.ToString(blonnik - sumaBlonnika);
+						c1.Text = blonnik.ToString();
+					}
                     if(i == 4)
                     {
-                        double sumaSoli = Convert.ToDouble(c1.Text);
+                        //double sumaSoli = Convert.ToDouble(c1.Text);
                         double sol = Convert.ToDouble(solTextBox.Text);
-                        pozostalaSol.Text = Convert.ToString(sol - sumaSoli);
-                    }
+						// pozostalaSol.Text = Convert.ToString(sol - sumaSoli);
+						c1.Text = sol.ToString();
+					}
                     if(i == 5)
                     {
-                        double sumaTluszcze = Convert.ToDouble(c1.Text);
+                        //double sumaTluszcze = Convert.ToDouble(c1.Text);
                         double tluszcze = Convert.ToDouble(tluszczeTextBox.Text);
-                        pozostaleTluszcze.Text = Convert.ToString(tluszcze - sumaTluszcze);
-                    }
-                    r1.Cells.Add(c1);
-                    TableZliczoneWartosci.Rows.Add(r1);
-                }
+						//pozostaleTluszcze.Text = Convert.ToString(tluszcze - sumaTluszcze);
+						c1.Text = tluszcze.ToString();
+					}
+					r1.Cells.Add(c1);
+					
+					if (reader.GetDouble(i)/Convert.ToDouble(c1.Text) < 0.9 || reader.GetDouble(i) / Convert.ToDouble(c1.Text) > 1.1)
+						r1.BackColor = System.Drawing.Color.Red;
+					else
+						r1.BackColor = System.Drawing.Color.Green;
+					c1 = new TableCell();
+					if (reader.GetName(i) != "Kalorie")
+						c1.Text = "g";
+					else
+						c1.Text = "kcal";
+					r1.Cells.Add(c1);
+					TableZliczoneWartosci.Rows.Add(r1);
+				}
             }
             con.Close();
         }

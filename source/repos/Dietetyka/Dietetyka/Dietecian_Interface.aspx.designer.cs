@@ -499,15 +499,6 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.Label LabelClient;
         
         /// <summary>
-        /// Calendar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar;
-        
-        /// <summary>
         /// editCaloryPlan control.
         /// </summary>
         /// <remarks>
@@ -634,69 +625,6 @@ namespace Dietetyka {
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator12;
         
         /// <summary>
-        /// TableZliczoneWartosci control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TableZliczoneWartosci;
-        
-        /// <summary>
-        /// pozostaleKalorie control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal pozostaleKalorie;
-        
-        /// <summary>
-        /// pozostaleWeglowodany control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal pozostaleWeglowodany;
-        
-        /// <summary>
-        /// pozostaleBialka control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal pozostaleBialka;
-        
-        /// <summary>
-        /// pozostalyBlonnik control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal pozostalyBlonnik;
-        
-        /// <summary>
-        /// pozostalaSol control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal pozostalaSol;
-        
-        /// <summary>
-        /// pozostaleTluszcze control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal pozostaleTluszcze;
-        
-        /// <summary>
         /// DishListDiv control.
         /// </summary>
         /// <remarks>
@@ -760,6 +688,24 @@ namespace Dietetyka {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DishListDayClient;
         
         /// <summary>
+        /// Calendar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar Calendar;
+        
+        /// <summary>
+        /// dayDiet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dayDiet;
+        
+        /// <summary>
         /// LabelDay control.
         /// </summary>
         /// <remarks>
@@ -821,5 +767,14 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator daniaDropDownListValidator;
+        
+        /// <summary>
+        /// TableZliczoneWartosci control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableZliczoneWartosci;
     }
 }
