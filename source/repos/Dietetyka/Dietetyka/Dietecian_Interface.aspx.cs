@@ -515,11 +515,11 @@ namespace Dietetyka
         {
             SqlConnection con = new SqlConnection(constr);
             con.Open();
-            SqlCommand sql = new SqlCommand("SELECT Id, kategoria FROM Danie ORDER BY kategoria", con);
+            SqlCommand sql = new SqlCommand("SELECT DISTINCT kategoria FROM Danie ORDER BY kategoria", con);
             sql.CommandType = CommandType.Text;
             kategoriaDanDropDownList.DataSource = sql.ExecuteReader();
             kategoriaDanDropDownList.DataTextField = "kategoria";
-            kategoriaDanDropDownList.DataValueField = "Id";
+            kategoriaDanDropDownList.DataValueField = "kategoria";
             kategoriaDanDropDownList.DataBind();
             kategoriaDanDropDownList.Items.Insert(0, new ListItem("-- WYBIERZ KATEGORIE DANIA --", "0"));
         }
@@ -529,7 +529,7 @@ namespace Dietetyka
             daniaDropDownList.Items.Clear();
             SqlConnection con = new SqlConnection(constr);
             con.Open();
-            SqlCommand sql = new SqlCommand("SELECT Id, nazwa FROM Danie WHERE kategoria = '" + kategoriaDanDropDownList.SelectedItem.Text + "' ORDER BY nazwa", con);
+            SqlCommand sql = new SqlCommand("SELECT Id, nazwa FROM Danie WHERE kategoria = N'" + kategoriaDanDropDownList.SelectedItem.Text + "' ORDER BY nazwa", con);
             sql.CommandType = CommandType.Text;
             daniaDropDownList.DataSource = sql.ExecuteReader();
             daniaDropDownList.DataTextField = "nazwa";
