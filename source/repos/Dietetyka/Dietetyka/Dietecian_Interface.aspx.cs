@@ -536,7 +536,9 @@ namespace Dietetyka
             daniaDropDownList.DataValueField = "Id";
             daniaDropDownList.DataBind();
             daniaDropDownList.Items.Insert(0, new ListItem("-- WYBIERZ DANIE --", "0"));
-        }
+			odswiezMenu();
+			odswiezZliczanie();
+		}
 
         protected void dodajDanie_Click(object sender, EventArgs e)
         {
@@ -667,7 +669,7 @@ namespace Dietetyka
 					c1.Text = reader.GetName(i);
                     r1.Cells.Add(c1);
                     c1 = new TableCell();
-					c1.Text = reader.GetDouble(i).ToString();
+					c1.Text = Math.Round(reader.GetDouble(i), 0).ToString();
 					r1.Cells.Add(c1);
 					c1 = new TableCell();
 					if (i == 0)
@@ -714,7 +716,9 @@ namespace Dietetyka
 					}
 					r1.Cells.Add(c1);
 					
-					if (reader.GetDouble(i)/Convert.ToDouble(c1.Text) < 0.9 || reader.GetDouble(i) / Convert.ToDouble(c1.Text) > 1.1)
+					if (reader.GetDouble(i)/Convert.ToDouble(c1.Text) < 0.9)
+						r1.BackColor = System.Drawing.Color.OrangeRed;
+					else if (reader.GetDouble(i) / Convert.ToDouble(c1.Text) > 1.1)
 						r1.BackColor = System.Drawing.Color.Red;
 					else
 						r1.BackColor = System.Drawing.Color.Green;
