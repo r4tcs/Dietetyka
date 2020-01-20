@@ -118,7 +118,7 @@
 							<br />
 						<asp:TextBox ID="TextBoxKalorie" runat="server"></asp:TextBox>kcal<br />
 						<asp:RangeValidator ID="RangeValidatorKalorie" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"
-							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxKalorie" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+							MinimumValue="0.00" MaximumValue="99999999" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxKalorie" ErrorMessage="Podaj wartość w przedziale <0,00, 99999999>"></asp:RangeValidator>
 					</div>
 
 					<div class="form-group">
@@ -126,7 +126,7 @@
 							<br />
 						<asp:TextBox ID="TextBoxWeglowodany" runat="server"></asp:TextBox>g<br />
 						<asp:RangeValidator ID="RangeValidatorWeglowodany" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"
-							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxWeglowodany" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+							MinimumValue="0.00" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxWeglowodany" ErrorMessage="Podaj wartość w przedziale <0,00, 100>"></asp:RangeValidator>
 					</div>
 
 					<div class="form-group">
@@ -134,7 +134,7 @@
 							<br />
 						<asp:TextBox ID="TextBoxBialka" runat="server"></asp:TextBox>g<br />
 						<asp:RangeValidator ID="RangeValidatorBialka" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"
-							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxBialka" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+							MinimumValue="0.00" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxBialka" ErrorMessage="Podaj wartość w przedziale <0,00, 100>"></asp:RangeValidator>
 					</div>
 
 					<div class="form-group">
@@ -142,7 +142,7 @@
 							<br />
 						<asp:TextBox ID="TextBoxBlonnik" runat="server"></asp:TextBox>g<br />
 						<asp:RangeValidator ID="RangeValidatorBlonnik" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"
-							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxBlonnik" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+							MinimumValue="0.00" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxBlonnik" ErrorMessage="Podaj wartość w przedziale <0,00, 100>"></asp:RangeValidator>
 					</div>
 
 					<div class="form-group">
@@ -150,7 +150,7 @@
 							<br />
 						<asp:TextBox ID="TextBoxSol" runat="server"></asp:TextBox>g<br />
 						<asp:RangeValidator ID="RangeValidatorSol" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"
-							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxSol" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+							MinimumValue="0.00" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxSol" ErrorMessage="Podaj wartość w przedziale <0,00, 100>"></asp:RangeValidator>
 					</div>
 
 					<div class="form-group">
@@ -158,7 +158,7 @@
 							<br />
 						<asp:TextBox ID="TextBoxTluszcze" runat="server"></asp:TextBox>g<br />
 						<asp:RangeValidator ID="RangeValidatorTluszcze" runat="server" ForeColor="Red" Display="Dynamic" ValidationGroup="addProduct"
-							MinimumValue="0.01" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxTluszcze" ErrorMessage="Podaj wartość w przedziale <0,01, 100>"></asp:RangeValidator>
+							MinimumValue="0.00" MaximumValue="100" CultureInvariantValues="true" Type="Currency" ControlToValidate="TextBoxTluszcze" ErrorMessage="Podaj wartość w przedziale <0,00, 100>"></asp:RangeValidator>
 					</div>
 					<asp:Button ID="addProduct" runat="server" Width="150px" Text="Dodaj produkt" ValidationGroup="addProduct" OnClick="addProduct_Click" />
 				</div>
