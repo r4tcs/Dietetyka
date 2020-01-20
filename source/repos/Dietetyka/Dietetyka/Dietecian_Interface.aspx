@@ -357,12 +357,13 @@
 				</div>
 
 				<div class="left" runat="server" id="DivCreateDiet" visible="false">
-					<b>
-						<p style="font-size: large">
+					<p style="font-size: large">
+                        <b>
+						
 							Klient:
 					<asp:Label ID="LabelClient" runat="server" Text=""></asp:Label>
+                            </b>
 						</p>
-					</b>
 					<br />
 					<div id="editCaloryPlan" runat="server" visible="false">
 						<b>Plan żywienia</b><br />

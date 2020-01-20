@@ -128,7 +128,7 @@ namespace Dietetyka
                     Skladnik s = new Skladnik();
                     s.Id_dania = danieID;
                     DropDownList box1 = (DropDownList)Gridview1.Rows[rowIndex].Cells[0].FindControl("DropDownListIngredient");
-                    SqlCommand sql = new SqlCommand("SELECT Id FROM Produkt_spozywczy WHERE nazwa='" + box1.SelectedItem.Text + "'", con);
+                    SqlCommand sql = new SqlCommand("SELECT Id FROM Produkt_spozywczy WHERE nazwa=N'" + box1.SelectedItem.Text + "'", con);
                     sql.CommandType = CommandType.Text;
                     s.Id_produktu = Convert.ToInt32(sql.ExecuteScalar());
                     TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBoxWeight");
@@ -397,7 +397,7 @@ namespace Dietetyka
             {
                 SqlConnection con = new SqlConnection(constr);
                 con.Open();
-                SqlCommand sql = new SqlCommand("SELECT Id, nazwa FROM Danie WHERE kategoria='" + DropDownListCategory.SelectedItem.Text + "' ORDER BY nazwa", con);
+                SqlCommand sql = new SqlCommand("SELECT Id, nazwa FROM Danie WHERE kategoria=N'" + DropDownListCategory.SelectedItem.Text + "' ORDER BY nazwa", con);
                 sql.CommandType = CommandType.Text;
                 DropDownListDish.DataSource = sql.ExecuteReader();
                 DropDownListDish.DataTextField = "nazwa";
