@@ -6,7 +6,8 @@
 <head>
 	<title>Home Page</title>
 	<link href="css/css.css" rel="stylesheet">
-	<link href="css/css.min.css" rel="stylesheet" type="text/css">
+    <%--<link href="css/css.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 		.auto-style1 {
 			width: 400px;
@@ -22,7 +23,10 @@
 			<!-- Navbar -->
 			<ul class="navbar-nav ml-auto ml-md-0">
 				<li class="nav-item dropdown no-arrow mx-1" runat="server">
-					<asp:Button ID="Registration_Log_In_button" runat="server" Text="Zarejestruj się!" OnClick="Registration_Log_In_button_Click"></asp:Button>
+                    <a class="nav-link" href="Login_Registration_Page.aspx">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                        <span>Rejestracja</span></a>
+					<%--<asp:Button ID="Registration_Log_In_button" runat="server" Text="Zarejestruj się!" OnClick="Registration_Log_In_button_Click"></asp:Button>--%>
 				</li>
 			</ul>
 

@@ -5,6 +5,48 @@
         height: 500px;
         width: 500px;
     }
+
+    .BtnSend {
+        border: none;
+        background: transparent url(../../Images/contact_bt.gif) no-repeat center;
+    }
+
+    .left {
+        float: left;
+        text-align: left;
+        margin: 10px 25px;
+        display: inline;
+    }
+
+    .center {
+        float: left;
+        text-align: left;
+        width: 170px;
+        margin: 50px 140px;
+        display: inline;
+    }
+
+    .right {
+        float: right;
+        text-align: left;
+        width: 650px;
+        margin: 50px 150px;
+        display: inline;
+    }
+
+    .lista {
+        display: inline;
+        margin-left: 300px;
+    }
+
+    .edytuj {
+        float: none;
+        display: inline;
+    }
+
+    .wyloguj {
+        float: right;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -15,7 +57,8 @@
 <head>
     <title>Home Page</title>
     <link href="css/css.css" rel="stylesheet">
-    <link href="css/css.min.css" rel="stylesheet" type="text/css">
+    <%--<link href="css/css.min.css" rel="stylesheet" type="text/css">--%>
+    <link href="fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body id="page-top">
@@ -26,7 +69,11 @@
             <!-- Navbar -->
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown no-arrow mx-1" runat="server">
-                    <asp:Button ID="ButtonLogout" runat="server" Text="Wyloguj" OnClick="ButtonLogout_Click" />
+                    
+                    <a class="nav-link" href="Home_Page.aspx">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                        <span>Wyloguj</span></a>
+                    <%--<asp:Button ID="ButtonLogout" runat="server" Text="Wyloguj" OnClick="ButtonLogout_Click" />--%>
                 </li>
             </ul>
 
@@ -37,13 +84,25 @@
             <!-- Sidebar -->
             <ul class="sidebar navbar-nav">
                 <li class="nav-item">
-                    <asp:Button ID="ButtonKalendarz" runat="server" Text="Kalendarz" OnClick="ButtonKalendarz_Click" />
+                    <a class="nav-link" href="Kalendarz.aspx">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Kalendarz</span></a>
+                    <%--<asp:Button ID="ButtonKalendarz" runat="server" Text="Kalendarz" OnClick="ButtonKalendarz_Click" />--%>
                 </li>
+                <br />
                 <li class="nav-item">
-                    <asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />
+                    <a class="nav-link" href="Statystyka.aspx">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Statystyka</span></a>
+                    <%--<asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />--%>
                 </li>
+                <br />
                 <li class="nav-item">
-                    <asp:Button ID="ButtonKlient_ShopList" runat="server" Text="Klient_ShopList" OnClick="ButtonKlient_ShopList_Click" />
+                    
+                    <a class="nav-link" href="Klient_ShopList.aspx">
+                        <i class="fas fa-fw fa-shopping-cart"></i>
+                        <span>Lista Zakópow</span></a>
+                   <%-- <asp:Button ID="ButtonKlient_ShopList" runat="server" Text="Shop List" OnClick="ButtonKlient_ShopList_Click" />--%>
                 </li>
             </ul>
 
@@ -64,8 +123,32 @@
 
                             </td>
                             <td>
-                                <div id="info_div"></div>
+                                <div class="left" id="ProductListDiv" runat="server">
+                                    <table border="1">
+                                        <tr>
+                                            <asp:Repeater ID="Repeater_ShopList" runat="server" Visible="true">
+                                                <HeaderTemplate>
+                                                    <td><b>Nazwa</b></td>
+                                                    <td><b>Ilosc</b></td>
+                                                    <td><b>Jednostka Miary</b></td>
+
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><%# Eval("Nazwa") %></td>
+                                                        <td><%# Eval("Ilosc") %></td>
+                                                        <td><%# Eval("JednostkaMiary") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                            <td>
+
                                 <h4>Najbliższy do ciebie sklep</h4>
+                                <div id="info_div"></div>
                                 <div id="map"></div>
                                 <script>
                                     var stores = [
@@ -168,26 +251,7 @@
 
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <asp:Repeater ID="Repeater_ShopList" runat="server" Visible="true">
-                                    <HeaderTemplate>
-                                        <td><b>Nazwa</b></td>
-                                        <td><b>Ilosc</b></td>
-                                        <td><b>JednostkaMiary</b></td>
 
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td><%# Eval("Nazwa") %></td>
-                                            <td><%# Eval("Ilosc") %></td>
-                                            <td><%# Eval("JednostkaMiary") %></td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </td>
-
-                        </tr>
 
 
 
