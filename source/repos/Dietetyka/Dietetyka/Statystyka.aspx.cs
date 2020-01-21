@@ -28,19 +28,109 @@ namespace Dietetyka
             SqlCommand sql = new SqlCommand("SELECT CONCAT(imie, ' ', nazwisko) FROM Konto WHERE login='" + Session["username"].ToString() + "'", con);
             sql.CommandType = CommandType.Text;
             LabelName.Text = sql.ExecuteScalar() as string;
+            Calendar_Statystyka.SelectedDate = System.DateTime.Today;
 
-            fillChart();
+            fillChart_allTime();
 
             con.Close();
 
 
         }
 
-        private void fillChart()
+        private void fillChart_allTime()
         {
             SqlConnection con = new SqlConnection(constr);
             con.Open();
             SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id", con);
+            DataSet ds = new DataSet();
+            chart_sql.Fill(ds);
+            Statystyka_Chart.DataSource = ds;
+
+            Statystyka_Chart.Series["Kalorie"].YValueMembers = "Kalorie";
+            Statystyka_Chart.Series["Kalorie"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Weglowodany"].YValueMembers = "Weglowodany";
+            Statystyka_Chart.Series["Weglowodany"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Bialka"].YValueMembers = "Bialka";
+            Statystyka_Chart.Series["Bialka"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Blonnik"].YValueMembers = "Blonnik";
+            Statystyka_Chart.Series["Blonnik"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Sol"].YValueMembers = "Sol";
+            Statystyka_Chart.Series["Sol"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Tluszcze"].YValueMembers = "Tluszcze";
+            Statystyka_Chart.Series["Tluszcze"].Legend = "Kalorie";
+
+            con.Close();
+
+        }
+
+        private void fillChart_selectedDay()
+        {
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND m.data='" + Calendar_Statystyka.SelectedDate + "' ", new SqlConnection(constr));
+            //SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar_Statystyka.SelectedDate + "', 103)", new SqlConnection(constr));
+            //SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)= CONVERT(date, '" + Calendar_Statystyka.SelectedDate.ToShortDateString() + "', 23)", new SqlConnection(constr));
+
+            DataSet ds = new DataSet();
+            chart_sql.Fill(ds);
+            Statystyka_Chart.DataSource = ds;
+
+            Statystyka_Chart.Series["Kalorie"].YValueMembers = "Kalorie";
+            Statystyka_Chart.Series["Kalorie"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Weglowodany"].YValueMembers = "Weglowodany";
+            Statystyka_Chart.Series["Weglowodany"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Bialka"].YValueMembers = "Bialka";
+            Statystyka_Chart.Series["Bialka"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Blonnik"].YValueMembers = "Blonnik";
+            Statystyka_Chart.Series["Blonnik"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Sol"].YValueMembers = "Sol";
+            Statystyka_Chart.Series["Sol"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Tluszcze"].YValueMembers = "Tluszcze";
+            Statystyka_Chart.Series["Tluszcze"].Legend = "Kalorie";
+
+            con.Close();
+
+        }
+
+        private void fillChart_selectedWeek()
+        {
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            
+            SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND m.data='" + Calendar_Statystyka.SelectedDate.Month + "' ", new SqlConnection(constr));
+            //SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar_Statystyka.SelectedDate + "', 103)", new SqlConnection(constr));
+            //SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)= CONVERT(date, '" + Calendar_Statystyka.SelectedDate.ToShortDateString() + "', 23)", new SqlConnection(constr));
+
+            DataSet ds = new DataSet();
+            chart_sql.Fill(ds);
+            Statystyka_Chart.DataSource = ds;
+
+            Statystyka_Chart.Series["Kalorie"].YValueMembers = "Kalorie";
+            Statystyka_Chart.Series["Kalorie"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Weglowodany"].YValueMembers = "Weglowodany";
+            Statystyka_Chart.Series["Weglowodany"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Bialka"].YValueMembers = "Bialka";
+            Statystyka_Chart.Series["Bialka"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Blonnik"].YValueMembers = "Blonnik";
+            Statystyka_Chart.Series["Blonnik"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Sol"].YValueMembers = "Sol";
+            Statystyka_Chart.Series["Sol"].Legend = "Kalorie";
+            Statystyka_Chart.Series["Tluszcze"].YValueMembers = "Tluszcze";
+            Statystyka_Chart.Series["Tluszcze"].Legend = "Kalorie";
+
+            con.Close();
+
+        }
+
+        private void fillChart_selectedDates()
+        {
+          
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND m.data='" + Calendar_Statystyka.SelectedDate + "' ", new SqlConnection(constr));
+            //SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar_Statystyka.SelectedDate + "', 103)", new SqlConnection(constr));
+            //SqlDataAdapter chart_sql = new SqlDataAdapter("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)= CONVERT(date, '" + Calendar_Statystyka.SelectedDate.ToShortDateString() + "', 23)", new SqlConnection(constr));
+
             DataSet ds = new DataSet();
             chart_sql.Fill(ds);
             Statystyka_Chart.DataSource = ds;
@@ -90,19 +180,20 @@ namespace Dietetyka
 
         protected void Statystyka_Chart_Load(object sender, EventArgs e)
         {
-            fillChart();
+            fillChart_allTime();
         }
 
         protected void Calendar_Statystyka_SelectionChanged(object sender, EventArgs e)
         {
-            //SqlCommand cmd = new SqlCommand("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND m.data='" + Calendar_Statystyka.SelectedDate + "' ", new SqlConnection(constr));
+            SqlCommand cmd = new SqlCommand("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND m.data='" + Calendar_Statystyka.SelectedDate + "' ", new SqlConnection(constr));
             //SqlCommand cmd = new SqlCommand("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)=CONVERT(date, '" + Calendar_Statystyka.SelectedDate + "', 103)", new SqlConnection(constr));
-            SqlCommand cmd = new SqlCommand("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)= CONVERT(date, '" + Calendar_Statystyka.SelectedDate.ToShortDateString() + "', 23)", new SqlConnection(constr));
+            //SqlCommand cmd = new SqlCommand("SELECT SUM(ps.kalorie) Kalorie, SUM(ps.weglowodany) Weglowodany, SUM(ps.bialka) Bialka, SUM(ps.blonnik) Blonnik, SUM(ps.sol) Sol, SUM(ps.tluszcze) Tluszcze FROM Produkt_spozywczy ps, Skladnik s, Danie d, Dania_Menu dm, Menu m, Konto k WHERE k.login='" + Session["username"].ToString() + "' AND m.id = dm.Id_menu AND d.Id = dm.Id_dania AND d.Id = s.Id_dania AND s.Id_produktu = ps.Id AND CONVERT(date, m.data, 103)= CONVERT(date, '" + Calendar_Statystyka.SelectedDate.ToShortDateString() + "', 23)", new SqlConnection(constr));
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             Repeater_Statystyka.DataSource = dt;
             Repeater_Statystyka.DataBind();
+            fillChart_selectedDates();
         }
 
 
@@ -146,6 +237,21 @@ namespace Dietetyka
             }
 
             return dt;
+        }
+
+        protected void bt_fillChart_allTime_Click(object sender, EventArgs e)
+        {
+            fillChart_allTime();
+        }
+
+        protected void bt_fillChart_week_Click(object sender, EventArgs e)
+        {
+            fillChart_selectedWeek();
+        }
+
+        protected void ButtonKlient_ShopList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Klient_ShopList.aspx");
         }
     }
 }

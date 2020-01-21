@@ -55,5 +55,10 @@ namespace Dietetyka
         {
             Response.Redirect("Statystyka.aspx");
         }
+
+        protected void ButtonKlient_ShopList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Klient_ShopList.aspx");
+        }
     }
 }

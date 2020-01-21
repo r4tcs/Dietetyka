@@ -17,12 +17,6 @@
             <!-- Navbar -->
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown no-arrow mx-1" runat="server">
-                    <asp:Button ID="Options_button" runat="server" Text="Options" OnClick="Options_button_Click" />
-                </li>
-                <li class="nav-item dropdown no-arrow mx-1" runat="server">
-                    <asp:Button ID="Messages_button" runat="server" Text="Messages" OnClick="Messages_button_Click" />
-                </li>
-                <li class="nav-item dropdown no-arrow mx-1" runat="server">
                     <asp:Button ID="ButtonLogout" runat="server" Text="Wyloguj" OnClick="ButtonLogout_Click" />
                 </li>
             </ul>
@@ -36,8 +30,13 @@
                 <li class="nav-item">
                     <asp:Button ID="ButtonKalendarz" runat="server" Text="Kalendarz" OnClick="ButtonKalendarz_Click" />
                 </li>
+                <br />
                 <li class="nav-item">
                     <asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />
+                </li>
+                <br />
+                <li class="nav-item">
+                    <asp:Button ID="ButtonKlient_ShopList" runat="server" Text="Shop List" OnClick="ButtonKlient_ShopList_Click" />
                 </li>
             </ul>
 

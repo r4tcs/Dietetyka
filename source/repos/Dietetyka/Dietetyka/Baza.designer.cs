@@ -33,9 +33,6 @@ namespace Dietetyka
     partial void InsertDanie(Danie instance);
     partial void UpdateDanie(Danie instance);
     partial void DeleteDanie(Danie instance);
-    partial void InsertProdukt_spozywczy(Produkt_spozywczy instance);
-    partial void UpdateProdukt_spozywczy(Produkt_spozywczy instance);
-    partial void DeleteProdukt_spozywczy(Produkt_spozywczy instance);
     partial void InsertSkladnik(Skladnik instance);
     partial void UpdateSkladnik(Skladnik instance);
     partial void DeleteSkladnik(Skladnik instance);
@@ -51,6 +48,9 @@ namespace Dietetyka
     partial void InsertPlan_zywienia(Plan_zywienia instance);
     partial void UpdatePlan_zywienia(Plan_zywienia instance);
     partial void DeletePlan_zywienia(Plan_zywienia instance);
+    partial void InsertProdukt_spozywczy(Produkt_spozywczy instance);
+    partial void UpdateProdukt_spozywczy(Produkt_spozywczy instance);
+    partial void DeleteProdukt_spozywczy(Produkt_spozywczy instance);
     #endregion
 		
 		public BazaDataContext() : 
@@ -91,14 +91,6 @@ namespace Dietetyka
 			}
 		}
 		
-		public System.Data.Linq.Table<Produkt_spozywczy> Produkt_spozywczies
-		{
-			get
-			{
-				return this.GetTable<Produkt_spozywczy>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Skladnik> Skladniks
 		{
 			get
@@ -136,6 +128,14 @@ namespace Dietetyka
 			get
 			{
 				return this.GetTable<Plan_zywienia>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Produkt_spozywczy> Produkt_spozywczies
+		{
+			get
+			{
+				return this.GetTable<Produkt_spozywczy>();
 			}
 		}
 	}
@@ -327,288 +327,6 @@ namespace Dietetyka
 		{
 			this.SendPropertyChanging();
 			entity.Danie = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Produkt_spozywczy")]
-	public partial class Produkt_spozywczy : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nazwa;
-		
-		private string _jednostka;
-		
-		private double _kalorie;
-		
-		private double _weglowodany;
-		
-		private double _bialka;
-		
-		private double _blonnik;
-		
-		private double _sol;
-		
-		private double _tluszcze;
-		
-		private EntitySet<Skladnik> _Skladniks;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnnazwaChanging(string value);
-    partial void OnnazwaChanged();
-    partial void OnjednostkaChanging(string value);
-    partial void OnjednostkaChanged();
-    partial void OnkalorieChanging(double value);
-    partial void OnkalorieChanged();
-    partial void OnweglowodanyChanging(double value);
-    partial void OnweglowodanyChanged();
-    partial void OnbialkaChanging(double value);
-    partial void OnbialkaChanged();
-    partial void OnblonnikChanging(double value);
-    partial void OnblonnikChanged();
-    partial void OnsolChanging(double value);
-    partial void OnsolChanged();
-    partial void OntluszczeChanging(double value);
-    partial void OntluszczeChanged();
-    #endregion
-		
-		public Produkt_spozywczy()
-		{
-			this._Skladniks = new EntitySet<Skladnik>(new Action<Skladnik>(this.attach_Skladniks), new Action<Skladnik>(this.detach_Skladniks));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string nazwa
-		{
-			get
-			{
-				return this._nazwa;
-			}
-			set
-			{
-				if ((this._nazwa != value))
-				{
-					this.OnnazwaChanging(value);
-					this.SendPropertyChanging();
-					this._nazwa = value;
-					this.SendPropertyChanged("nazwa");
-					this.OnnazwaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_jednostka", DbType="NVarChar(4) NOT NULL", CanBeNull=false)]
-		public string jednostka
-		{
-			get
-			{
-				return this._jednostka;
-			}
-			set
-			{
-				if ((this._jednostka != value))
-				{
-					this.OnjednostkaChanging(value);
-					this.SendPropertyChanging();
-					this._jednostka = value;
-					this.SendPropertyChanged("jednostka");
-					this.OnjednostkaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kalorie", DbType="Float NOT NULL")]
-		public double kalorie
-		{
-			get
-			{
-				return this._kalorie;
-			}
-			set
-			{
-				if ((this._kalorie != value))
-				{
-					this.OnkalorieChanging(value);
-					this.SendPropertyChanging();
-					this._kalorie = value;
-					this.SendPropertyChanged("kalorie");
-					this.OnkalorieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weglowodany", DbType="Float NOT NULL")]
-		public double weglowodany
-		{
-			get
-			{
-				return this._weglowodany;
-			}
-			set
-			{
-				if ((this._weglowodany != value))
-				{
-					this.OnweglowodanyChanging(value);
-					this.SendPropertyChanging();
-					this._weglowodany = value;
-					this.SendPropertyChanged("weglowodany");
-					this.OnweglowodanyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bialka", DbType="Float NOT NULL")]
-		public double bialka
-		{
-			get
-			{
-				return this._bialka;
-			}
-			set
-			{
-				if ((this._bialka != value))
-				{
-					this.OnbialkaChanging(value);
-					this.SendPropertyChanging();
-					this._bialka = value;
-					this.SendPropertyChanged("bialka");
-					this.OnbialkaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_blonnik", DbType="Float NOT NULL")]
-		public double blonnik
-		{
-			get
-			{
-				return this._blonnik;
-			}
-			set
-			{
-				if ((this._blonnik != value))
-				{
-					this.OnblonnikChanging(value);
-					this.SendPropertyChanging();
-					this._blonnik = value;
-					this.SendPropertyChanged("blonnik");
-					this.OnblonnikChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol", DbType="Float NOT NULL")]
-		public double sol
-		{
-			get
-			{
-				return this._sol;
-			}
-			set
-			{
-				if ((this._sol != value))
-				{
-					this.OnsolChanging(value);
-					this.SendPropertyChanging();
-					this._sol = value;
-					this.SendPropertyChanged("sol");
-					this.OnsolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tluszcze", DbType="Float NOT NULL")]
-		public double tluszcze
-		{
-			get
-			{
-				return this._tluszcze;
-			}
-			set
-			{
-				if ((this._tluszcze != value))
-				{
-					this.OntluszczeChanging(value);
-					this.SendPropertyChanging();
-					this._tluszcze = value;
-					this.SendPropertyChanged("tluszcze");
-					this.OntluszczeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Produkt_spozywczy_Skladnik", Storage="_Skladniks", ThisKey="Id", OtherKey="Id_produktu")]
-		public EntitySet<Skladnik> Skladniks
-		{
-			get
-			{
-				return this._Skladniks;
-			}
-			set
-			{
-				this._Skladniks.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Skladniks(Skladnik entity)
-		{
-			this.SendPropertyChanging();
-			entity.Produkt_spozywczy = this;
-		}
-		
-		private void detach_Skladniks(Skladnik entity)
-		{
-			this.SendPropertyChanging();
-			entity.Produkt_spozywczy = null;
 		}
 	}
 	
@@ -1822,6 +1540,312 @@ namespace Dietetyka
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Produkt_spozywczy")]
+	public partial class Produkt_spozywczy : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nazwa;
+		
+		private string _jednostka;
+		
+		private double _kalorie;
+		
+		private double _weglowodany;
+		
+		private double _bialka;
+		
+		private double _blonnik;
+		
+		private double _sol;
+		
+		private double _tluszcze;
+		
+		private string _jednostkamiary;
+		
+		private EntitySet<Skladnik> _Skladniks;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnazwaChanging(string value);
+    partial void OnnazwaChanged();
+    partial void OnjednostkaChanging(string value);
+    partial void OnjednostkaChanged();
+    partial void OnkalorieChanging(double value);
+    partial void OnkalorieChanged();
+    partial void OnweglowodanyChanging(double value);
+    partial void OnweglowodanyChanged();
+    partial void OnbialkaChanging(double value);
+    partial void OnbialkaChanged();
+    partial void OnblonnikChanging(double value);
+    partial void OnblonnikChanged();
+    partial void OnsolChanging(double value);
+    partial void OnsolChanged();
+    partial void OntluszczeChanging(double value);
+    partial void OntluszczeChanged();
+    partial void OnjednostkamiaryChanging(string value);
+    partial void OnjednostkamiaryChanged();
+    #endregion
+		
+		public Produkt_spozywczy()
+		{
+			this._Skladniks = new EntitySet<Skladnik>(new Action<Skladnik>(this.attach_Skladniks), new Action<Skladnik>(this.detach_Skladniks));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nazwa", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nazwa
+		{
+			get
+			{
+				return this._nazwa;
+			}
+			set
+			{
+				if ((this._nazwa != value))
+				{
+					this.OnnazwaChanging(value);
+					this.SendPropertyChanging();
+					this._nazwa = value;
+					this.SendPropertyChanged("nazwa");
+					this.OnnazwaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_jednostka", DbType="NVarChar(4) NOT NULL", CanBeNull=false)]
+		public string jednostka
+		{
+			get
+			{
+				return this._jednostka;
+			}
+			set
+			{
+				if ((this._jednostka != value))
+				{
+					this.OnjednostkaChanging(value);
+					this.SendPropertyChanging();
+					this._jednostka = value;
+					this.SendPropertyChanged("jednostka");
+					this.OnjednostkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kalorie", DbType="Float NOT NULL")]
+		public double kalorie
+		{
+			get
+			{
+				return this._kalorie;
+			}
+			set
+			{
+				if ((this._kalorie != value))
+				{
+					this.OnkalorieChanging(value);
+					this.SendPropertyChanging();
+					this._kalorie = value;
+					this.SendPropertyChanged("kalorie");
+					this.OnkalorieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weglowodany", DbType="Float NOT NULL")]
+		public double weglowodany
+		{
+			get
+			{
+				return this._weglowodany;
+			}
+			set
+			{
+				if ((this._weglowodany != value))
+				{
+					this.OnweglowodanyChanging(value);
+					this.SendPropertyChanging();
+					this._weglowodany = value;
+					this.SendPropertyChanged("weglowodany");
+					this.OnweglowodanyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bialka", DbType="Float NOT NULL")]
+		public double bialka
+		{
+			get
+			{
+				return this._bialka;
+			}
+			set
+			{
+				if ((this._bialka != value))
+				{
+					this.OnbialkaChanging(value);
+					this.SendPropertyChanging();
+					this._bialka = value;
+					this.SendPropertyChanged("bialka");
+					this.OnbialkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_blonnik", DbType="Float NOT NULL")]
+		public double blonnik
+		{
+			get
+			{
+				return this._blonnik;
+			}
+			set
+			{
+				if ((this._blonnik != value))
+				{
+					this.OnblonnikChanging(value);
+					this.SendPropertyChanging();
+					this._blonnik = value;
+					this.SendPropertyChanged("blonnik");
+					this.OnblonnikChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol", DbType="Float NOT NULL")]
+		public double sol
+		{
+			get
+			{
+				return this._sol;
+			}
+			set
+			{
+				if ((this._sol != value))
+				{
+					this.OnsolChanging(value);
+					this.SendPropertyChanging();
+					this._sol = value;
+					this.SendPropertyChanged("sol");
+					this.OnsolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tluszcze", DbType="Float NOT NULL")]
+		public double tluszcze
+		{
+			get
+			{
+				return this._tluszcze;
+			}
+			set
+			{
+				if ((this._tluszcze != value))
+				{
+					this.OntluszczeChanging(value);
+					this.SendPropertyChanging();
+					this._tluszcze = value;
+					this.SendPropertyChanged("tluszcze");
+					this.OntluszczeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_jednostkamiary", DbType="NVarChar(2)")]
+		public string jednostkamiary
+		{
+			get
+			{
+				return this._jednostkamiary;
+			}
+			set
+			{
+				if ((this._jednostkamiary != value))
+				{
+					this.OnjednostkamiaryChanging(value);
+					this.SendPropertyChanging();
+					this._jednostkamiary = value;
+					this.SendPropertyChanged("jednostkamiary");
+					this.OnjednostkamiaryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Produkt_spozywczy_Skladnik", Storage="_Skladniks", ThisKey="Id", OtherKey="Id_produktu")]
+		public EntitySet<Skladnik> Skladniks
+		{
+			get
+			{
+				return this._Skladniks;
+			}
+			set
+			{
+				this._Skladniks.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Skladniks(Skladnik entity)
+		{
+			this.SendPropertyChanging();
+			entity.Produkt_spozywczy = this;
+		}
+		
+		private void detach_Skladniks(Skladnik entity)
+		{
+			this.SendPropertyChanging();
+			entity.Produkt_spozywczy = null;
 		}
 	}
 }

@@ -19,12 +19,6 @@
             <!-- Navbar -->
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown no-arrow mx-1" runat="server">
-                    <asp:Button ID="Options_button" runat="server" Text="Options" OnClick="Options_button_Click" />
-                </li>
-                <li class="nav-item dropdown no-arrow mx-1" runat="server">
-                    <asp:Button ID="Messages_button" runat="server" Text="Messages" OnClick="Messages_button_Click" />
-                </li>
-                <li class="nav-item dropdown no-arrow mx-1" runat="server">
                     <asp:Button ID="ButtonLogout" runat="server" Text="Wyloguj" OnClick="ButtonLogout_Click" />
                 </li>
             </ul>
@@ -41,6 +35,9 @@
                 <li class="nav-item">
                     <asp:Button ID="ButtonStatystyka" runat="server" Text="Statystyka" OnClick="ButtonStatystyka_Click" />
                 </li>
+                <li class="nav-item">
+                    <asp:Button ID="ButtonKlient_ShopList" runat="server" Text="Klient_ShopList" OnClick="ButtonKlient_ShopList_Click" />
+                </li>
             </ul>
 
             <div id="content-wrapper">
@@ -50,9 +47,11 @@
                     <!-- Page Content -->
                     <h1>Witaj,
                         <asp:Label ID="LabelName" runat="server" Text="LabelName"></asp:Label></h1>
+                    <br />
+                        <h2>Twoja Statystyka za caly czas korzystania programem!</h2>
                     <table>
                         <tr>
-                            <td>Twoja Statystyka za caly czas korzystania programem!
+                            <td>
                                 <br />
                                 <asp:Chart ID="Statystyka_Chart" runat="server" OnLoad="Statystyka_Chart_Load">
                                     <Series>
@@ -84,12 +83,19 @@
                                 <br />
                                 <asp:Calendar ID="Calendar_Statystyka" runat="server" OnDayRender="Calendar_Statystyka_DayRender" OnSelectionChanged="Calendar_Statystyka_SelectionChanged"></asp:Calendar>
                             </td>
+                            <td>
+                                <asp:Button ID="bt_fillChart_allTime" runat="server" Text="Statystyka ogolna" OnClick="bt_fillChart_allTime_Click" />
+                                <br />
+                                <br />
+
+                                <asp:Button ID="bt_fillChart_week" runat="server" Text="Statystyka tygodniowa" OnClick="bt_fillChart_week_Click" />
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <table border="1">
                                     <tr>
-                                        <asp:Repeater ID="Repeater_Statystyka" runat="server">
+                                        <asp:Repeater ID="Repeater_Statystyka" runat="server" Visible="false">
                                             <HeaderTemplate>
                                                 <td><b>Kalorie</b></td>
                                                 <td><b>Weglowodany</b></td>

@@ -124,6 +124,7 @@
     <Content Include="Kalendarz.aspx">
       <BrowseToURL>~/Kalendarz.aspx</BrowseToURL>
     </Content>
+    <Content Include="Klient_ShopList.aspx" />
     <Content Include="Komentarz.aspx" />
     <Content Include="Login_Registration_Page.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -220,6 +221,13 @@
     </Compile>
     <Compile Include="Kalendarz.aspx.designer.cs">
       <DependentUpon>Kalendarz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Klient_ShopList.aspx.cs">
+      <DependentUpon>Klient_ShopList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Klient_ShopList.aspx.designer.cs">
+      <DependentUpon>Klient_ShopList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Komentarz.aspx.cs">
       <DependentUpon>Komentarz.aspx</DependentUpon>

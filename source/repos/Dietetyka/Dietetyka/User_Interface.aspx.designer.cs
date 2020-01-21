@@ -22,24 +22,6 @@ namespace Dietetyka {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Options_button control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Options_button;
-        
-        /// <summary>
-        /// Messages_button control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Messages_button;
-        
-        /// <summary>
         /// ButtonLogout control.
         /// </summary>
         /// <remarks>
@@ -65,6 +47,15 @@ namespace Dietetyka {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonStatystyka;
+        
+        /// <summary>
+        /// ButtonKlient_ShopList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonKlient_ShopList;
         
         /// <summary>
         /// LabelName control.
